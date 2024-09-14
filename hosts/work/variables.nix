@@ -11,6 +11,7 @@
     display-link = true;
     git = true;
     jetbrains = true;
+    lutris = false;
     steam = false;
     ubuntu-theme = true;
     vscode = true;

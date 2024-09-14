@@ -11,6 +11,7 @@
   modules.software.git.enable = hostVariables.modules.git;
   modules.software.displaylink.enable = hostVariables.modules.display-link;
   modules.software.jetbrains.enable = hostVariables.modules.jetbrains;
+  modules.software.lutris.enable = hostVariables.modules.lutris;
   modules.software.steam.enable = hostVariables.modules.steam;
   modules.software.vscode.enable = hostVariables.modules.vscode;
   modules.ubuntu-theme.enable = hostVariables.modules.ubuntu-theme;
