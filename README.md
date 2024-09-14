@@ -2,7 +2,7 @@
 ## Useage
 Create a `.dotfiles` folder in the home directory. Check out the project in .dotfiles folder. To use one of the existing hosts, adjust the variables.nix in `./hosts/{private or work}/variables.nix`.
 When building for the first time, you must execute the command. 
-`sudo nixos-rebuild switch --flake /home/USERNAME/.dotfiles#PRIVATE_OR_WORK`.
+`sudo nixos-rebuild switch --flake /home/USERNAME/.dotfiles#private_OR_work`.
 The system can then be rebuilt using the `rebuild` command.
 
 If you want to create a new host, a new folder must be created in the `./hosts` directory.  In the new folder, `default.nix`, `configration.nix`, `hardware-configuration.nix`, `home.nix` and `variables.nix` must be created.
@@ -102,7 +102,7 @@ Adapt the variables to your system.The new host must then be added to flake.nix 
         modules = [./hosts/private];
         hostVariables = import ./hosts/private/variables.nix;
       };
-      NEW-HOST = mkNixosConfiguration {
+      NEW-HOST-NAME-LIKE-THE-FOLDER = mkNixosConfiguration {
         modules = [./hosts/HOST-FOLDER];
         hostVariables = import ./hosts/HOST-FOLDER/variables.nix;
       };
