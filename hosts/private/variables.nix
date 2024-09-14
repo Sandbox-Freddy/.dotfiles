@@ -34,6 +34,7 @@
       "firefox.desktop"
       "thunderbird.desktop"
       "code.desktop"
+      "steam.desktop"
       "org.gnome.Nautilus.desktop"
     ];
   };
