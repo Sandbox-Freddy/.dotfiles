@@ -17,6 +17,11 @@
     { device = "/dev/disk/by-uuid/36253f74-54a6-4be3-9cf8-4d039fc5005a";
       fsType = "ext4";
     };
+  
+    fileSystems."mnt/samsungssd" = {
+    device = "/dev/disk/by-uuid/002a4cd1-408c-4417-850c-4e91f9f90ae9";
+    fsType = "ext4";
+  };
 
   boot.initrd.luks.devices."luks-031c2c80-6692-41b2-9ad7-b64f62dd877e".device = "/dev/disk/by-uuid/031c2c80-6692-41b2-9ad7-b64f62dd877e";
 
