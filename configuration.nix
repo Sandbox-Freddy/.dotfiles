@@ -14,7 +14,7 @@
   modules.software.lutris.enable = hostVariables.modules.lutris;
   modules.software.steam.enable = hostVariables.modules.steam;
   modules.software.vscode.enable = hostVariables.modules.vscode;
-  modules.ubuntu-theme.enable = hostVariables.modules.ubuntu-theme;
+  modules.gui.gnome.enable = hostVariables.modules.gnome;
   modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
   modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
 

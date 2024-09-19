@@ -13,7 +13,7 @@
     jetbrains = true;
     lutris = false;
     steam = false;
-    ubuntu-theme = true;
+    gnome = true;
     vscode = true;
   };
   git = {
@@ -27,7 +27,7 @@
       name = "Sandbox-Freddy";
     };
   };
-  ubuntu-theme = {
+  gnome = {
     fav-icon = [
       "org.gnome.Console.desktop"
       "google-chrome.desktop"

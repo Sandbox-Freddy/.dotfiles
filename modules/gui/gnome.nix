@@ -5,10 +5,10 @@
   hostVariables,
   ...
 }: {
-  options.modules.ubuntu-theme = {
-    enable = lib.mkEnableOption "ubuntu-theme";
+  options.modules.gui.gnome = {
+    enable = lib.mkEnableOption "gnome";
   };
-  config = lib.mkIf config.modules.ubuntu-theme.enable {
+  config = lib.mkIf config.modules.gui.gnome.enable {
     environment.systemPackages = with pkgs; [
       gnome3.dconf-editor
       gnome3.gnome-tweaks
@@ -59,7 +59,7 @@
           running-indicator-style = "DOTS";
         };
         "org/gnome/shell" = {
-          favorite-apps = hostVariables.ubuntu-theme.fav-icon;
+          favorite-apps = hostVariables.gnome.fav-icon;
         };
         "org/gnome/desktop/wm/preferences" = {
           button-layout = "appmenu:minimize,maximize,close";

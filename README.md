@@ -23,7 +23,7 @@ The variables.nix must contain the following variables
     jetbrains = false;
     lutris = true;
     steam = true;
-    ubuntu-theme = true;
+    gnome = true;
     vscode = true;
   };
   git = {
