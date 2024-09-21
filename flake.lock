@@ -62,19 +62,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-<<<<<<< HEAD
-        "lastModified": 1726710255,
-        "narHash": "sha256-F7IpHzKsV9lzFhSZ5/8jMrAPNTLDAloazYlulnTyG9o=",
-        "owner": "nix-community",
-        "repo": "nix-vscode-extensions",
-        "rev": "e7740781e76ff6495f6a0c8c69ddc2d3f62c41c0",
-=======
         "lastModified": 1726882701,
         "narHash": "sha256-n0m5F0Q2ZF6egEm0mvzLCVImzwJaT0GVzYVwD+UnqwE=",
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
         "rev": "8822dcf9078f408c5ddbdbbd5c2dc9782fe5eb61",
->>>>>>> 1a5a591 ([All hosts] flake update, change steam.nix [private] update hardware-configuration.nix)
         "type": "github"
       },
       "original": {
