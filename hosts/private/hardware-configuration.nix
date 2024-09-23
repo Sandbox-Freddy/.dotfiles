@@ -22,7 +22,7 @@
     fsType = "ext4";
   };
 
-  fileSystems."mnt/samsungssd" = {
+  fileSystems."/mnt/samsungssd" = {
     device = "/dev/disk/by-uuid/002a4cd1-408c-4417-850c-4e91f9f90ae9";
     fsType = "ext4";
   };
