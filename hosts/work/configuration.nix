@@ -97,6 +97,7 @@
     apostrophe
     google-chrome
     bitwarden-desktop
+    vlc
   ];
 
   #Yubikey
