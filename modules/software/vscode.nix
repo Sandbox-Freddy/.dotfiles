@@ -13,12 +13,12 @@
       (vscode-with-extensions.override {
         # TODO remove after unstable updated to 1.93.0
         vscode = pkgs.vscode.overrideAttrs (old: rec {
-          version = "1.93.0";
+          version = "1.94.2";
           plat = "linux-x64";
           src = fetchurl {
             name = "VSCode_${version}_${plat}.tar.gz";
             url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-            sha256 = "24BEzLDg5QLuB4G1OGB+lqEaH+Xy+WULbqaePJHElj4=";
+            sha256 = "NktZowxWnt96Xa4Yxyv+oMmwHGylYIxFrpws/y0XhXA=";
           };
         });
 
