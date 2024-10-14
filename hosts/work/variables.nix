@@ -2,6 +2,7 @@
   username = "freddy";
   host = "work";
   system = "x86_64-linux";
+  printer = true;
   modules = {
     driver = {
       nvidia = false;

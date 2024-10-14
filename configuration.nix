@@ -18,6 +18,8 @@
   modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
   modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
 
+  services.printing.enable = hostVariables.printer;
+  programs.noisetorch.enable = true;
   environment.systemPackages = with pkgs; [
     alejandra
   ];
