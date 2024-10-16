@@ -10,17 +10,18 @@ The variables.nix must contain the following variables
 ```
 {
   username = "";
-  host = "NAME OF THE HOST";
+  host = "";
   system = "";
+  printer = true;
   modules = {
     driver = {
-      nvidia = true;
-      amdgpu = false;
+      nvidia = false;
+      amdgpu = true;
     };
     docker = true;
-    display-link = false;
+    display-link = true;
     git = true;
-    jetbrains = false;
+    jetbrains = true;
     lutris = true;
     steam = true;
     gnome = true;
@@ -29,17 +30,17 @@ The variables.nix must contain the following variables
   git = {
     lfs = true;
     extraConfig = {
-      defaultBranch = "";
-      credential-helper = "";
+      defaultBranch = "main";
+      credential-helper = "store";
     };
     credentials = {
       email = "";
       name = "";
     };
+    includes = [];
   };
-  ubuntu-theme = {
-    fav-icon = [
-    ];
+  gnome = {
+    fav-icon = [];
   };
 }
 ```
