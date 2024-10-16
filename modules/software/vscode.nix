@@ -38,6 +38,12 @@
             mkhl.direnv
             # javascript/typescript
             esbenp.prettier-vscode
+            dbaeumer.vscode-eslint
+            #python
+            ms-python.python
+            ms-python.debugpy
+            # ide keybindings
+            k--kato.intellij-idea-keybindings
           ];
       })
     ];
