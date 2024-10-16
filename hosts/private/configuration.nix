@@ -91,9 +91,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vlc
-    google-chrome
     bitwarden-desktop
+    google-chrome
+    vlc
   ];
 
   #Yubikey
