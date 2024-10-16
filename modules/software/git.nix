@@ -24,12 +24,7 @@
         };
         userEmail = hostVariables.git.credentials.email;
         userName = hostVariables.git.credentials.name;
-        includes = [
-          {
-            path = "~/Dev/.gitconfig";
-            condition = "gitdir:~/Dev/";
-          }
-        ];
+        includes = hostVariables.git.includes;
       };
     };
   };

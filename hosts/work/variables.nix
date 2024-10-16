@@ -27,6 +27,12 @@
       email = "31123359+Sandbox-Freddy@users.noreply.github.com";
       name = "Sandbox-Freddy";
     };
+    includes = [
+          {
+            path = "~/Dev/.gitconfig";
+            condition = "gitdir:~/Dev/";
+          }
+        ];
   };
   gnome = {
     fav-icon = [
