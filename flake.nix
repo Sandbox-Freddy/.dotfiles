@@ -57,6 +57,10 @@
         modules = [./hosts/private];
         hostVariables = import ./hosts/private/variables.nix;
       };
+      thinclient = mkNixosConfiguration {
+        modules = [./hosts/thinclient];
+        hostVariables = import ./hosts/thinclient/variables.nix;
+      };
     };
     overlays = import ./overlays.nix inputs;
   };
