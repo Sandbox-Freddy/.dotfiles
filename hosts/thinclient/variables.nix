@@ -37,6 +37,8 @@
       "google-chrome.desktop"
       "firefox.desktop"
       "code.desktop"
+      "com.valvesoftware.SteamLink.desktop"
+      "vlc.desktop"
       "org.gnome.Nautilus.desktop"
     ];
   };
