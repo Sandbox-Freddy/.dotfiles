@@ -21,6 +21,7 @@ The variables.nix must contain the following variables
     docker = true;
     display-link = true;
     git = true;
+    flatpak = false;
     jetbrains = true;
     lutris = true;
     steam = true;

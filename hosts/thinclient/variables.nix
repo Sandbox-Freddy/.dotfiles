@@ -11,9 +11,10 @@
     docker = false;
     display-link = false;
     git = true;
+    flatpak = true;
     jetbrains = false;
     lutris = false;
-    steam = true;
+    steam = false;
     gnome = true;
     vscode = true;
   };
@@ -35,7 +36,6 @@
       "bitwarden.desktop"
       "google-chrome.desktop"
       "firefox.desktop"
-      "steam.desktop"
       "code.desktop"
       "org.gnome.Nautilus.desktop"
     ];

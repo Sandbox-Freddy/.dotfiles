@@ -11,6 +11,7 @@
     docker = true;
     display-link = false;
     git = true;
+    flatpak = false;
     jetbrains = false;
     lutris = true;
     steam = true;

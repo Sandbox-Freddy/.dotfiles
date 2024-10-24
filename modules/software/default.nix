@@ -2,6 +2,7 @@
   imports = [
     ./displaylink.nix
     ./docker.nix
+    ./flatpak.nix
     ./git.nix
     ./jetbrains.nix
     ./lutris.nix
