@@ -9,6 +9,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./home.nix
   ];
 
   # Bootloader.
@@ -43,9 +44,6 @@
 
   # Configure console keymap
   console.keyMap = "de";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
