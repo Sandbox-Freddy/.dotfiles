@@ -20,7 +20,6 @@
 
   services.printing.enable = hostVariables.printer;
 
-
   environment.systemPackages = with pkgs; [
     alejandra
   ];

@@ -2,14 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  pkgs,
   hostVariables,
+  pkgs,
   ...
 }: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./home.nix
   ];
 
   # Bootloader.
@@ -73,7 +72,7 @@
     description = "Frederik Nies";
     extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
-      thunderbird
+      #  thunderbird
     ];
   };
 
@@ -81,9 +80,7 @@
   programs.direnv.enable = true;
 
   # Install firefox.
-  programs.firefox = {
-    enable = true;
-  };
+  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -95,9 +92,6 @@
     google-chrome
     vlc
   ];
-
-  #Yubikey
-  services.pcscd.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -124,6 +118,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-
   system.stateVersion = "24.05"; # Did you read the comment?
 }

@@ -28,11 +28,11 @@
       name = "Sandbox-Freddy";
     };
     includes = [
-          {
-            path = "~/Dev/.gitconfig";
-            condition = "gitdir:~/Dev/";
-          }
-        ];
+      {
+        path = "~/Dev/.gitconfig";
+        condition = "gitdir:~/Dev/";
+      }
+    ];
   };
   gnome = {
     fav-icon = [
