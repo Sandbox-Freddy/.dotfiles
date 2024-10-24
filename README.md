@@ -113,4 +113,5 @@ Adapt the variables to your system.The new host must then be added to flake.nix 
   };
 }
 ```
+Important: If you have added a new client, please remember to include ./home.nix in the imports section of configuration.nix for that client.”
 The new host can then be built with this `sudo nixos-rebuild switch --flake /home/USERNAME/.dotfiles#NAME_OF_NEW_HOST`

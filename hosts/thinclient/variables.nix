@@ -13,7 +13,7 @@
     git = true;
     jetbrains = false;
     lutris = false;
-    steam = false;
+    steam = true;
     gnome = true;
     vscode = true;
   };
@@ -35,6 +35,7 @@
       "bitwarden.desktop"
       "google-chrome.desktop"
       "firefox.desktop"
+      "steam.desktop"
       "code.desktop"
       "org.gnome.Nautilus.desktop"
     ];
