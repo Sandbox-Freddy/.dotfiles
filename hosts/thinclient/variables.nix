@@ -31,6 +31,12 @@
   };
   gnome = {
     fav-icon = [
+      "org.gnome.Console.desktop"
+      "bitwarden.desktop"
+      "google-chrome.desktop"
+      "firefox.desktop"
+      "code.desktop"
+      "org.gnome.Nautilus.desktop"
     ];
   };
 }
