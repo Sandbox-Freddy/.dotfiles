@@ -9,12 +9,11 @@
     enable = lib.mkEnableOption "flatpak";
   };
 
-  config =
-    lib.mkIf config.modules.software.flatpak.enable {
+  config = lib.mkIf config.modules.software.flatpak.enable {
         services.flatpak.enable = true;
 
         environment.systemPackages = with pkgs;[
             flatpak
-        ]
+        ];
     };
 }
