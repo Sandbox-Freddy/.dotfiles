@@ -10,10 +10,10 @@
   };
 
   config = lib.mkIf config.modules.software.flatpak.enable {
-        services.flatpak.enable = true;
+    services.flatpak.enable = true;
 
-        environment.systemPackages = with pkgs;[
-            flatpak
-        ];
-    };
+    environment.systemPackages = with pkgs; [
+      flatpak
+    ];
+  };
 }

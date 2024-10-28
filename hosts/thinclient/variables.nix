@@ -16,6 +16,7 @@
     lutris = false;
     steam = false;
     gnome = true;
+    kde = false;
     vscode = true;
   };
   git = {

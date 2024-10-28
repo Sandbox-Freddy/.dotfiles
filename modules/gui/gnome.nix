@@ -9,6 +9,9 @@
     enable = lib.mkEnableOption "gnome";
   };
   config = lib.mkIf config.modules.gui.gnome.enable {
+    services.xserver.displayManager.gdm.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+
     environment.systemPackages = with pkgs; [
       gnome3.dconf-editor
       gnome3.gnome-tweaks

@@ -16,6 +16,7 @@
   modules.software.steam.enable = hostVariables.modules.steam;
   modules.software.vscode.enable = hostVariables.modules.vscode;
   modules.gui.gnome.enable = hostVariables.modules.gnome;
+  modules.gui.kde.enable = hostVariables.modules.kde;
   modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
   modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
 

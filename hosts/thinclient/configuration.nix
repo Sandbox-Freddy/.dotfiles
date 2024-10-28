@@ -32,10 +32,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "de";
@@ -61,13 +57,13 @@
     #media-session.enable = true;
   };
 
-    hardware.opengl = {
+  hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [
       # your Open GL, Vulkan and VAAPI drivers
       # vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable
       # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
-       intel-media-sdk   # for older GPUs
+      intel-media-sdk # for older GPUs
     ];
   };
 
