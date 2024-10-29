@@ -86,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
     google-chrome
+    libreoffice-qt6-still
     vlc
   ];
 
