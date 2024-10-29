@@ -88,6 +88,7 @@
     bitwarden-desktop
     google-chrome
     keepassxc
+    neofetch
     postman
     vlc
     yubioath-flutter

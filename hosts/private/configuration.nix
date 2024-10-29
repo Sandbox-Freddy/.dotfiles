@@ -87,6 +87,7 @@
     bitwarden-desktop
     google-chrome
     libreoffice-qt6-still
+    neofetch
     vlc
   ];
 

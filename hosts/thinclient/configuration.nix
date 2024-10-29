@@ -95,6 +95,7 @@
     flatpak
     bitwarden-desktop
     google-chrome
+    neofetch
     vlc
   ];
 
