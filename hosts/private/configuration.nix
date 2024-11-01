@@ -89,6 +89,7 @@
     libreoffice-qt6-still
     neofetch
     vlc
+    yubioath-flutter
   ];
 
   #Yubikey

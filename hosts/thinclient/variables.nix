@@ -14,7 +14,7 @@
     flatpak = true;
     jetbrains = false;
     lutris = false;
-    steam = false;
+    steam = true;
     gnome = true;
     kde = false;
     vscode = true;
