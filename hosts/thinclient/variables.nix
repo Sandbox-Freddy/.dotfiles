@@ -8,7 +8,7 @@
       nvidia = false;
       amdgpu = false;
     };
-    docker = false;
+    docker = true;
     display-link = false;
     git = true;
     flatpak = true;
