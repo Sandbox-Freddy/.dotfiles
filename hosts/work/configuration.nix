@@ -85,6 +85,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     apostrophe
+    beekeeper-studio
     bitwarden-desktop
     google-chrome
     keepassxc
