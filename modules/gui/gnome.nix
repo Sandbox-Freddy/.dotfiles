@@ -13,8 +13,8 @@
     services.xserver.desktopManager.gnome.enable = true;
 
     environment.systemPackages = with pkgs; [
-      gnome3.dconf-editor
-      gnome3.gnome-tweaks
+      dconf-editor
+      gnome-tweaks
       gnomeExtensions.dash-to-dock
       gnomeExtensions.user-themes
       gnomeExtensions.system-monitor

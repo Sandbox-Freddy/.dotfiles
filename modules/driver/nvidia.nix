@@ -8,10 +8,10 @@
   };
 
   config = lib.mkIf config.modules.driver.nvidia.enable {
-    hardware.opengl = {
+    hardware.graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32Bit = true;
+      #driSupport = true;
+      #driSupport32Bit = true;
     };
 
     services.xserver.videoDrivers = ["nvidia"];
