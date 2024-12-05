@@ -11,17 +11,6 @@
   config = lib.mkIf config.modules.software.vscode.enable {
     environment.systemPackages = with pkgs; [
       (vscode-with-extensions.override {
-        # TODO remove after unstable updated to 1.93.0
-        vscode = pkgs.vscode.overrideAttrs (old: rec {
-          version = "1.94.2";
-          plat = "linux-x64";
-          src = fetchurl {
-            name = "VSCode_${version}_${plat}.tar.gz";
-            url = "https://update.code.visualstudio.com/${version}/${plat}/stable";
-            sha256 = "NktZowxWnt96Xa4Yxyv+oMmwHGylYIxFrpws/y0XhXA=";
-          };
-        });
-
         vscodeExtensions = let
           vscode-extensions = nix-vscode-extensions.extensions.${pkgs.stdenv.hostPlatform.system};
         in
