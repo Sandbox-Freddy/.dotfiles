@@ -5,7 +5,7 @@
     # basic home-manager config
     home.username = "${hostVariables.username}";
     home.homeDirectory = "/home/${hostVariables.username}";
-    home.stateVersion = "24.11";
+    home.stateVersion = hostVariables.stateVersion;
     programs.home-manager.enable = true;
   };
 }

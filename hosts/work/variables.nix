@@ -2,6 +2,7 @@
   username = "freddy";
   host = "work";
   system = "x86_64-linux";
+  stateVersion = "24.11";
   printer = true;
   modules = {
     driver = {

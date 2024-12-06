@@ -12,6 +12,7 @@ The variables.nix must contain the following variables
   username = "";
   host = "";
   system = "";
+  stateVersion = "";
   printer = true;
   modules = {
     driver = {
