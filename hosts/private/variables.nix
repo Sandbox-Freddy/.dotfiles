@@ -16,8 +16,8 @@
     jetbrains = false;
     lutris = true;
     steam = true;
-    gnome = true;
-    kde = false;
+    gnome = false;
+    kde = true;
     vscode = true;
   };
   git = {
