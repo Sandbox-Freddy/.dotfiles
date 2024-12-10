@@ -57,7 +57,7 @@
     #media-session.enable = true;
   };
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [
       # your Open GL, Vulkan and VAAPI drivers
