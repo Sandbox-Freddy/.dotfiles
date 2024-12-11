@@ -22,7 +22,8 @@
       powerManagement.finegrained = false;
       open = false;
       nvidiaSettings = true;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # change back to stable after gnome bug is fixed
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     hardware.nvidia.prime = {
