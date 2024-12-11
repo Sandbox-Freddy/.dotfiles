@@ -86,7 +86,6 @@
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
     google-chrome
-    libreoffice-qt6-still
     neofetch
     vlc
     yubioath-flutter
