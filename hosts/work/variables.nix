@@ -50,7 +50,6 @@
       "com.yubico.authenticator.desktop"
       "org.keepassxc.KeePassXC.desktop"
       "org.gnome.Nautilus.desktop"
-      "org.gnome.gitlab.somas.Apostrophe.desktop"
       "org.gnome.TextEditor.desktop"
     ];
   };

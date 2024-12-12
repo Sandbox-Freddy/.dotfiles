@@ -84,12 +84,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    apostrophe
     beekeeper-studio
     bitwarden-desktop
     google-chrome
     keepassxc
     neofetch
+    pinta
     postman
     vlc
     yubioath-flutter
