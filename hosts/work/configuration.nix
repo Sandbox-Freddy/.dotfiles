@@ -86,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     beekeeper-studio
     bitwarden-desktop
+    drawio
     google-chrome
     keepassxc
     neofetch
