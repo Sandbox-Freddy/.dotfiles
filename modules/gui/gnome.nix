@@ -14,14 +14,16 @@
 
     environment.systemPackages = with pkgs; [
       dconf-editor
+      ffmpegthumbnailer
+      gnome-chess
       gnome-tweaks
+      gnomeExtensions.clipboard-history
       gnomeExtensions.dash-to-dock
       gnomeExtensions.user-themes
       gnomeExtensions.system-monitor
-      yaru-theme
-      papirus-icon-theme
-      ffmpegthumbnailer
       loupe
+      papirus-icon-theme
+      yaru-theme
     ];
 
     home-manager.users.${hostVariables.username} = {
@@ -36,6 +38,7 @@
             pkgs.gnomeExtensions.dash-to-dock.extensionUuid
             pkgs.gnomeExtensions.user-themes.extensionUuid
             pkgs.gnomeExtensions.system-monitor.extensionUuid
+            pkgs.gnomeExtensions.clipboard-history.extensionUuid
           ];
         };
         "org/gnome/desktop/interface" = {
