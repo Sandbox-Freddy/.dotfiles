@@ -85,7 +85,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
-    google-chrome
     neofetch
     vlc
     yubioath-flutter
