@@ -92,9 +92,8 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    flatpak
     bitwarden-desktop
-    google-chrome
+    flatpak
     neofetch
     vlc
   ];

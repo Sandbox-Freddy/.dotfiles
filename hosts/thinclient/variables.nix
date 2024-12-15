@@ -36,7 +36,6 @@
     fav-icon = [
       "org.gnome.Console.desktop"
       "bitwarden.desktop"
-      "google-chrome.desktop"
       "firefox.desktop"
       "code.desktop"
       "com.valvesoftware.SteamLink.desktop"
