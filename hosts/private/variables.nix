@@ -11,6 +11,7 @@
     };
     docker = true;
     display-link = false;
+    discord = true;
     git = true;
     flatpak = false;
     jetbrains = false;
@@ -40,6 +41,7 @@
       "thunderbird.desktop"
       "code.desktop"
       "steam.desktop"
+      "discord-ptb.desktop"
       "org.gnome.Nautilus.desktop"
     ];
   };

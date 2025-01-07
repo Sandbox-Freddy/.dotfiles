@@ -10,6 +10,7 @@
   modules.software.docker.enable = hostVariables.modules.docker;
   modules.software.git.enable = hostVariables.modules.git;
   modules.software.flatpak.enable = hostVariables.modules.flatpak;
+  modules.software.discord.enable = hostVariables.modules.discord;
   modules.software.displaylink.enable = hostVariables.modules.display-link;
   modules.software.jetbrains.enable = hostVariables.modules.jetbrains;
   modules.software.lutris.enable = hostVariables.modules.lutris;

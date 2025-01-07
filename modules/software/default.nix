@@ -1,5 +1,6 @@
 {
   imports = [
+    ./discord.nix
     ./displaylink.nix
     ./docker.nix
     ./flatpak.nix

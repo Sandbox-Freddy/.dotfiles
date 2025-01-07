@@ -20,6 +20,7 @@ The variables.nix must contain the following variables
       amdgpu = true;
     };
     docker = true;
+    discord = true;
     display-link = true;
     git = true;
     flatpak = false;

@@ -11,6 +11,7 @@
     };
     docker = true;
     display-link = false;
+    discord = false;
     git = true;
     flatpak = true;
     jetbrains = false;
