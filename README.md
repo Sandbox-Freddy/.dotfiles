@@ -24,7 +24,8 @@ The variables.nix must contain the following variables
     display-link = true;
     git = true;
     flatpak = false;
-    jetbrains = true;
+    idea-ultimate = false;
+    webstorm = false;
     lutris = true;
     steam = true;
     gnome = true;

@@ -5,9 +5,10 @@
     ./docker.nix
     ./flatpak.nix
     ./git.nix
-    ./jetbrains.nix
+    ./idea-ultimate.nix
     ./lutris.nix
     ./steam.nix
     ./vscode.nix
+    ./webstorm.nix
   ];
 }

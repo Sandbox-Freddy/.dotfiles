@@ -14,7 +14,8 @@
     discord = false;
     git = true;
     flatpak = true;
-    jetbrains = false;
+    idea-ultimate = false;
+    webstorm = false;
     lutris = false;
     steam = true;
     gnome = true;
