@@ -39,7 +39,7 @@
       "org.gnome.Console.desktop"
       "bitwarden.desktop"
       "firefox.desktop"
-      "thunderbird.desktop"
+      "webstorm.desktop"
       "code.desktop"
       "steam.desktop"
       "discord-ptb.desktop"
