@@ -144,5 +144,4 @@ The new host can then be built with this `sudo nixos-rebuild switch --flake /hom
       };
     });
 }
-
 ```
