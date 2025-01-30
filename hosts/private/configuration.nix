@@ -86,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
     neofetch
+    pinta
     vlc
     yubioath-flutter
   ];
