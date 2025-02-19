@@ -44,7 +44,7 @@
       "org.gnome.Console.desktop"
       "google-chrome.desktop"
       "firefox.desktop"
-      "postman.desktop"
+      "insomnia.desktop"
       "idea-ultimate.desktop"
       "code.desktop"
       "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"

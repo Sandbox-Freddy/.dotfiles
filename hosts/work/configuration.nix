@@ -88,10 +88,10 @@
     bitwarden-desktop
     drawio
     google-chrome
+    insomnia
     keepassxc
     neofetch
     pinta
-    postman
     vlc
     yubioath-flutter
   ];
