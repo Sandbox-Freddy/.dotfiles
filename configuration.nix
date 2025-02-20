@@ -33,4 +33,9 @@
     nssmdns4 = hostVariables.printer;
     openFirewall = hostVariables.printer;
   };
+
+  programs.nh = {
+    enable = true;
+    flake = "/home/${hostVariables.username}/.dotfiles";
+  };
 }
