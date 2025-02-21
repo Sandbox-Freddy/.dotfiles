@@ -33,6 +33,9 @@
             ms-python.debugpy
             # ide keybindings
             k--kato.intellij-idea-keybindings
+
+            # Rust
+            rust-lang.rust-analyzer
           ];
       })
     ];
