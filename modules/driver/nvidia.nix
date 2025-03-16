@@ -10,8 +10,7 @@
   config = lib.mkIf config.modules.driver.nvidia.enable {
     hardware.graphics = {
       enable = true;
-      #driSupport = true;
-      #driSupport32Bit = true;
+      enable32Bit = true;
     };
 
     services.xserver.videoDrivers = ["nvidia"];
@@ -23,7 +22,7 @@
       open = false;
       nvidiaSettings = true;
       # change back to stable after gnome bug is fixed
-      package = config.boot.kernelPackages.nvidiaPackages.beta;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
     };
 
     hardware.nvidia.prime = {

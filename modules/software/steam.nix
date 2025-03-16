@@ -9,6 +9,13 @@
     enable = lib.mkEnableOption "steam";
   };
   config = lib.mkIf config.modules.software.steam.enable {
+    nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+      "steam"
+      "steam-original"
+      "steam-unwrapped"
+      "steam-run"
+    ];
+
     programs.steam = {
       enable = true;
       remotePlay.openFirewall = true;
