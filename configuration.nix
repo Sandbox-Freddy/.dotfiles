@@ -15,6 +15,7 @@
   modules.software.idea-ultimate.enable = hostVariables.modules.idea-ultimate;
   modules.software.webstorm.enable = hostVariables.modules.webstorm;
   modules.software.lutris.enable = hostVariables.modules.lutris;
+  modules.software.noisetorch.enable = hostVariables.modules.noisetorch;
   modules.software.steam.enable = hostVariables.modules.steam;
   modules.software.vscode.enable = hostVariables.modules.vscode;
   modules.gui.gnome.enable = hostVariables.modules.gnome;

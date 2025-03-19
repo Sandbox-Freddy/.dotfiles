@@ -27,6 +27,7 @@ The variables.nix must contain the following variables
     idea-ultimate = false;
     webstorm = false;
     lutris = true;
+    noisetorch = true;
     steam = true;
     gnome = true;
     vscode = true;

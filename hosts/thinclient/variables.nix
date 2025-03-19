@@ -17,6 +17,7 @@
     idea-ultimate = false;
     webstorm = false;
     lutris = false;
+    noisetorch = false;
     steam = true;
     gnome = true;
     kde = false;
