@@ -48,6 +48,7 @@
       "insomnia.desktop"
       "idea-ultimate.desktop"
       "code.desktop"
+      "chrome-cadlkienfkclaiaibeoongdcgmdikeeg-Default.desktop"
       "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
       "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
       "com.yubico.authenticator.desktop"
