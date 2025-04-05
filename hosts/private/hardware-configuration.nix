@@ -14,10 +14,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   boot.initrd.systemd.enable = true;
-
-  services.tpm2.enable = true;
   security.tpm2.enable = true;
 
   boot.initrd.availableKernelModules = [
