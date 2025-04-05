@@ -9,28 +9,32 @@ If you want to create a new host, a new folder must be created in the `./hosts` 
 The variables.nix must contain the following variables
 ```
 {
-  username = "";
-  host = "";
-  system = "";
-  stateVersion = "";
-  printer = true;
+  username = "freddy";
+  host = "work";
+  system = "x86_64-linux";
+  stateVersion = "24.11";
   modules = {
     driver = {
       nvidia = false;
       amdgpu = true;
     };
     docker = true;
-    discord = true;
     display-link = true;
+    discord = false;
     git = true;
     flatpak = false;
-    idea-ultimate = false;
+    idea-ultimate = true;
     webstorm = false;
-    lutris = true;
+    lutris = false;
     noisetorch = true;
-    steam = true;
+    steam = false;
     gnome = true;
+    kde = false;
     vscode = true;
+  };
+  systemSettings = {
+    bootanimation = false;
+    printer = false;
   };
   git = {
     lfs = true;
@@ -42,12 +46,19 @@ The variables.nix must contain the following variables
       email = "";
       name = "";
     };
-    includes = [];
+    includes = [
+      {
+        path = "";
+        condition = "";
+      }
+    ];
   };
   gnome = {
-    fav-icon = [];
+    fav-icon = [
+    ];
   };
 }
+
 ```
 Adapt the variables to your system.The new host must then be added to flake.nix in the root directory.
 ```

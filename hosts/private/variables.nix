@@ -3,7 +3,6 @@
   host = "private";
   system = "x86_64-linux";
   stateVersion = "24.11";
-  printer = true;
   modules = {
     driver = {
       nvidia = true;
@@ -22,6 +21,10 @@
     gnome = true;
     kde = false;
     vscode = true;
+  };
+  systemSettings = {
+    bootanimation = true;
+    printer = true;
   };
   git = {
     lfs = true;

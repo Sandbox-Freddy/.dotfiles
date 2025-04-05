@@ -22,18 +22,12 @@
   modules.gui.kde.enable = hostVariables.modules.kde;
   modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
   modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
+  modules.system.bootanimation.enable = hostVariables.systemSettings.bootanimation;
+  modules.system.printer.enable = hostVariables.systemSettings.printer;
 
   environment.systemPackages = with pkgs; [
     alejandra
   ];
-
-  # Printer
-  services.printing.enable = hostVariables.printer;
-  services.avahi = {
-    enable = hostVariables.printer;
-    nssmdns4 = hostVariables.printer;
-    openFirewall = hostVariables.printer;
-  };
 
   programs.nh = {
     enable = true;

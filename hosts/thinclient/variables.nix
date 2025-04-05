@@ -3,7 +3,6 @@
   host = "thinclient";
   system = "x86_64-linux";
   stateVersion = "24.11";
-  printer = false;
   modules = {
     driver = {
       nvidia = false;
@@ -22,6 +21,10 @@
     gnome = true;
     kde = false;
     vscode = true;
+  };
+  systemSettings = {
+    bootanimation = false;
+    printer = false;
   };
   git = {
     lfs = true;

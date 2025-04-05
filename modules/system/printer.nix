@@ -4,12 +4,16 @@
   hostVariables,
   ...
 }: {
-  options.s.docker = {
-    enable = lib.mkEnableOption "docker";
+  options.modules.system.printer = {
+    enable = lib.mkEnableOption "printer";
   };
 
-  config = lib.mkIf config.modules.software.docker.enable {
-    virtualisation.docker.enable = true;
-    users.users.${hostVariables.username}.extraGroups = ["docker"];
+  config = lib.mkIf config.modules.system.printer.enable {
+    services.printing.enable = true;
+    services.avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
   };
 }
