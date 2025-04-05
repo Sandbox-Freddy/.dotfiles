@@ -12,6 +12,14 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.initrd.systemd.enable = true;
+
+  services.tpm2.enable = true;
+  security.tpm2.enable = true;
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
@@ -29,7 +37,6 @@
 
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
-  boot.initrd.systemd.enable = true;
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/1dd31ff9-e64a-40c7-afdc-8570b2edc840";

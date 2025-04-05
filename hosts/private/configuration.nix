@@ -87,6 +87,7 @@
     bitwarden-desktop
     neofetch
     pinta
+    sbctl
     vlc
     yubioath-flutter
   ];
