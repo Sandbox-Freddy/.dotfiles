@@ -14,7 +14,7 @@
 
     environment.systemPackages = with pkgs; [
       flatpak
-      gnome.gnome-software
+      gnome-software
     ];
 
     systemd.services.flatpak-repo = {
