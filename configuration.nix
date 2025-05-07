@@ -7,6 +7,7 @@
   ...
 }: {
   # Modules
+  modules.software.android-studio.enable = hostVariables.modules.android-studio;
   modules.software.docker.enable = hostVariables.modules.docker;
   modules.software.git.enable = hostVariables.modules.git;
   modules.software.flatpak.enable = hostVariables.modules.flatpak;

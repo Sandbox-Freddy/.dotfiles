@@ -12,6 +12,7 @@ in
           // {
             amdgpu = true;
           };
+        android-studio = true;
         display-link = true;
         idea-ultimate = true;
       };

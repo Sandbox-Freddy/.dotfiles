@@ -1,5 +1,6 @@
 {
   imports = [
+    ./android-studio.nix
     ./discord.nix
     ./displaylink.nix
     ./docker.nix

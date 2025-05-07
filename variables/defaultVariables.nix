@@ -4,6 +4,7 @@
   system = "x86_64-linux";
   stateVersion = "24.11";
   modules = {
+    android-studio = false;
     driver = {
       nvidia = false;
       amdgpu = false;
