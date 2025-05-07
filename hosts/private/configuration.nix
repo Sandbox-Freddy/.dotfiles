@@ -86,6 +86,7 @@
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
     google-chrome
+    linuxKernel.packages.linux_xanmod_stable.xpadneo
     neofetch
     pinta
     sbctl

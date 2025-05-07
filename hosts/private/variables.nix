@@ -23,6 +23,8 @@ in
         fav-icon = [
           "org.gnome.Console.desktop"
           "bitwarden.desktop"
+          "chrome-cadlkienfkclaiaibeoongdcgmdikeeg-Default.desktop"
+          "google-chrome.desktop"
           "firefox.desktop"
           "webstorm.desktop"
           "code.desktop"
