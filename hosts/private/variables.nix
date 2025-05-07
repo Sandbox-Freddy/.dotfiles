@@ -17,6 +17,11 @@ in
         lutris = true;
         steam = true;
       };
+    systemSettings =
+      default.systemSettings
+      // {
+        virtualization = true;
+      };
     gnome =
       default.gnome
       // {

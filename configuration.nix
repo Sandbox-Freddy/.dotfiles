@@ -24,6 +24,7 @@
   modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
   modules.system.bootanimation.enable = hostVariables.systemSettings.bootanimation;
   modules.system.printer.enable = hostVariables.systemSettings.printer;
+  modules.system.virtualization.enable = hostVariables.systemSettings.virtualization;
 
   environment.systemPackages = with pkgs; [
     alejandra

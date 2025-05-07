@@ -25,6 +25,7 @@
   systemSettings = {
     bootanimation = true;
     printer = true;
+    virtualization = false;
   };
   git = {
     lfs = true;
