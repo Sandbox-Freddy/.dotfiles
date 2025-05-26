@@ -30,7 +30,20 @@
     ];
 
     users.users.${hostVariables.username} = {
-      extraGroups = ["libvirtd" "kvm"];
+      isNormalUser = true;
+      extraGroups = ["wheel" "libvirt" "kvm" "input"];
     };
+
+    security.polkit.enable = true;
+    environment.etc."polkit-1/rules.d/50-libvirt-usb.rules".text = ''
+      polkit.addRule(function(action, subject) {
+        if (
+          action.id == "org.spice-space.lowlevelusbaccess" &&
+          subject.isInGroup("libvirt")
+        ) {
+          return polkit.Result.YES;
+        }
+      });
+    '';
   };
 }
