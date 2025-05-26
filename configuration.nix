@@ -21,6 +21,7 @@
   modules.software.vscode.enable = hostVariables.modules.vscode;
   modules.gui.gnome.enable = hostVariables.modules.gnome;
   modules.gui.kde.enable = hostVariables.modules.kde;
+  modules.gui.hyperland.enable = hostVariables.modules.hyperland;
   modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
   modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
   modules.system.bootanimation.enable = hostVariables.systemSettings.bootanimation;

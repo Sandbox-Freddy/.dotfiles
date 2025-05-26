@@ -22,6 +22,7 @@
     gnome = true;
     kde = false;
     vscode = true;
+    hyperland = false;
   };
   systemSettings = {
     bootanimation = true;
