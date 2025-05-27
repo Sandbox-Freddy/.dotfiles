@@ -42,7 +42,7 @@
   console.keyMap = "de";
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -84,7 +84,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    beekeeper-studio
     bitwarden-desktop
     drawio
     google-chrome
