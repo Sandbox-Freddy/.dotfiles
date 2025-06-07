@@ -26,6 +26,7 @@
   };
   systemSettings = {
     bootanimation = true;
+    gaming = false;
     printer = true;
     virtualization = false;
   };

@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: {
   options.modules.driver.nvidia = {
@@ -8,11 +9,6 @@
   };
 
   config = lib.mkIf config.modules.driver.nvidia.enable {
-    hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-    };
-
     services.xserver.videoDrivers = ["nvidia"];
 
     hardware.nvidia = {
@@ -28,6 +24,11 @@
       sync.enable = true;
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
+    };
+
+    environment.variables = {
+      __NV_PRIME_RENDER_OFFLOAD = "1";
+      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
   };
 }

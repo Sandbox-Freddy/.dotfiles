@@ -20,6 +20,7 @@ in
     systemSettings =
       default.systemSettings
       // {
+        gaming = true;
         virtualization = true;
       };
     gnome =

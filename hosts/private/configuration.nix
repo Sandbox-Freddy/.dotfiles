@@ -122,6 +122,8 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-
+  services.udev.extraRules = ''
+    ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0666", GROUP="plugdev"
+  '';
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
 }

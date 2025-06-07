@@ -25,6 +25,7 @@
   modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
   modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
   modules.system.bootanimation.enable = hostVariables.systemSettings.bootanimation;
+  modules.system.gaming.enable = hostVariables.systemSettings.gaming;
   modules.system.printer.enable = hostVariables.systemSettings.printer;
   modules.system.virtualization.enable = hostVariables.systemSettings.virtualization;
 
