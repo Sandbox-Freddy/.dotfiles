@@ -5,22 +5,35 @@
   ...
 }: {
   options.modules.system.gaming = {
-  enable =lib.mkEnableOption "gaming";
+    enable = lib.mkEnableOption "gaming";
   };
 
   config = lib.mkIf config.modules.system.gaming.enable {
-    hardware.graphics.enable = true;
-    hardware.graphics.enable32Bit = true;
+    hardware.graphics = {
+      enable = true;
+      enable32Bit = true;
+      extraPackages = with pkgs; [
+        nvidia-vaapi-driver
+        vulkan-validation-layers
+      ];
+    };
 
-    hardware.graphics.extraPackages = with pkgs; [
-      nvidia-vaapi-driver
-      vulkan-validation-layers
-    ];
+    nixpkgs.config.allowUnfreePredicate = pkg:
+      builtins.elem (lib.getName pkg) [
+        "steam"
+        "steam-original"
+        "steam-unwrapped"
+        "steam-run"
+      ];
+
     programs.gamemode.enable = true;
     programs.steam = {
       enable = true;
       gamescopeSession.enable = true;
       remotePlay.openFirewall = true;
+      package = pkgs.unstable.steam.override {
+        extraPkgs = pkgs: [pkgs.attr pkgs.pipewire pkgs.pkgsi686Linux.pipewire];
+      };
     };
 
     environment.systemPackages = with pkgs; [
@@ -29,6 +42,17 @@
       vkd3d-proton
       bottles
       mangohud
+      lutris
+      (lutris.override {
+        extraLibraries = pkgs: [
+          # List library dependencies here
+        ];
+      })
+      (lutris.override {
+        extraPkgs = pkgs: [
+          # List package dependencies here
+        ];
+      })
     ];
 
     environment.variables = {

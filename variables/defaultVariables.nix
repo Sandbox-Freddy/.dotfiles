@@ -16,9 +16,7 @@
     flatpak = false;
     idea-ultimate = false;
     webstorm = false;
-    lutris = false;
     noisetorch = true;
-    steam = false;
     gnome = true;
     kde = false;
     vscode = true;

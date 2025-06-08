@@ -9,7 +9,6 @@ in
       // {
         flatpak = true;
         noisetorch = false;
-        steam = true;
       };
     gnome =
       default.gnome

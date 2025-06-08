@@ -14,8 +14,6 @@ in
           };
         discord = true;
         webstorm = true;
-        lutris = true;
-        steam = true;
       };
     systemSettings =
       default.systemSettings

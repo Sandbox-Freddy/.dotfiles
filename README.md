@@ -75,7 +75,6 @@ switch
     };
     docker = true;
     git = true;
-    steam = false;
     vscode = true;
     gnome = true;
     kde = false;
