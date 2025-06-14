@@ -9,15 +9,6 @@
   };
 
   config = lib.mkIf config.modules.system.gaming.enable {
-    hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        vulkan-validation-layers
-      ];
-    };
-
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
         "steam"
