@@ -28,15 +28,10 @@
     };
 
     environment.systemPackages = with pkgs; [
-      protonup-qt
-      dxvk
-      vkd3d-proton
-      bottles
-      mangohud
       lutris
       (lutris.override {
         extraLibraries = pkgs: [
-          # List library dependencies here
+         # List package libraries here
         ];
       })
       (lutris.override {
@@ -45,9 +40,5 @@
         ];
       })
     ];
-
-    environment.variables = {
-      MANGOHUD = "0";
-    };
   };
 }

@@ -3,16 +3,17 @@
   lib,
   pkgs,
   ...
-}: {
+}:{
   options.modules.driver.nvidia = {
     enable = lib.mkEnableOption "nvidia";
   };
 
   config = lib.mkIf config.modules.driver.nvidia.enable {
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [
+      "nvidia"
+    ];
 
     hardware.nvidia = {
-      modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
       open = false;
@@ -34,11 +35,6 @@
         vulkan-loader
         vulkan-tools
       ];
-    };
-
-    environment.variables = {
-      __NV_PRIME_RENDER_OFFLOAD = "1";
-      __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     };
   };
 }
