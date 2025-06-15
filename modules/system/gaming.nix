@@ -31,7 +31,7 @@
       lutris
       (lutris.override {
         extraLibraries = pkgs: [
-         # List package libraries here
+          # List package libraries here
         ];
       })
       (lutris.override {

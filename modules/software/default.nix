@@ -10,5 +10,6 @@
     ./noisetorch.nix
     ./vscode.nix
     ./webstorm.nix
+    ./wine.nix
   ];
 }

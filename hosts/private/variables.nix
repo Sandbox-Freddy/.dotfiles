@@ -14,6 +14,7 @@ in
           };
         discord = true;
         webstorm = true;
+        wine = true;
       };
     systemSettings =
       default.systemSettings

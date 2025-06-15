@@ -3,7 +3,7 @@
   lib,
   pkgs,
   ...
-}:{
+}: {
   options.modules.driver.nvidia = {
     enable = lib.mkEnableOption "nvidia";
   };
@@ -14,6 +14,7 @@
     ];
 
     hardware.nvidia = {
+      modesetting.enable = true;
       powerManagement.enable = false;
       powerManagement.finegrained = false;
       open = false;
