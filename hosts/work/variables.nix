@@ -33,7 +33,7 @@ in
           "org.gnome.Console.desktop"
           "google-chrome.desktop"
           "firefox.desktop"
-          "insomnia.desktop"
+          "hoppscotch.desktop"
           "idea-ultimate.desktop"
           "code.desktop"
           "chrome-cadlkienfkclaiaibeoongdcgmdikeeg-Default.desktop"

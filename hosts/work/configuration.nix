@@ -87,7 +87,7 @@
     bitwarden-desktop
     drawio
     google-chrome
-    insomnia
+    hoppscotch
     keepassxc
     neofetch
     pinta
