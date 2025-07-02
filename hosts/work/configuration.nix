@@ -87,7 +87,6 @@
     bitwarden-desktop
     drawio
     google-chrome
-    hoppscotch
     keepassxc
     neofetch
     pinta
