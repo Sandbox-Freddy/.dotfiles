@@ -33,6 +33,7 @@ in
           "org.gnome.Console.desktop"
           "google-chrome.desktop"
           "firefox.desktop"
+          "chrome-hcmbhdgajegmbifcliiifdgabfomdoeo-Default.desktop"
           "chrome-gpilnghdnjmkagonnhmhajmadneiolhf-Default.desktop"
           "idea-ultimate.desktop"
           "code.desktop"
