@@ -85,6 +85,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
+    bruno
     drawio
     google-chrome
     keepassxc
