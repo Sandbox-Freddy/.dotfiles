@@ -39,6 +39,7 @@
           # List package dependencies here
         ];
       })
+      vulkan-tools
     ];
   };
 }

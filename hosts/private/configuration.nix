@@ -126,4 +126,11 @@
     ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0666", GROUP="plugdev"
   '';
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
+
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8192;
+    } # 8GB Swapfile
+  ];
 }
