@@ -3,7 +3,7 @@ let
 in
   default
   // {
-    host = "private";
+    host = "freddy-laptop";
     modules =
       default.modules
       // {

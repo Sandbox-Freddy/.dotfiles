@@ -53,9 +53,9 @@
         modules = [./hosts/work];
         hostVariables = import ./hosts/work/variables.nix;
       };
-      private = mkNixosConfiguration {
-        modules = [./hosts/private];
-        hostVariables = import ./hosts/private/variables.nix;
+      freddy-laptop = mkNixosConfiguration {
+        modules = [./hosts/freddy-laptop];
+        hostVariables = import ./hosts/freddy-laptop/variables.nix;
       };
       thinclient = mkNixosConfiguration {
         modules = [./hosts/thinclient];

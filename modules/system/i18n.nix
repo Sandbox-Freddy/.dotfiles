@@ -1,7 +1,4 @@
-{
-hostVariables,
-...
-}: {
+{hostVariables, ...}: {
   i18n.defaultLocale = hostVariables.location;
 
   i18n.extraLocaleSettings = {
