@@ -73,7 +73,7 @@
   users.users.${hostVariables.username} = {
     isNormalUser = true;
     description = "Frederik Nies";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "scanner" "lp"];
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -126,9 +126,9 @@
 
   #Scanner
   hardware.sane.enable = true;
-  users.users.${hostVariables.username}.extraGroups = [ "scanner" "lp" ];
-  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
+  hardware.sane.extraBackends = [ pkgs.sane-airscan pkgs.epkowa ];
   services.udev.packages = [ pkgs.sane-airscan ];
   services.ipp-usb.enable=true;
-  hardware.sane.extraBackends = [ pkgs.epkowa ];
+
+
 }
