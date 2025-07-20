@@ -17,6 +17,11 @@ in
           // {
             display-link = true;
           };
+        systemSettings =
+          default.modules.systemSettings
+          // {
+            scanner = true;
+          };
       };
     git =
       default.git

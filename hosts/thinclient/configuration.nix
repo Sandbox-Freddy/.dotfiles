@@ -73,7 +73,7 @@
   users.users.${hostVariables.username} = {
     isNormalUser = true;
     description = "Frederik Nies";
-    extraGroups = ["networkmanager" "wheel" "scanner" "lp"];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       #  thunderbird
     ];
@@ -123,21 +123,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
-
-  #Scanner
-  hardware.sane = {
-    enable = true;
-    extraBackends = [pkgs.sane-airscan pkgs.epkowa];
-  };
-  services.udev.packages = [pkgs.sane-airscan];
-  services.ipp-usb.enable = true;
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-    publish = {
-      enable = true;
-      addresses = true;
-      userServices = true;
-    };
-  };
 }

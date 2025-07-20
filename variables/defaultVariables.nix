@@ -29,6 +29,7 @@
       gaming = false;
       printer = true;
       virtualization = false;
+      scanner = false;
     };
   };
   git = {

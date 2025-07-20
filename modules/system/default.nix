@@ -6,6 +6,7 @@
     ./i18n.nix
     ./keybindings.nix
     ./printer.nix
+    ./scanner.nix
     ./virtualization.nix
   ];
 }

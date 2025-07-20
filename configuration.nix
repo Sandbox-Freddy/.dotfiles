@@ -24,6 +24,7 @@
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
   modules.system.gaming.enable = hostVariables.modules.systemSettings.gaming;
   modules.system.printer.enable = hostVariables.modules.systemSettings.printer;
+  modules.system.scanner.enable = hostVariables.modules.systemSettings.scanner;
   modules.system.virtualization.enable = hostVariables.modules.systemSettings.virtualization;
 
   environment.systemPackages = with pkgs; [
