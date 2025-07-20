@@ -123,4 +123,12 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
+
+  #Scanner
+  hardware.sane.enable = true;
+  users.users.${hostVariables.username}.extraGroups = [ "scanner" "lp" ];
+  hardware.sane.extraBackends = [ pkgs.sane-airscan ];
+  services.udev.packages = [ pkgs.sane-airscan ];
+  services.ipp-usb.enable=true;
+  hardware.sane.extraBackends = [ pkgs.epkowa ];
 }
