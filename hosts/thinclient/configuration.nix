@@ -125,10 +125,19 @@
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
 
   #Scanner
-  hardware.sane.enable = true;
-  hardware.sane.extraBackends = [ pkgs.sane-airscan pkgs.epkowa ];
-  services.udev.packages = [ pkgs.sane-airscan ];
-  services.ipp-usb.enable=true;
-
-
+  hardware.sane = {
+    enable = true;
+    extraBackends = [pkgs.sane-airscan pkgs.epkowa];
+  };
+  services.udev.packages = [pkgs.sane-airscan];
+  services.ipp-usb.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    publish = {
+      enable = true;
+      addresses = true;
+      userServices = true;
+    };
+  };
 }
