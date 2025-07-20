@@ -12,13 +12,12 @@
     hardware.sane = {
       enable = true;
       extraBackends = [pkgs.sane-airscan];
-      disabledDefaultBackends = ["escl"]; # optional
     };
     services.udev.packages = [pkgs.sane-airscan];
 
     services.avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       publish = {
         enable = true;
         addresses = true;

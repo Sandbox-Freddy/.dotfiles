@@ -13,6 +13,11 @@ in
             flatpak = true;
             noisetorch = false;
           };
+        systemSettings =
+          default.modules.systemSettings
+          // {
+            scanner = true;
+          };
       };
     gnome =
       default.gnome
