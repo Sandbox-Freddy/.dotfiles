@@ -56,16 +56,6 @@
     #media-session.enable = true;
   };
 
-  hardware.graphics = {
-    enable = true;
-    extraPackages = with pkgs; [
-      # your Open GL, Vulkan and VAAPI drivers
-      # vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable
-      # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
-      intel-media-sdk # for older GPUs
-    ];
-  };
-
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -83,7 +73,9 @@
   programs.direnv.enable = true;
 
   # Install firefox.
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -123,4 +115,14 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
+
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      # your Open GL, Vulkan and VAAPI drivers
+      # vpl-gpu-rt          # for newer GPUs on NixOS >24.05 or unstable
+      # onevpl-intel-gpu  # for newer GPUs on NixOS <= 24.05
+      intel-media-sdk # for older GPUs
+    ];
+  };
 }

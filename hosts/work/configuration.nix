@@ -2,8 +2,8 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  pkgs,
   hostVariables,
+  pkgs,
   ...
 }: {
   imports = [
@@ -85,14 +85,13 @@
   environment.systemPackages = with pkgs; [
     android-studio
     bitwarden-desktop
+    brave
     bruno
     drawio
-    google-chrome
     jetbrains.idea-ultimate
     keepassxc
     neofetch
     pinta
-    vlc
     yubioath-flutter
   ];
 
