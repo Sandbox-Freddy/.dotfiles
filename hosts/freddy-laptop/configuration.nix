@@ -84,14 +84,11 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
+    brave
     discord-ptb
-    google-chrome
     jetbrains.webstorm
-    linuxKernel.packages.linux_xanmod_stable.xpadneo
-    neofetch
     pinta
     sbctl
-    vlc
     yubioath-flutter
   ];
 
