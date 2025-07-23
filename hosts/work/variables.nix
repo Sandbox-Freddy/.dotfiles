@@ -33,18 +33,17 @@ in
       // {
         fav-icon = [
           "org.gnome.Console.desktop"
-          "firefox.desktop"
+          "brave-browser.desktop"
           "bruno.desktop"
           "idea-ultimate.desktop"
           "org.keepassxc.KeePassXC.desktop"
           "com.yubico.authenticator.desktop"
+          "brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
+          "brave-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
           "org.gnome.Nautilus.desktop"
           "org.gnome.TextEditor.desktop"
-          "chrome-cadlkienfkclaiaibeoongdcgmdikeeg-Default.desktop"
-          "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
-          "google-chrome.desktop"
+          "firefox.desktop"
           "code.desktop"
-          "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
         ];
       };
   }
