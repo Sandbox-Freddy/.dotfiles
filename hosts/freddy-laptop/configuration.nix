@@ -86,6 +86,7 @@
     bitwarden-desktop
     brave
     discord-ptb
+    ffmpeg
     jetbrains.webstorm
     pinta
     sbctl
