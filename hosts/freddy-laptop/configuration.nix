@@ -85,6 +85,7 @@
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
     brave
+    cifs-utils
     discord-ptb
     ffmpeg
     jetbrains.webstorm
