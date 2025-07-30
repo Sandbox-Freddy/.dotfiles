@@ -22,7 +22,7 @@
       enable = true;
       gamescopeSession.enable = true;
       remotePlay.openFirewall = true;
-      package = pkgs.unstable.steam.override {
+      package = pkgs.steam.override {
         extraPkgs = pkgs: [pkgs.attr pkgs.pipewire pkgs.pkgsi686Linux.pipewire];
       };
     };
