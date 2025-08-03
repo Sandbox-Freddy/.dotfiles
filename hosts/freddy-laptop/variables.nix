@@ -21,7 +21,6 @@ in
           default.modules.systemSettings
           // {
             gaming = true;
-            virtualization = true;
           };
       };
     gnome =
