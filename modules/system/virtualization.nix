@@ -10,40 +10,37 @@
   };
 
   config = lib.mkIf config.modules.system.virtualization.enable {
-    virtualisation.libvirtd = {
-      enable = true;
-      qemu = {
-        ovmf.enable = true;
-        swtpm.enable = true;
-        runAsRoot = true;
-      };
-    };
+    boot.extraModprobeConfig = "options kvm_intel nested=1";
 
-    programs.virt-manager.enable = true;
+    programs.dconf.enable = true;
 
+    # Add user to libvirtd group
+    users.users.${hostVariables.username}.extraGroups = ["libvirtd"];
+
+    # Install necessary packages
     environment.systemPackages = with pkgs; [
       virt-manager
       virt-viewer
+      spice
       spice-gtk
-      qemu_kvm
-      usbutils
+      spice-protocol
+      win-virtio
+      win-spice
+      adwaita-icon-theme
     ];
 
-    users.users.${hostVariables.username} = {
-      isNormalUser = true;
-      extraGroups = ["wheel" "libvirt" "kvm" "input"];
+    # Manage the virtualisation services
+    virtualisation = {
+      libvirtd = {
+        enable = true;
+        qemu = {
+          swtpm.enable = true;
+          ovmf.enable = true;
+          ovmf.packages = [pkgs.OVMFFull.fd];
+        };
+      };
+      spiceUSBRedirection.enable = true;
     };
-
-    security.polkit.enable = true;
-    environment.etc."polkit-1/rules.d/50-libvirt-usb.rules".text = ''
-      polkit.addRule(function(action, subject) {
-        if (
-          action.id == "org.spice-space.lowlevelusbaccess" &&
-          subject.isInGroup("libvirt")
-        ) {
-          return polkit.Result.YES;
-        }
-      });
-    '';
+    services.spice-vdagentd.enable = true;
   };
 }
