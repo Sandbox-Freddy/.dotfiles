@@ -63,7 +63,7 @@
   users.users.${hostVariables.username} = {
     isNormalUser = true;
     description = "Frederik Nies";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = ["networkmanager" "wheel" "vboxusers"];
     packages = with pkgs; [
       thunderbird
     ];
@@ -89,7 +89,6 @@
     discord-ptb
     ffmpeg
     jetbrains.webstorm
-    quickemu
     pinta
     sbctl
     yubioath-flutter
@@ -134,4 +133,9 @@
       size = 8192;
     } # 8GB Swapfile
   ];
+
+  # virtualisation.virtualbox.host.enable = true;
+  # virtualisation.virtualbox.host.enableExtensionPack = true;
+  # virtualisation.libvirtd.enable = false;
+  # boot.blacklistedKernelModules = ["kvm-intel" "kvm-amd" "xpad"];
 }
