@@ -40,6 +40,7 @@ in
           "com.yubico.authenticator.desktop"
           "brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
           "brave-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
+          "brave-fmpnliohjhemenmnlpbfagaolkdacoja-Default.desktop"
           "org.gnome.Nautilus.desktop"
           "org.gnome.TextEditor.desktop"
           "firefox.desktop"
