@@ -16,6 +16,7 @@ in
           default.modules.software
           // {
             wine = true;
+            ollama = true;
           };
         systemSettings =
           default.modules.systemSettings

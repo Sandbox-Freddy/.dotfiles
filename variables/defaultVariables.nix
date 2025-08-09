@@ -22,6 +22,7 @@
       git = true;
       noisetorch = true;
       wine = false;
+      ollama = false;
       vscode = true;
     };
     systemSettings = {
