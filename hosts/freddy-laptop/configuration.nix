@@ -92,6 +92,7 @@
     pinta
     sbctl
     yubioath-flutter
+    ollama
   ];
 
   #Yubikey
@@ -138,4 +139,12 @@
   # virtualisation.virtualbox.host.enableExtensionPack = true;
   # virtualisation.libvirtd.enable = false;
   # boot.blacklistedKernelModules = ["kvm-intel" "kvm-amd" "xpad"];
+
+  services.ollama = {
+    enable = true;
+    acceleration = "cuda";
+    loadModels = ["llama3.2:3b" "gpt-oss:20b"];
+  };
+  services.open-webui.enable = true;
+
 }
