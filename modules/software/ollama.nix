@@ -27,8 +27,7 @@ in {
       enable = true;
       package = ollama-latest;
       acceleration = "cuda";
-      loadModels = ["llama3.2:3b" "gpt-oss:20b"];
     };
-    services.open-webui.enable = true;
+    services.open-webui.enable = false;
   };
 }
