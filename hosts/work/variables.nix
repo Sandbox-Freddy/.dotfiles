@@ -16,6 +16,7 @@ in
           default.modules.software
           // {
             display-link = true;
+            ollama = true;
           };
       };
     git =
