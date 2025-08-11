@@ -23,11 +23,18 @@ in {
   config = lib.mkIf config.modules.software.ollama.enable {
     environment.systemPackages = [ollama-latest];
 
-    services.ollama = {
-      enable = true;
-      package = ollama-latest;
-      acceleration = "cuda";
-    };
+    services.ollama = lib.mkMerge [
+      {
+        enable = true;
+        package = ollama-latest;
+      }
+      (lib.mkIf (hostVariables.modules.driver.nvidia) {
+        acceleration = "cuda";
+      })
+      (lib.mkIf (hostVariables.modules.driver.amdgpu) {
+        acceleration = "rocm";
+      })
+    ];
     services.open-webui.enable = false;
   };
 }
