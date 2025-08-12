@@ -125,4 +125,11 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
 
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
+
+    swapDevices = [
+      {
+        device = "/swapfile";
+        size = 8192;
+      } # 8GB Swapfile
+    ];
 }
