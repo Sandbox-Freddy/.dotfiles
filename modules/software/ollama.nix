@@ -28,11 +28,15 @@ in {
         enable = true;
         package = ollama-latest;
       }
-      (lib.mkIf (hostVariables.modules.driver.nvidia) {
+      (lib.mkIf (hostVariables.modules.driver.nvidia == true) {
         acceleration = "cuda";
       })
-      (lib.mkIf (hostVariables.modules.driver.amdgpu) {
+      (lib.mkIf (hostVariables.modules.driver.amdgpu == true) {
         acceleration = "rocm";
+        environmentVariables = {
+          HCC_AMDGPU_TARGET = "gfx1103";
+        };
+        rocmOverrideGfx = "11.0.3";
       })
     ];
     services.open-webui.enable = false;
