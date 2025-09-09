@@ -21,6 +21,7 @@
       gnomeExtensions.dash-to-dock
       gnomeExtensions.user-themes
       gnomeExtensions.system-monitor
+      gucharmap
       loupe
       papirus-icon-theme
       yaru-theme
