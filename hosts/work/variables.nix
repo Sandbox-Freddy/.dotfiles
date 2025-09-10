@@ -46,6 +46,7 @@ in
           "org.gnome.TextEditor.desktop"
           "firefox.desktop"
           "code.desktop"
+          "Logseq.desktop"
         ];
       };
   }
