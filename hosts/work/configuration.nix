@@ -90,6 +90,7 @@
     drawio
     jetbrains.idea-ultimate
     keepassxc
+    logseq
     neofetch
     pinta
     yubioath-flutter
