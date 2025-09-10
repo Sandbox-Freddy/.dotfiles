@@ -86,7 +86,7 @@
     android-studio
     bitwarden-desktop
     brave
-    bruno
+    unstable.bruno
     drawio
     jetbrains.idea-ultimate
     keepassxc
