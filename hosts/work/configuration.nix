@@ -127,10 +127,10 @@
 
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
 
-    swapDevices = [
-      {
-        device = "/swapfile";
-        size = 8192;
-      } # 8GB Swapfile
-    ];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8192;
+    } # 8GB Swapfile
+  ];
 }
