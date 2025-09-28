@@ -6,7 +6,7 @@
   ...
 }: let
   ollama-latest = pkgs.ollama.overrideAttrs (oldAttrs: rec {
-    version = "0.11.4";
+    version = "0.12.3";
     src = pkgs.fetchFromGitHub {
       owner = "ollama";
       repo = "ollama";
