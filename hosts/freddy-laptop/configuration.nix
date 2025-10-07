@@ -89,6 +89,7 @@
     discord-ptb
     ffmpeg
     jetbrains.webstorm
+    keepassxc
     pinta
     sbctl
     yubioath-flutter
