@@ -26,7 +26,7 @@ in
           "org.gnome.Console.desktop"
           "bitwarden.desktop"
           "firefox.desktop"
-          "code.desktop"
+          "webstorm.desktop"
           "com.valvesoftware.SteamLink.desktop"
           "vlc.desktop"
           "org.gnome.Nautilus.desktop"

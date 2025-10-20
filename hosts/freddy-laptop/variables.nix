@@ -33,7 +33,6 @@ in
           "firefox.desktop"
           "brave-browser.desktop"
           "webstorm.desktop"
-          "code.desktop"
           "steam.desktop"
           "discord-ptb.desktop"
           "org.gnome.Nautilus.desktop"

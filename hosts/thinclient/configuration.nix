@@ -85,6 +85,7 @@
   environment.systemPackages = with pkgs; [
     bitwarden-desktop
     flatpak
+    jetbrains.webstorm
     neofetch
     vlc
   ];

@@ -21,7 +21,6 @@
   modules.software.noisetorch.enable = hostVariables.modules.software.noisetorch;
   modules.software.wine.enable = hostVariables.modules.software.wine;
   modules.software.ollama.enable = hostVariables.modules.software.ollama;
-  modules.software.vscode.enable = hostVariables.modules.software.vscode;
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
   modules.system.gaming.enable = hostVariables.modules.systemSettings.gaming;
   modules.system.printer.enable = hostVariables.modules.systemSettings.printer;

@@ -44,7 +44,6 @@ in
           "org.gnome.Nautilus.desktop"
           "org.gnome.TextEditor.desktop"
           "firefox.desktop"
-          "code.desktop"
           "Logseq.desktop"
         ];
       };

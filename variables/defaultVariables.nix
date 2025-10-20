@@ -23,7 +23,6 @@
       noisetorch = true;
       wine = false;
       ollama = false;
-      vscode = true;
     };
     systemSettings = {
       bootanimation = true;
