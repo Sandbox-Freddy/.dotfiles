@@ -39,6 +39,9 @@ in {
         rocmOverrideGfx = "11.0.3";
       })
     ];
-    services.open-webui.enable = false;
+    services.open-webui = {
+      enable = true;
+      port = 3000;
+    };
   };
 }

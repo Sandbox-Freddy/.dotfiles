@@ -90,6 +90,7 @@
     ffmpeg
     jetbrains.webstorm
     keepassxc
+    losslesscut-bin
     pinta
     sbctl
     yubioath-flutter
