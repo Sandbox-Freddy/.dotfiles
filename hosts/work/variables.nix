@@ -46,5 +46,7 @@ in
           "firefox.desktop"
           "Logseq.desktop"
         ];
+        idle-delay = 300;
+        left-handed = false;
       };
   }

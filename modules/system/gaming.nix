@@ -26,20 +26,5 @@
         extraPkgs = pkgs: [pkgs.attr pkgs.pipewire pkgs.pkgsi686Linux.pipewire];
       };
     };
-
-    environment.systemPackages = with pkgs; [
-      lutris
-      (lutris.override {
-        extraLibraries = pkgs: [
-          # List package libraries here
-        ];
-      })
-      (lutris.override {
-        extraPkgs = pkgs: [
-          # List package dependencies here
-        ];
-      })
-      vulkan-tools
-    ];
   };
 }

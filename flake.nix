@@ -6,13 +6,11 @@
       url = "github:nix-community/home-manager?ref=release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
   outputs = inputs @ {
     nixpkgs,
     home-manager,
-    nix-vscode-extensions,
     ...
   }: let
     mkNixosConfiguration = {
@@ -44,7 +42,6 @@
           ];
         specialArgs = {
           inherit hostVariables;
-          inherit nix-vscode-extensions;
         };
       };
   in {

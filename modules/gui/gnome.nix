@@ -88,7 +88,7 @@
           power-button-action = "interactive";
         };
         "org/gnome/desktop/session" = {
-          idle-delay = 300;
+          idle-delay = hostVariables.gnome.idle-delay;
         };
         "org/gnome/desktop/screensaver" = {
           lock-enabled = true;
@@ -96,6 +96,9 @@
         };
         "org/gnome/desktop/notifications" = {
           show-in-lock-screen = false;
+        };
+        "org/gnome/desktop/peripherals/mouse" = {
+          left-handed = hostVariables.gnome.left-handed;
         };
 
         # keybindings

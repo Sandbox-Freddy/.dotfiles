@@ -46,5 +46,7 @@
   gnome = {
     fav-icon = [
     ];
+    idle-delay = 0;
+    left-handed = true;
   };
 }
