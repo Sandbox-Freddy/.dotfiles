@@ -93,6 +93,7 @@
     losslesscut-bin
     pinta
     sbctl
+    unstable.space-cadet-pinball
     yubioath-flutter
   ];
 
