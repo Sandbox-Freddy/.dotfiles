@@ -85,7 +85,8 @@
   environment.systemPackages = with pkgs; [
     android-studio
     bitwarden-desktop
-    brave
+    unstable.brave
+    unstable.dbeaver-bin
     unstable.bruno
     drawio
     jetbrains.idea-ultimate
