@@ -28,6 +28,15 @@
   # Set your time zone.
   time.timeZone = "Europe/Berlin";
 
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+
+  # Configure keymap in X11
+  services.xserver.xkb = {
+    layout = "de";
+    variant = "";
+  };
+
   # Configure console keymap
   console.keyMap = "de";
 
