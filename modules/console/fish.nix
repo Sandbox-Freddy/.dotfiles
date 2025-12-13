@@ -23,8 +23,8 @@
 
             function __atuin_install --on-event fish_prompt
               functions -e __atuin_install
-              bind -M insert -k up _atuin_bind_up
-              bind -M default -k up _atuin_bind_up
+              bind -M insert up _atuin_bind_up
+              bind -M default up _atuin_bind_up
               bind up _atuin_bind_up
             end
           '';
