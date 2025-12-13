@@ -39,4 +39,7 @@
     enable = true;
     flake = "/home/${hostVariables.username}/.dotfiles";
   };
+
+  system.autoUpgrade.enable = true;
+  system.autoUpgrade.allowReboot = true;
 }

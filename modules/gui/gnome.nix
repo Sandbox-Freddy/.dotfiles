@@ -9,11 +9,11 @@
     enable = lib.mkEnableOption "gnome";
   };
   config = lib.mkIf config.modules.gui.gnome.enable {
-    services.xserver.displayManager.gdm = {
+    services.displayManager.gdm = {
       enable = true;
       wayland = true;
     };
-    services.xserver.desktopManager.gnome.enable = true;
+    services.desktopManager.gnome.enable = true;
 
     environment.systemPackages = with pkgs; [
       dconf-editor

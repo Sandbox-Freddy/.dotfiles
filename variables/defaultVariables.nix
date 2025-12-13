@@ -3,7 +3,7 @@
   host = "default";
   system = "x86_64-linux";
   location = "de_DE.UTF-8";
-  stateVersion = "25.05";
+  stateVersion = "25.11";
   modules = {
     console = {
       fish = true;
