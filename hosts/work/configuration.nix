@@ -83,11 +83,9 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    android-studio
-    bitwarden-desktop
     unstable.brave
-    unstable.dbeaver-bin
     unstable.bruno
+    unstable.dbeaver-bin
     drawio
     jetbrains.idea-ultimate
     keepassxc
