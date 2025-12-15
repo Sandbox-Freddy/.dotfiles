@@ -28,7 +28,6 @@ in
       // {
         fav-icon = [
           "org.gnome.Console.desktop"
-          "bitwarden.desktop"
           "firefox.desktop"
           "brave-browser.desktop"
           "webstorm.desktop"

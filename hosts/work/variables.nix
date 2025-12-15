@@ -37,7 +37,7 @@ in
           "bruno.desktop"
           "idea-ultimate.desktop"
           "org.keepassxc.KeePassXC.desktop"
-          "com.yubico.authenticator.desktop"
+          "com.yubico.yubioath.desktop"
           "brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
           "brave-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
           "brave-fmpnliohjhemenmnlpbfagaolkdacoja-Default.desktop"

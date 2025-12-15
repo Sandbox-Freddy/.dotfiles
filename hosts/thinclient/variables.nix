@@ -24,7 +24,6 @@ in
       // {
         fav-icon = [
           "org.gnome.Console.desktop"
-          "bitwarden.desktop"
           "firefox.desktop"
           "webstorm.desktop"
           "com.valvesoftware.SteamLink.desktop"
