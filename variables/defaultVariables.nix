@@ -27,8 +27,6 @@
     systemSettings = {
       bootanimation = true;
       gaming = false;
-      printer = true;
-      scanner = false;
     };
   };
   git = {

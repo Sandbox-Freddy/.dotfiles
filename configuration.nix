@@ -23,8 +23,6 @@
   modules.software.ollama.enable = hostVariables.modules.software.ollama;
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
   modules.system.gaming.enable = hostVariables.modules.systemSettings.gaming;
-  modules.system.printer.enable = hostVariables.modules.systemSettings.printer;
-  modules.system.scanner.enable = hostVariables.modules.systemSettings.scanner;
 
   environment.systemPackages = with pkgs; [
     alejandra
