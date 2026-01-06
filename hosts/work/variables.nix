@@ -35,7 +35,7 @@ in
           "org.gnome.Console.desktop"
           "brave-browser.desktop"
           "bruno.desktop"
-          "idea-ultimate.desktop"
+          "idea.desktop"
           "org.keepassxc.KeePassXC.desktop"
           "com.yubico.yubioath.desktop"
           "brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
