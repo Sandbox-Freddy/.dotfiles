@@ -88,10 +88,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    unstable.brave
     unstable.bruno
     unstable.dbeaver-bin
     drawio
+    unstable.google-chrome
     jetbrains.idea-ultimate
     keepassxc
     logseq
