@@ -33,14 +33,12 @@ in
       // {
         fav-icon = [
           "org.gnome.Console.desktop"
-          "brave-browser.desktop"
           "bruno.desktop"
           "idea.desktop"
+          "google-chrome.desktop"
+          "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
           "org.keepassxc.KeePassXC.desktop"
           "com.yubico.yubioath.desktop"
-          "brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
-          "brave-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
-          "brave-fmpnliohjhemenmnlpbfagaolkdacoja-Default.desktop"
           "org.gnome.Nautilus.desktop"
           "org.gnome.TextEditor.desktop"
           "firefox.desktop"
