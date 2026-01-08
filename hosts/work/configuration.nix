@@ -91,10 +91,10 @@
     unstable.bruno
     unstable.dbeaver-bin
     drawio
-    unstable.google-chrome
     jetbrains.idea-ultimate
     keepassxc
     logseq
+    unstable.microsoft-edge
     neofetch
     pinta
     yubioath-flutter
