@@ -10,7 +10,9 @@
 
   config = lib.mkIf config.modules.driver.amdgpu.enable {
     boot.initrd.kernelModules = ["amdgpu"];
-    boot.kernelParams = [ "radeon.cik_support=0" "amdgpu.cik_support=1" ];
+    boot.kernelParams = ["radeon.cik_support=0" "amdgpu.cik_support=1"];
+
+    hardware.amdgpu.legacySupport.enable = true;
 
     services.xserver = {
       enable = true;
