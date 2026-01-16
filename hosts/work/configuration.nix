@@ -93,7 +93,6 @@
     drawio
     jetbrains.idea-ultimate
     keepassxc
-    logseq
     unstable.microsoft-edge
     neofetch
     pinta
