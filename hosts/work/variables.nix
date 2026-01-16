@@ -41,7 +41,6 @@ in
           "org.gnome.Nautilus.desktop"
           "org.gnome.TextEditor.desktop"
           "firefox.desktop"
-          "Logseq.desktop"
         ];
         idle-delay = 300;
         left-handed = false;
