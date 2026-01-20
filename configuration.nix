@@ -24,6 +24,39 @@
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
   modules.system.gaming.enable = hostVariables.modules.systemSettings.gaming;
 
+  # Common Desktop / System Settings
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.networkmanager.enable = true;
+  time.timeZone = "Europe/Berlin";
+
+  i18n.defaultLocale = hostVariables.location;
+
+  services.xserver.enable = true;
+  services.xserver.xkb = {
+    layout = "de";
+    variant = "";
+  };
+  console.keyMap = "de";
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+  security.rtkit.enable = true;
+
+  users.users.${hostVariables.username} = {
+    isNormalUser = true;
+    description = "${hostVariables.description}";
+    extraGroups = ["networkmanager" "wheel"];
+  };
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     alejandra
   ];

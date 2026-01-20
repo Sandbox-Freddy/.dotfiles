@@ -1,5 +1,6 @@
 {
   username = "freddy";
+  description = "Frederik Nies";
   host = "default";
   system = "x86_64-linux";
   location = "de_DE.UTF-8";
@@ -33,7 +34,6 @@
     lfs = true;
     extraConfig = {
       defaultBranch = "main";
-      credential-helper = "store";
     };
     credentials = {
       email = "31123359+Sandbox-Freddy@users.noreply.github.com";
