@@ -91,7 +91,7 @@
     unstable.bruno
     unstable.dbeaver-bin
     drawio
-    jetbrains.idea-ultimate
+    unstable.jetbrains.idea-ultimate
     keepassxc
     unstable.microsoft-edge
     neofetch
