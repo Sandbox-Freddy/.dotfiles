@@ -2,117 +2,84 @@
 
 This repository contains my modular NixOS system configuration, powered by [Nix Flakes](https://nixos.wiki/wiki/Flakes) and [Home Manager](https://nix-community.github.io/home-manager/).
 
-## ✅ Features
+## 🚀 Features
 
-- 🔁 Flake-based for reproducibility
-- 🧩 Modular configuration per host
-- 💻 Includes Home Manager for user-level setup
-- 📁 Centralized `variables.nix` for system flags and module toggles
+- **Flake-based**: Reproducible system configurations.
+- **Multi-host**: Support for different machines (`work`, `freddy-laptop`, `thinclient`).
+- **Modular**: Clean separation of drivers, software, and system settings.
+- **Home Manager**: Integrated user-level configuration.
+- **Centralized Variables**: Easily toggle features and set system-wide flags via `variables.nix`.
 
----
+## 🛠️ Stack
+
+- **OS**: NixOS
+- **Configuration**: Nix (Flakes)
+- **User Management**: Home Manager
+- **Shell**: Fish (optional, via modules)
+- **Desktop Environment**: GNOME (optional, via modules)
 
 ## 🏗️ Getting Started
 
-### 1. Clone into `.dotfiles`
+### Prerequisites
+
+- NixOS installed on your machine.
+
+### Installation
+
+1. Clone the repository into `~/.dotfiles`:
 
 ```bash
 git clone https://github.com/Sandbox-Freddy/.dotfiles ~/.dotfiles
 cd ~/.dotfiles
 ```
 
-### 2. Use an existing host
-
-Edit:
-
-```nix
-./hosts/{work,private}/variables.nix
-```
-
-Then run:
+2. Apply configuration for a specific host (e.g., `work`):
 
 ```bash
 sudo nixos-rebuild switch --flake ~/.dotfiles#work
 ```
 
-For later rebuilds:
+## ⌨️ Scripts & Aliases
 
-```bash
-rebuild
-```
+The configuration provides several useful shell aliases defined in `modules/console/aliases.nix`:
 
-or 
-```bash
-switch
-```
-
-> `rebuild` and `switch` is an alias for `nixos-rebuild` with predefined arguments.
-
----
+| Alias | Description |
+|-------|-------------|
+| `rebuild` | Rebuilds the current host configuration. |
+| `update` | Updates the `flake.lock` file. |
+| `switchnix` | Switches configuration using `nh` (Nix Helper). |
+| `nixfmt` | Formats nix files using `alejandra`. |
+| `securebootsign` | Signs boot files for Secure Boot using `sbctl`. |
 
 ## ➕ Adding a New Host
 
-1. Create a new folder in `./hosts/`, e.g. `my-laptop`
-2. Add these files:
-    - `configuration.nix`
-    - `default.nix`
-    - `hardware-configuration.nix`
-    - `variables.nix`
+1. Create a new folder in `./hosts/`, e.g., `my-laptop`.
+2. Add the required files:
+    - `configuration.nix`: Host-specific NixOS configuration.
+    - `default.nix`: Entry point for the host (usually imports other files).
+    - `hardware-configuration.nix`: Generated hardware config.
+    - `variables.nix`: Configuration flags for this host.
 
-3. Your `variables.nix` should follow this structure:
+3. Example `variables.nix`:
 
 ```nix
-{
-  username = "freddy";
-  host = "default";
-  system = "x86_64-linux";
-  stateVersion = "25.05";
-  modules = {
-    console = {
-      fish = true;
-    };
-    driver = {
-      nvidia = false;
-      amdgpu = false;
-    };
+let
+  default = import ../../variables/defaultVariables.nix;
+in
+default // {
+  host = "my-laptop";
+  modules = default.modules // {
     gui = {
       gnome = true;
     };
-    software = {
-      display-link = false;
+    software = default.modules.software // {
       docker = true;
-      flatpak = false;
-      git = true;
-      noisetorch = true;
-      wine = false;
-      vscode = true;
     };
-    systemSettings = {
-      bootanimation = true;
-      gaming = false;
-      printer = true;
-      virtualization = false;
-    };
-  };
-  git = {
-    lfs = true;
-    extraConfig = {
-      defaultBranch = "main";
-      credential-helper = "store";
-    };
-    credentials = {
-      email = "31123359+Sandbox-Freddy@users.noreply.github.com";
-      name = "Sandbox-Freddy";
-    };
-    includes = [];
-  };
-  gnome = {
-    fav-icon = [
-    ];
   };
 }
 ```
 
-4. Finally, register the host in your `flake.nix`:
+4. Register the host in `flake.nix`:
 
 ```nix
 nixosConfigurations = {
@@ -123,48 +90,33 @@ nixosConfigurations = {
 };
 ```
 
----
+## 📁 Project Structure
 
-## 🛠 Troubleshooting & Known Issues
+- `hosts/`: Host-specific configurations.
+- `modules/`: Reusable configuration modules.
+    - `console/`: Shell, aliases, and terminal themes.
+    - `driver/`: Hardware drivers (Nvidia, AMD).
+    - `gui/`: Desktop environments (GNOME).
+    - `software/`: Application-specific configurations (Docker, Git, etc.).
+    - `system/`: Core system settings (Boot, i18n, Gaming).
+- `variables/`: Default configuration values.
+- `flake.nix`: Main entry point for the flake.
+- `home.nix`: Global Home Manager configuration.
+- `configuration.nix`: Common NixOS settings shared by all hosts.
 
-### ❗ `attribute 'xyz' missing`
+## ⚙️ Environment Variables
 
-Ensure that your `variables.nix` file contains all required attributes. Use a central default like:
+This project primarily uses Nix variables defined in `variables.nix` rather than traditional environment variables for system configuration. Key variables include:
 
-```nix
-let default = import ../../variables/defaultVariables.nix; in
-default // { ... }
-```
-
-This ensures every module gets all expected keys.
-
-
-
-### 🧨 Module flags not working
-
-Make sure you’re not accidentally shadowing or omitting expected fields:
-
-- Use `default.modules // { ... }` instead of `{}` when overriding
-- Use `lib.attrByPath` or `lib.getAttrFromPath` for optional flags
-
----
-
-### 🔄 Flake not updating correctly
-
-Run:
-
-```bash
-nix flake update
-rebuild switch --flake .#your-host
-```
-
-If you're using `nix-direnv`, reload the shell with `direnv reload`.
-
----
+- `username`: The primary system user.
+- `host`: The hostname.
+- `system`: The architecture (e.g., `x86_64-linux`).
+- `stateVersion`: The NixOS state version.
 
 ## 📄 License
 
 This project is licensed under the [MIT License](./LICENSE).
+
 ---
 
 > 💬 Feedback, PRs, and questions are always welcome.
