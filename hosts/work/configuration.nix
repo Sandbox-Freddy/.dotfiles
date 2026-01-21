@@ -34,7 +34,7 @@
     unstable.bruno
     unstable.dbeaver-bin
     drawio
-    unstable.jetbrains.idea-ultimate
+    unstable.jetbrains.idea
     keepassxc
     unstable.microsoft-edge
     neofetch

@@ -18,7 +18,7 @@
       programs.git = {
         enable = true;
         lfs.enable = hostVariables.git.lfs;
-        extraConfig = {
+        settings = {
           user = {
             email = hostVariables.git.credentials.email;
             name = hostVariables.git.credentials.name;
