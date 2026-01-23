@@ -13,6 +13,18 @@
 
   networking.hostName = hostVariables.host; # Define your hostname.
 
+  # Modules
+  modules.gui.gnome = {
+    favoriteApps = [
+      "org.gnome.Console.desktop"
+      "firefox.desktop"
+      "webstorm.desktop"
+      "com.valvesoftware.SteamLink.desktop"
+      "vlc.desktop"
+      "org.gnome.Nautilus.desktop"
+    ];
+  };
+
   # Enable networking
   networking.networkmanager = {
     plugins = with pkgs; [
@@ -31,11 +43,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    flatpak
-    jetbrains.webstorm
     neofetch
-    vlc
   ];
+
+  home-manager.users.${hostVariables.username} = {
+    home.packages = with pkgs; [
+      jetbrains.webstorm
+      vlc
+    ];
+  };
 
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
 

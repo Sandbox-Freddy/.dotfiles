@@ -30,21 +30,4 @@
       gaming = false;
     };
   };
-  git = {
-    lfs = true;
-    extraConfig = {
-      defaultBranch = "main";
-    };
-    credentials = {
-      email = "31123359+Sandbox-Freddy@users.noreply.github.com";
-      name = "Sandbox-Freddy";
-    };
-    includes = [];
-  };
-  gnome = {
-    fav-icon = [
-    ];
-    idle-delay = 0;
-    left-handed = true;
-  };
 }

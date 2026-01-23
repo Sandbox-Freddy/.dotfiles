@@ -23,17 +23,4 @@ in
             gaming = true;
           };
       };
-    gnome =
-      default.gnome
-      // {
-        fav-icon = [
-          "org.gnome.Console.desktop"
-          "firefox.desktop"
-          "brave-browser.desktop"
-          "webstorm.desktop"
-          "steam.desktop"
-          "discord-ptb.desktop"
-          "org.gnome.Nautilus.desktop"
-        ];
-      };
   }

@@ -13,6 +13,32 @@
 
   networking.hostName = hostVariables.host; # Define your hostname.
 
+  # Modules
+  modules.gui.gnome = {
+    favoriteApps = [
+      "org.gnome.Console.desktop"
+      "bruno.desktop"
+      "idea.desktop"
+      "microsoft-edge.desktop"
+      "org.keepassxc.KeePassXC.desktop"
+      "com.yubico.yubioath.desktop"
+      "org.gnome.Nautilus.desktop"
+      "org.gnome.TextEditor.desktop"
+      "firefox.desktop"
+    ];
+    idleDelay = 300;
+    leftHanded = false;
+  };
+
+  modules.software.git = {
+    includes = [
+      {
+        path = "~/Dev/.gitconfig";
+        condition = "gitdir:~/Dev/";
+      }
+    ];
+  };
+
   # Enable networking
   networking.networkmanager = {
     plugins = with pkgs; [
@@ -31,16 +57,21 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    unstable.bruno
-    unstable.dbeaver-bin
-    drawio
-    unstable.jetbrains.idea
-    keepassxc
-    unstable.microsoft-edge
     neofetch
     pinta
-    yubioath-flutter
   ];
+
+  home-manager.users.${hostVariables.username} = {
+    home.packages = with pkgs; [
+      unstable.bruno
+      unstable.dbeaver-bin
+      drawio
+      unstable.jetbrains.idea
+      keepassxc
+      unstable.microsoft-edge
+      yubioath-flutter
+    ];
+  };
 
   #Yubikey
   services.pcscd.enable = true;

@@ -4,6 +4,7 @@
 {
   pkgs,
   hostVariables,
+  config,
   ...
 }: {
   imports = [
@@ -68,7 +69,7 @@
 
   programs.nh = {
     enable = true;
-    flake = "/home/${hostVariables.username}/.dotfiles";
+    flake = config.users.users.${hostVariables.username}.home + "/.dotfiles";
   };
 
   system.autoUpgrade.enable = true;

@@ -4,11 +4,28 @@
   config,
   hostVariables,
   ...
-}: {
+}: let
+  cfg = config.modules.gui.gnome;
+in {
   options.modules.gui.gnome = {
     enable = lib.mkEnableOption "gnome";
+    favoriteApps = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "Favorite apps in GNOME dash";
+    };
+    idleDelay = lib.mkOption {
+      type = lib.types.int;
+      default = 0;
+      description = "Idle delay in seconds";
+    };
+    leftHanded = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable left-handed mouse mode";
+    };
   };
-  config = lib.mkIf config.modules.gui.gnome.enable {
+  config = lib.mkIf cfg.enable {
     services.displayManager.gdm = {
       enable = true;
       wayland = true;
@@ -69,7 +86,7 @@
           running-indicator-style = "DOTS";
         };
         "org/gnome/shell" = {
-          favorite-apps = hostVariables.gnome.fav-icon;
+          favorite-apps = cfg.favoriteApps;
         };
         "org/gnome/desktop/wm/preferences" = {
           button-layout = "appmenu:minimize,maximize,close";
@@ -91,7 +108,7 @@
           power-button-action = "interactive";
         };
         "org/gnome/desktop/session" = {
-          idle-delay = hostVariables.gnome.idle-delay;
+          idle-delay = cfg.idleDelay;
         };
         "org/gnome/desktop/screensaver" = {
           lock-enabled = true;
@@ -101,7 +118,7 @@
           show-in-lock-screen = false;
         };
         "org/gnome/desktop/peripherals/mouse" = {
-          left-handed = hostVariables.gnome.left-handed;
+          left-handed = cfg.leftHanded;
         };
 
         # keybindings

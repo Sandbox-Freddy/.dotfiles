@@ -13,6 +13,19 @@
 
   networking.hostName = hostVariables.host; # Define your hostname.
 
+  # Modules
+  modules.gui.gnome = {
+    favoriteApps = [
+      "org.gnome.Console.desktop"
+      "firefox.desktop"
+      "brave-browser.desktop"
+      "webstorm.desktop"
+      "steam.desktop"
+      "discord-ptb.desktop"
+      "org.gnome.Nautilus.desktop"
+    ];
+  };
+
   # Enable networking
   networking.networkmanager = {
     plugins = with pkgs; [
@@ -23,7 +36,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${hostVariables.username} = {
     extraGroups = ["vboxusers"];
-    packages = with pkgs; [
+  };
+
+  home-manager.users.${hostVariables.username} = {
+    home.packages = with pkgs; [
       thunderbird
     ];
   };
@@ -41,16 +57,22 @@
   environment.systemPackages = with pkgs; [
     brave
     cifs-utils
-    discord-ptb
     ffmpeg
-    jetbrains.webstorm
-    keepassxc
-    losslesscut-bin
     pinta
     sbctl
     unstable.space-cadet-pinball
-    yubioath-flutter
   ];
+
+  home-manager.users.${hostVariables.username} = {
+    home.packages = with pkgs; [
+      thunderbird
+      discord-ptb
+      jetbrains.webstorm
+      keepassxc
+      losslesscut-bin
+      yubioath-flutter
+    ];
+  };
 
   #Yubikey
   services.pcscd.enable = true;

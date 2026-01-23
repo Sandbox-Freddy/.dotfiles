@@ -1,4 +1,4 @@
-{hostVariables, ...}: {
+{hostVariables, config, ...}: {
   nix = {
     gc = {
       automatic = true;
@@ -13,7 +13,7 @@
       trusted-users = [hostVariables.username];
     };
     extraOptions = ''
-      !include /home/${hostVariables.username}/.nix.conf
+      !include ${config.users.users.${hostVariables.username}.home}/.nix.conf
     '';
   };
 }

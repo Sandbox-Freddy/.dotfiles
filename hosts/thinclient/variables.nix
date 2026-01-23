@@ -14,16 +14,4 @@ in
             noisetorch = false;
           };
       };
-    gnome =
-      default.gnome
-      // {
-        fav-icon = [
-          "org.gnome.Console.desktop"
-          "firefox.desktop"
-          "webstorm.desktop"
-          "com.valvesoftware.SteamLink.desktop"
-          "vlc.desktop"
-          "org.gnome.Nautilus.desktop"
-        ];
-      };
   }
