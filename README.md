@@ -4,25 +4,27 @@ This repository contains my modular NixOS system configuration, powered by [Nix 
 
 ## 🚀 Features
 
-- **Flake-based**: Reproducible system configurations.
+- **Flake-based**: Reproducible system configurations using NixOS 25.11.
 - **Multi-host**: Support for different machines (`work`, `freddy-laptop`, `thinclient`).
 - **Modular**: Clean separation of drivers, software, and system settings.
 - **Home Manager**: Integrated user-level configuration.
 - **Centralized Variables**: Easily toggle features and set system-wide flags via `variables.nix`.
+- **Pre-configured Software**: Includes modules for Docker, Git, GNOME, and more.
 
 ## 🛠️ Stack
 
-- **OS**: NixOS
+- **OS**: NixOS (Stable 25.11 & Unstable)
 - **Configuration**: Nix (Flakes)
 - **User Management**: Home Manager
-- **Shell**: Fish (optional, via modules)
-- **Desktop Environment**: GNOME (optional, via modules)
+- **Shell**: Fish (via `modules/console/fish.nix`)
+- **Desktop Environment**: GNOME (via `modules/gui/gnome.nix`)
+- **Package Manager**: Nix
 
 ## 🏗️ Getting Started
 
-### Prerequisites
+### Requirements
 
-- NixOS installed on your machine.
+- NixOS installed on your machine
 
 ### Installation
 
@@ -45,73 +47,42 @@ The configuration provides several useful shell aliases defined in `modules/cons
 
 | Alias | Description |
 |-------|-------------|
-| `rebuild` | Rebuilds the current host configuration. |
+| `rebuild` | Rebuilds the current host configuration using `nixos-rebuild`. |
 | `update` | Updates the `flake.lock` file. |
 | `switchnix` | Switches configuration using `nh` (Nix Helper). |
 | `nixfmt` | Formats nix files using `alejandra`. |
 | `securebootsign` | Signs boot files for Secure Boot using `sbctl`. |
 
-## ➕ Adding a New Host
+## 🧪 Tests
 
-1. Create a new folder in `./hosts/`, e.g., `my-laptop`.
-2. Add the required files:
-    - `configuration.nix`: Host-specific NixOS configuration.
-    - `default.nix`: Entry point for the host (usually imports other files).
-    - `hardware-configuration.nix`: Generated hardware config.
-    - `variables.nix`: Configuration flags for this host.
-
-3. Example `variables.nix`:
-
-```nix
-let
-  default = import ../../variables/defaultVariables.nix;
-in
-default // {
-  host = "my-laptop";
-  modules = default.modules // {
-    gui = {
-      gnome = true;
-    };
-    software = default.modules.software // {
-      docker = true;
-    };
-  };
-}
-```
-
-4. Register the host in `flake.nix`:
-
-```nix
-nixosConfigurations = {
-  my-laptop = mkNixosConfiguration {
-    modules = [ ./hosts/my-laptop ];
-    hostVariables = import ./hosts/my-laptop/variables.nix;
-  };
-};
-```
+- [ ] TODO: Implement automated NixOS tests for configurations.
+- Currently, verification is done manually by running `nixos-rebuild dry-activate`.
 
 ## 📁 Project Structure
 
 - `hosts/`: Host-specific configurations.
+    - `freddy-laptop/`, `thinclient/`, `work/`: Specific machine setups.
 - `modules/`: Reusable configuration modules.
-    - `console/`: Shell, aliases, and terminal themes.
+    - `console/`: Shell (Fish), aliases, and terminal themes (Oh-My-Posh).
     - `driver/`: Hardware drivers (Nvidia, AMD).
     - `gui/`: Desktop environments (GNOME).
-    - `software/`: Application-specific configurations (Docker, Git, etc.).
-    - `system/`: Core system settings (Boot, i18n, Gaming).
+    - `software/`: Application-specific configurations (Docker, Git, Ollama, etc.).
+    - `system/`: Core system settings (Boot, i18n, Gaming, Keybindings).
 - `variables/`: Default configuration values.
-- `flake.nix`: Main entry point for the flake.
+- `flake.nix`: Main entry point for the flake, defining inputs and host configurations.
 - `home.nix`: Global Home Manager configuration.
 - `configuration.nix`: Common NixOS settings shared by all hosts.
+- `overlays.nix`: Custom Nixpkgs overlays.
 
-## ⚙️ Environment Variables
+## ⚙️ Nix Variables
 
-This project primarily uses Nix variables defined in `variables.nix` rather than traditional environment variables for system configuration. Key variables include:
+This project primarily uses Nix variables defined in `variables.nix` rather than traditional environment variables for system configuration. Key variables in `variables/defaultVariables.nix` include:
 
-- `username`: The primary system user.
+- `username`: The primary system user (default: `freddy`).
 - `host`: The hostname.
 - `system`: The architecture (e.g., `x86_64-linux`).
-- `stateVersion`: The NixOS state version.
+- `stateVersion`: The NixOS state version (currently `25.11`).
+- `modules`: A nested attribute set to enable/disable specific modules.
 
 ## 📄 License
 
