@@ -1,4 +1,8 @@
-{hostVariables, config, ...}: {
+{
+  hostVariables,
+  config,
+  ...
+}: {
   nix = {
     gc = {
       automatic = true;

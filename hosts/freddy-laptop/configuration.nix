@@ -38,12 +38,6 @@
     extraGroups = ["vboxusers"];
   };
 
-  home-manager.users.${hostVariables.username} = {
-    home.packages = with pkgs; [
-      thunderbird
-    ];
-  };
-
   # Install direnv
   programs.direnv.enable = true;
 
