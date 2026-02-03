@@ -16,6 +16,9 @@
     gui = {
       gnome = true;
     };
+    printer = {
+      epson-xp-3105 = false;
+    };
     software = {
       display-link = false;
       docker = true;

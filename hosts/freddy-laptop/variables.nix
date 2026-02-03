@@ -12,6 +12,11 @@ in
           // {
             nvidia = true;
           };
+        printer =
+          default.modules.printer
+          // {
+            epson-xp-3105 = true;
+          };
         software =
           default.modules.software
           // {
