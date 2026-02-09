@@ -18,6 +18,7 @@
     };
     printer = {
       epson-xp-3105 = false;
+      sane = false;
     };
     software = {
       display-link = false;

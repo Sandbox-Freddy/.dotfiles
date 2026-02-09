@@ -16,6 +16,7 @@
   modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
   modules.gui.gnome.enable = hostVariables.modules.gui.gnome;
   modules.printer.epson-xp-3105.enable = hostVariables.modules.printer.epson-xp-3105;
+  modules.printer.sane.enable = hostVariables.modules.printer.sane;
   modules.software.displaylink.enable = hostVariables.modules.software.display-link;
   modules.software.docker.enable = hostVariables.modules.software.docker;
   modules.software.flatpak.enable = hostVariables.modules.software.flatpak;

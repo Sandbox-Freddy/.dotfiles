@@ -15,7 +15,8 @@ in
         printer =
           default.modules.printer
           // {
-            epson-xp-3105 = true;
+            epson-xp-3105 = false;
+            sane = true;
           };
         software =
           default.modules.software
