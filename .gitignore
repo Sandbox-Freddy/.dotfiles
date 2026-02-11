@@ -1,2 +1,3 @@
 .idea
 .direnv
+variables/local.nix

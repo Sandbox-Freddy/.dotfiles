@@ -1,6 +1,6 @@
 {
   imports = [
-    ./epson-xp-3105.nix
+    ./printer.nix
     ./sane.nix
   ];
 }
