@@ -17,6 +17,7 @@ in
           // {
             printer = true;
             sane = true;
+            scanbutton = true;
           };
         software =
           default.modules.software
