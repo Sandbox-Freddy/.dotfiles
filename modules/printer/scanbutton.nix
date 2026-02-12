@@ -6,76 +6,104 @@
   ...
 }: let
   cfg = config.modules.printer.scanbutton;
+  scannerUser = hostVariables.username;
+  scanOutputDir = cfg.outputDir;
+
+  saneBin = "${pkgs.sane-backends}/bin";
+  libtiffBin = "${pkgs.libtiff}/bin";
+  coreutilsBin = "${pkgs.coreutils}/bin";
+  utilLinuxBin = "${pkgs.util-linux}/bin";
+
+  duplexSources = [
+    "ADF Duplex"
+    "ADF Front and Back"
+  ];
 
   scanScript = pkgs.writeShellScript "scanbutton-scan.sh" ''
     #!/usr/bin/env bash
     set -euo pipefail
 
-    SCANIMAGE_BIN="${pkgs.sane-backends}/bin/scanimage"
-    TIFFCP_BIN="${pkgs.libtiff}/bin/tiffcp"
-    TIFF2PDF_BIN="${pkgs.libtiff}/bin/tiff2pdf"
-    DATE_BIN="${pkgs.coreutils}/bin/date"
-    LOGGER_BIN="${pkgs.util-linux}/bin/logger"
-    MKDIR_BIN="${pkgs.coreutils}/bin/mkdir"
-    MKTEMP_BIN="${pkgs.coreutils}/bin/mktemp"
-    MV_BIN="${pkgs.coreutils}/bin/mv"
-    RM_BIN="${pkgs.coreutils}/bin/rm"
+    SCANIMAGE_BIN="${saneBin}/scanimage"
+    TIFFCP_BIN="${libtiffBin}/tiffcp"
+    TIFF2PDF_BIN="${libtiffBin}/tiff2pdf"
+    DATE_BIN="${coreutilsBin}/date"
+    LOGGER_BIN="${utilLinuxBin}/logger"
+    MKDIR_BIN="${coreutilsBin}/mkdir"
+    MKTEMP_BIN="${coreutilsBin}/mktemp"
+    MV_BIN="${coreutilsBin}/mv"
+    RM_BIN="${coreutilsBin}/rm"
 
-    OUT_DIR="${cfg.outputDir}"
-    UUID="$(cat /proc/sys/kernel/random/uuid)"
+    OUT_DIR="${scanOutputDir}"
     TIMESTAMP="$("$DATE_BIN" +%Y%m%d-%H%M%S)"
-    OUT_FILE="$OUT_DIR/scan-$TIMESTAMP-$UUID.pdf"
+    UUID="$(cat /proc/sys/kernel/random/uuid)"
+
     TMP_DIR="$("$MKTEMP_BIN" -d)"
     MERGED_TIFF="$TMP_DIR/scan-merged.tiff"
+    OUT_FILE="$OUT_DIR/scan-$TIMESTAMP-$UUID.pdf"
+    PAGE_PATTERN="$TMP_DIR/page-%03d.tiff"
+    readonly DUPLEX_SOURCES=(${lib.concatMapStringsSep " " (source: "\"${source}\"") duplexSources})
+
+    log() {
+      "$LOGGER_BIN" -t scanbutton-scan "$1"
+    }
 
     cleanup() {
       "$RM_BIN" -rf "$TMP_DIR"
     }
     trap cleanup EXIT
 
-    "$MKDIR_BIN" -p "$OUT_DIR"
-
     device_args=()
     if [ -n "''${SCANBD_DEVICE:-}" ]; then
       device_args=(--device-name "$SCANBD_DEVICE")
     fi
 
-    scan_ok=0
-    for source in "ADF Duplex" "ADF Front and Back"; do
-      if "$SCANIMAGE_BIN" "''${device_args[@]}" \
-        --source "$source" \
-        --resolution 300 \
-        --mode "Lineart" \
-        --format=tiff \
-        --batch="$TMP_DIR/page-%03d.tiff"; then
-        scan_ok=1
-        break
+    scan_pages() {
+      local source
+      for source in "''${DUPLEX_SOURCES[@]}"; do
+        if "$SCANIMAGE_BIN" "''${device_args[@]}" \
+          --source "$source" \
+          --resolution 300 \
+          --mode "Lineart" \
+          --format=tiff \
+          --batch="$PAGE_PATTERN"; then
+          return 0
+        fi
+      done
+      return 1
+    }
+
+    merge_to_pdf() {
+      local -a pages
+      shopt -s nullglob
+      pages=("$TMP_DIR"/page-*.tiff)
+      shopt -u nullglob
+
+      if [ "''${#pages[@]}" -eq 0 ]; then
+        return 1
       fi
-    done
 
-    if [ "$scan_ok" -ne 1 ]; then
-      "$LOGGER_BIN" -t scanbutton-scan "scanimage failed for device ''${SCANBD_DEVICE:-unknown} (no matching duplex source)"
+      if [ "''${#pages[@]}" -eq 1 ]; then
+        "$MV_BIN" "''${pages[0]}" "$MERGED_TIFF"
+      else
+        "$TIFFCP_BIN" "''${pages[@]}" "$MERGED_TIFF"
+      fi
+
+      "$TIFF2PDF_BIN" -o "$OUT_FILE" "$MERGED_TIFF"
+    }
+
+    "$MKDIR_BIN" -p "$OUT_DIR"
+
+    if ! scan_pages; then
+      log "scanimage failed for device ''${SCANBD_DEVICE:-unknown} (no matching duplex source)"
       exit 1
     fi
 
-    shopt -s nullglob
-    pages=("$TMP_DIR"/page-*.tiff)
-    shopt -u nullglob
-
-    if [ "''${#pages[@]}" -eq 0 ]; then
-      "$LOGGER_BIN" -t scanbutton-scan "No pages scanned for device ''${SCANBD_DEVICE:-unknown}"
+    if ! merge_to_pdf; then
+      log "No pages scanned for device ''${SCANBD_DEVICE:-unknown}"
       exit 1
     fi
 
-    if [ "''${#pages[@]}" -eq 1 ]; then
-      "$MV_BIN" "''${pages[0]}" "$MERGED_TIFF"
-    else
-      "$TIFFCP_BIN" "''${pages[@]}" "$MERGED_TIFF"
-    fi
-
-    "$TIFF2PDF_BIN" -o "$OUT_FILE" "$MERGED_TIFF"
-
-    "$LOGGER_BIN" -t scanbutton-scan "Saved $OUT_FILE"
+    log "Saved $OUT_FILE"
   '';
 
   scanbdConf = pkgs.writeText "scanbd.conf" ''
@@ -137,7 +165,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    users.users.${hostVariables.username} = {
+    users.users.${scannerUser} = {
       extraGroups = ["scanner" "lp"];
     };
 
@@ -146,7 +174,7 @@ in {
     ];
 
     systemd.tmpfiles.rules = [
-      "d ${cfg.outputDir} 0770 ${hostVariables.username} users -"
+      "d ${scanOutputDir} 0770 ${scannerUser} users -"
     ];
 
     environment.etc."scanbd/scanbd.conf".source = scanbdConf;
