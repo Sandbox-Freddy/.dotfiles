@@ -13,5 +13,11 @@ in
             flatpak = true;
             noisetorch = false;
           };
+        printer =
+          default.modules.printer
+          // {
+            sane = true;
+            scanbutton = true;
+          };
       };
   }
