@@ -63,6 +63,7 @@
       discord-ptb
       jetbrains.webstorm
       keepassxc
+      unstable.lmstudio
       losslesscut-bin
       yubioath-flutter
     ];
