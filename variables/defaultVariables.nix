@@ -28,6 +28,9 @@ in
         printer = false;
         sane = false;
         scanbutton = false;
+        scanbuttonOutDir = null;
+        scanbuttonBlankPageThreshold = null;
+        scanbuttonBlackBorderTrimFuzz = null;
       };
       software = {
         display-link = false;

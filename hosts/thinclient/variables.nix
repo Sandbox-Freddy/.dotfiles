@@ -18,6 +18,9 @@ in
           // {
             sane = true;
             scanbutton = true;
+            scanbuttonOutDir = "/mnt/paperless";
+            scanbuttonBlankPageThreshold = 0.985;
+            scanbuttonBlackBorderTrimFuzz = "32%";
           };
       };
   }

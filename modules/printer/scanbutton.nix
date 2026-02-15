@@ -7,10 +7,14 @@
 }: let
   cfg = config.modules.printer.scanbutton;
   scannerUser = hostVariables.username;
+  hostOutputDir = lib.attrByPath ["modules" "printer" "scanbuttonOutDir"] null hostVariables;
+  hostBlankPageThreshold = lib.attrByPath ["modules" "printer" "scanbuttonBlankPageThreshold"] null hostVariables;
+  hostBlackBorderTrimFuzz = lib.attrByPath ["modules" "printer" "scanbuttonBlackBorderTrimFuzz"] null hostVariables;
   scanOutputDir = cfg.outputDir;
 
   saneBin = "${pkgs.sane-backends}/bin";
   libtiffBin = "${pkgs.libtiff}/bin";
+  imagemagickBin = "${pkgs.imagemagick}/bin";
   coreutilsBin = "${pkgs.coreutils}/bin";
   utilLinuxBin = "${pkgs.util-linux}/bin";
 
@@ -26,6 +30,7 @@
     SCANIMAGE_BIN="${saneBin}/scanimage"
     TIFFCP_BIN="${libtiffBin}/tiffcp"
     TIFF2PDF_BIN="${libtiffBin}/tiff2pdf"
+    MAGICK_BIN="${imagemagickBin}/magick"
     DATE_BIN="${coreutilsBin}/date"
     LOGGER_BIN="${utilLinuxBin}/logger"
     MKDIR_BIN="${coreutilsBin}/mkdir"
@@ -35,13 +40,17 @@
 
     OUT_DIR="${scanOutputDir}"
     TIMESTAMP="$("$DATE_BIN" +%Y%m%d-%H%M%S)"
-    UUID="$(cat /proc/sys/kernel/random/uuid)"
+    UUID="$("${utilLinuxBin}/uuidgen")"
 
     TMP_DIR="$("$MKTEMP_BIN" -d)"
     MERGED_TIFF="$TMP_DIR/scan-merged.tiff"
     OUT_FILE="$OUT_DIR/scan-$TIMESTAMP-$UUID.pdf"
     PAGE_PATTERN="$TMP_DIR/page-%03d.tiff"
     readonly DUPLEX_SOURCES=(${lib.concatMapStringsSep " " (source: "\"${source}\"") duplexSources})
+    readonly BLANK_PAGE_THRESHOLD="${toString cfg.blankPageThreshold}"
+    readonly BLANK_PAGE_MAX_DARK_RATIO="0.004"
+    readonly BLACK_BORDER_TRIM_FUZZ="${cfg.blackBorderTrimFuzz}"
+    readonly BLACK_BORDER_SHAVE="12x12"
 
     log() {
       "$LOGGER_BIN" -t scanbutton-scan "$1"
@@ -72,6 +81,66 @@
       return 1
     }
 
+    remove_blank_pages() {
+      local -a pages
+      local page
+      local is_blank
+      local is_low_ink
+      local removed_blank_count=0
+
+      shopt -s nullglob
+      pages=("$TMP_DIR"/page-*.tiff)
+      shopt -u nullglob
+
+      for page in "''${pages[@]}"; do
+        if ! is_blank="$("$MAGICK_BIN" "$page" -colorspace Gray -format "%[fx:mean>=$BLANK_PAGE_THRESHOLD]" info:)"; then
+          log "Skipping blank-page check for $page (ImageMagick failed)"
+          continue
+        fi
+        if ! is_low_ink="$("$MAGICK_BIN" "$page" -colorspace Gray -threshold 80% -negate -format "%[fx:mean<=$BLANK_PAGE_MAX_DARK_RATIO]" info:)"; then
+          log "Skipping low-ink blank check for $page (ImageMagick failed)"
+          continue
+        fi
+
+        if [ "$is_blank" = "1" ] || [ "$is_low_ink" = "1" ]; then
+          "$RM_BIN" -f "$page"
+          removed_blank_count=$((removed_blank_count + 1))
+        fi
+      done
+
+      log "Blank-page cleanup removed $removed_blank_count page(s)"
+    }
+
+    remove_black_borders() {
+      local -a pages
+      local page
+      local trim_tmp
+      local trimmed_count=0
+
+      shopt -s nullglob
+      pages=("$TMP_DIR"/page-*.tiff)
+      shopt -u nullglob
+
+      for page in "''${pages[@]}"; do
+        trim_tmp="$page.trimmed"
+        if "$MAGICK_BIN" "$page" -fuzz "$BLACK_BORDER_TRIM_FUZZ" -trim +repage "$trim_tmp"; then
+          if "$MAGICK_BIN" "$trim_tmp" -shave "$BLACK_BORDER_SHAVE" "$page"; then
+            "$RM_BIN" -f "$trim_tmp"
+            trimmed_count=$((trimmed_count + 1))
+          else
+            "$MV_BIN" "$trim_tmp" "$page"
+            log "Border trim applied without shave for $page"
+            trimmed_count=$((trimmed_count + 1))
+          fi
+        else
+          "$RM_BIN" -f "$trim_tmp"
+          log "Skipping border-trim output rewrite for $page (ImageMagick trim failed)"
+        fi
+      done
+
+      log "Border cleanup processed $trimmed_count page(s)"
+    }
+
     merge_to_pdf() {
       local -a pages
       shopt -s nullglob
@@ -97,6 +166,9 @@
       log "scanimage failed for device ''${SCANBD_DEVICE:-unknown} (no matching duplex source)"
       exit 1
     fi
+
+    remove_black_borders
+    remove_blank_pages
 
     if ! merge_to_pdf; then
       log "No pages scanned for device ''${SCANBD_DEVICE:-unknown}"
@@ -147,8 +219,29 @@ in {
 
     outputDir = lib.mkOption {
       type = lib.types.str;
-      default = "/home/${hostVariables.username}/Scans";
+      default =
+        if hostOutputDir != null
+        then hostOutputDir
+        else "/home/${hostVariables.username}/Scans";
       description = "Directory where scanned files are written.";
+    };
+
+    blankPageThreshold = lib.mkOption {
+      type = lib.types.float;
+      default =
+        if hostBlankPageThreshold != null
+        then hostBlankPageThreshold
+        else 0.998;
+      description = "Grayscale mean threshold (0-1) above which a scanned page is considered empty and removed.";
+    };
+
+    blackBorderTrimFuzz = lib.mkOption {
+      type = lib.types.str;
+      default =
+        if hostBlackBorderTrimFuzz != null
+        then hostBlackBorderTrimFuzz
+        else "12%";
+      description = "ImageMagick fuzz value used when trimming black page borders.";
     };
 
     scannerFilter = lib.mkOption {
@@ -190,6 +283,7 @@ in {
       path = with pkgs; [
         sane-backends
         libtiff
+        imagemagick
         coreutils
         util-linux
       ];
