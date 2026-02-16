@@ -68,7 +68,9 @@
       drawio
       unstable.jetbrains.idea
       keepassxc
+      unstable.lmstudio
       unstable.microsoft-edge
+      nodejs_24
       yubioath-flutter
     ];
   };
