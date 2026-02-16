@@ -66,7 +66,7 @@ The configuration provides several useful shell aliases defined in `modules/cons
     - `console/`: Shell (Fish), aliases, and terminal themes (Oh-My-Posh).
     - `driver/`: Hardware drivers (Nvidia, AMD).
     - `gui/`: Desktop environments (GNOME).
-    - `software/`: Application-specific configurations (Docker, Git, Ollama, etc.).
+    - `software/`: Application-specific configurations (Docker, Git, etc.).
     - `system/`: Core system settings (Boot, i18n, Gaming, Keybindings).
 - `variables/`: Default configuration values.
 - `flake.nix`: Main entry point for the flake, defining inputs and host configurations.

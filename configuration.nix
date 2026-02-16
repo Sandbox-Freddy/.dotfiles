@@ -24,7 +24,6 @@
   modules.software.git.enable = hostVariables.modules.software.git;
   modules.software.noisetorch.enable = hostVariables.modules.software.noisetorch;
   modules.software.wine.enable = hostVariables.modules.software.wine;
-  modules.software.ollama.enable = hostVariables.modules.software.ollama;
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
   modules.system.gaming.enable = hostVariables.modules.systemSettings.gaming;
 

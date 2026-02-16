@@ -64,6 +64,7 @@
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       unstable.bruno
+      claude-code
       unstable.dbeaver-bin
       drawio
       unstable.jetbrains.idea

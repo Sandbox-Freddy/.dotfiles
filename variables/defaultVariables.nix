@@ -39,7 +39,6 @@ in
         git = true;
         noisetorch = true;
         wine = false;
-        ollama = false;
       };
       systemSettings = {
         bootanimation = true;
