@@ -64,13 +64,13 @@
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       unstable.bruno
+      unstable.brave
       claude-code
       unstable.dbeaver-bin
       drawio
       unstable.jetbrains.idea
       keepassxc
       unstable.lmstudio
-      unstable.microsoft-edge
       nodejs_24
       yubioath-flutter
     ];
