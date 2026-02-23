@@ -46,8 +46,6 @@
           inherit hostVariables;
         };
       };
-  in flake-utils.lib.eachDefaultSystem (system: let
-    pkgs = import nixpkgs { inherit system; };
   in {
     nixosConfigurations = {
       work = mkNixosConfiguration {
@@ -65,16 +63,22 @@
     };
     overlays = import ./overlays.nix inputs;
     
-    # Additional flake outputs
-    packages = {
+    # Additional flake outputs using flake-utils for multi-system support
+    packages = flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs { inherit system; };
+    in {
       inherit (pkgs) alejandra;
-    };
+    });
     
-    devShells.default = pkgs.mkShell {
-      packages = with pkgs; [
-        alejandra
-        nixpkgs-fmt
-      ];
-    };
-  });
+    devShells = flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs { inherit system; };
+    in {
+      default = pkgs.mkShell {
+        packages = with pkgs; [
+          alejandra
+          nixpkgs-fmt
+        ];
+      };
+    });
+  };
 }
