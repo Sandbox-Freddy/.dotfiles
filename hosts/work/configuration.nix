@@ -19,6 +19,8 @@
       "org.gnome.Console.desktop"
       "bruno.desktop"
       "idea.desktop"
+      "brave-browser.desktop"
+      "brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
       "microsoft-edge.desktop"
       "org.keepassxc.KeePassXC.desktop"
       "com.yubico.yubioath.desktop"
