@@ -60,10 +60,10 @@
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       thunderbird
-      discord-ptb
       jetbrains.webstorm
       keepassxc
       unstable.lmstudio
+      unstable.mistral-vibe
       losslesscut-bin
       yubioath-flutter
     ];
@@ -73,7 +73,7 @@
   services.pcscd.enable = true;
 
   services.udev.extraRules = ''
-    ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0666", GROUP="plugdev"
+    ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0660", GROUP="plugdev"
   '';
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
 
