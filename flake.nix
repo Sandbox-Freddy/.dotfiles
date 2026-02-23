@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager?ref=release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,6 +11,7 @@
 
   outputs = inputs @ {
     nixpkgs,
+    flake-utils,
     home-manager,
     ...
   }: let
@@ -44,6 +46,8 @@
           inherit hostVariables;
         };
       };
+  in flake-utils.lib.eachDefaultSystem (system: let
+    pkgs = import nixpkgs { inherit system; };
   in {
     nixosConfigurations = {
       work = mkNixosConfiguration {
@@ -60,5 +64,17 @@
       };
     };
     overlays = import ./overlays.nix inputs;
-  };
+    
+    # Additional flake outputs
+    packages = {
+      inherit (pkgs) alejandra;
+    };
+    
+    devShells.default = pkgs.mkShell {
+      packages = with pkgs; [
+        alejandra
+        nixpkgs-fmt
+      ];
+    };
+  });
 }
