@@ -41,6 +41,7 @@ in {
       gnomeExtensions.dash-to-dock
       gnomeExtensions.user-themes
       gnomeExtensions.system-monitor
+      gnomeExtensions.color-picker
       gucharmap
       loupe
       papirus-icon-theme
@@ -60,6 +61,7 @@ in {
             pkgs.gnomeExtensions.user-themes.extensionUuid
             pkgs.gnomeExtensions.system-monitor.extensionUuid
             pkgs.gnomeExtensions.clipboard-history.extensionUuid
+            pkgs.gnomeExtensions.color-picker.extensionUuid
           ];
         };
         "org/gnome/desktop/interface" = {
