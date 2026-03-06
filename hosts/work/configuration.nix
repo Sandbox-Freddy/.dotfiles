@@ -63,6 +63,12 @@
     pinta
   ];
 
+  # Wayland/GPU fixes for Chromium-based apps
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    MOZ_ENABLE_WAYLAND = "1";
+  };
+
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       unstable.bruno
@@ -76,6 +82,19 @@
       nodejs_24
       yubioath-flutter
     ];
+
+    # GPU/Wayland flags for Chromium-based browsers
+    xdg.configFile."brave-flags.conf".text = ''
+      --enable-features=UseOzonePlatform,VaapiVideoDecoder,VaapiVideoEncoder
+      --ozone-platform=wayland
+      --enable-gpu-rasterization
+      --enable-zero-copy
+    '';
+
+    xdg.configFile."electron-flags.conf".text = ''
+      --enable-features=UseOzonePlatform
+      --ozone-platform=wayland
+    '';
   };
 
   #Yubikey
