@@ -62,16 +62,16 @@
       };
     };
     overlays = import ./overlays.nix inputs;
-    
+
     # Additional flake outputs using flake-utils for multi-system support
     packages = flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {inherit system;};
     in {
       inherit (pkgs) alejandra;
     });
-    
+
     devShells = flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs { inherit system; };
+      pkgs = import nixpkgs {inherit system;};
     in {
       default = pkgs.mkShell {
         packages = with pkgs; [
