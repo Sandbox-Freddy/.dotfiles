@@ -46,39 +46,37 @@
           inherit hostVariables;
         };
       };
-  in {
-    nixosConfigurations = {
-      work = mkNixosConfiguration {
-        modules = [./hosts/work];
-        hostVariables = import ./hosts/work/variables.nix;
+  in
+    flake-utils.lib.eachDefaultSystem (system: let
+      pkgs = import nixpkgs {inherit system;};
+    in {
+      packages = {
+        inherit (pkgs) alejandra;
       };
-      freddy-laptop = mkNixosConfiguration {
-        modules = [./hosts/freddy-laptop];
-        hostVariables = import ./hosts/freddy-laptop/variables.nix;
+      devShells = {
+        default = pkgs.mkShell {
+          packages = with pkgs; [
+            alejandra
+            nixpkgs-fmt
+          ];
+        };
       };
-      thinclient = mkNixosConfiguration {
-        modules = [./hosts/thinclient];
-        hostVariables = import ./hosts/thinclient/variables.nix;
+    })
+    // {
+      nixosConfigurations = {
+        work = mkNixosConfiguration {
+          modules = [./hosts/work];
+          hostVariables = import ./hosts/work/variables.nix;
+        };
+        freddy-laptop = mkNixosConfiguration {
+          modules = [./hosts/freddy-laptop];
+          hostVariables = import ./hosts/freddy-laptop/variables.nix;
+        };
+        thinclient = mkNixosConfiguration {
+          modules = [./hosts/thinclient];
+          hostVariables = import ./hosts/thinclient/variables.nix;
+        };
       };
+      overlays = import ./overlays.nix inputs;
     };
-    overlays = import ./overlays.nix inputs;
-
-    # Additional flake outputs using flake-utils for multi-system support
-    packages = flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      inherit (pkgs) alejandra;
-    });
-
-    devShells = flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      default = pkgs.mkShell {
-        packages = with pkgs; [
-          alejandra
-          nixpkgs-fmt
-        ];
-      };
-    });
-  };
 }
