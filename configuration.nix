@@ -71,7 +71,7 @@
 
   programs.nh = {
     enable = true;
-    flake = config.users.users.${hostVariables.username}.home + "/.dotfiles";
+    flake = "${config.users.users.${hostVariables.username}.home}/.dotfiles";
   };
 
   system.autoUpgrade.enable = true;
