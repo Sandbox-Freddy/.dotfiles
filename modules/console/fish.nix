@@ -20,14 +20,16 @@
           interactiveShellInit = ''
             # Disable greeting
             set fish_greeting
-
-            function __atuin_install --on-event fish_prompt
-              functions -e __atuin_install
-              bind -M insert up _atuin_bind_up
-              bind -M default up _atuin_bind_up
-              bind up _atuin_bind_up
+            function launch_ranger
+              ranger
+              commandline -f repaint
             end
+            bind shift-right launch_ranger
           '';
+        };
+
+        programs.ranger = {
+          enable = true;
         };
         programs.oh-my-posh = {
           enable = true;
