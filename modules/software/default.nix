@@ -4,7 +4,7 @@
     ./docker.nix
     ./flatpak.nix
     ./git.nix
-    ./noisetorch.nix
+    ./easyeffects.nix
     ./wine.nix
   ];
 }

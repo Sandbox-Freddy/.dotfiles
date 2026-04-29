@@ -11,7 +11,7 @@ in
           default.modules.software
           // {
             flatpak = true;
-            noisetorch = false;
+            easyeffects = false;
           };
         printer =
           default.modules.printer

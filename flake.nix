@@ -77,6 +77,5 @@
           hostVariables = import ./hosts/thinclient/variables.nix;
         };
       };
-      overlays = import ./overlays.nix inputs;
     };
 }

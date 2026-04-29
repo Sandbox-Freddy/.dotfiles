@@ -50,20 +50,6 @@ in {
 
     home-manager.users.${hostVariables.username} = {
       dconf.settings = {
-        "org/gnome/shell" = {
-          app-picker-layout = "[]";
-        };
-        "org/gnome/shell" = {
-          disable-user-extensions = false;
-          disabled-extensions = [];
-          enabled-extensions = [
-            pkgs.gnomeExtensions.dash-to-dock.extensionUuid
-            pkgs.gnomeExtensions.user-themes.extensionUuid
-            pkgs.gnomeExtensions.system-monitor.extensionUuid
-            pkgs.gnomeExtensions.clipboard-history.extensionUuid
-            pkgs.gnomeExtensions.color-picker.extensionUuid
-          ];
-        };
         "org/gnome/desktop/interface" = {
           clock-show-seconds = true;
           clock-show-weekday = true;
@@ -88,6 +74,16 @@ in {
           running-indicator-style = "DOTS";
         };
         "org/gnome/shell" = {
+          disable-user-extensions = false;
+          disabled-extensions = [];
+          enabled-extensions = [
+            pkgs.gnomeExtensions.dash-to-dock.extensionUuid
+            pkgs.gnomeExtensions.user-themes.extensionUuid
+            pkgs.gnomeExtensions.system-monitor.extensionUuid
+            pkgs.gnomeExtensions.clipboard-history.extensionUuid
+            pkgs.gnomeExtensions.color-picker.extensionUuid
+          ];
+          app-picker-layout = "[]";
           favorite-apps = cfg.favoriteApps;
         };
         "org/gnome/desktop/wm/preferences" = {
@@ -128,7 +124,6 @@ in {
           custom-keybindings = [
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/my-open-terminal/"
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/my-open-filemanager/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/my-flameshot/"
           ];
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/my-open-terminal" = {

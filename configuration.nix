@@ -22,7 +22,7 @@
   modules.software.docker.enable = hostVariables.modules.software.docker;
   modules.software.flatpak.enable = hostVariables.modules.software.flatpak;
   modules.software.git.enable = hostVariables.modules.software.git;
-  modules.software.noisetorch.enable = hostVariables.modules.software.noisetorch;
+  modules.software.easyeffects.enable = hostVariables.modules.software.easyeffects;
   modules.software.wine.enable = hostVariables.modules.software.wine;
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
   modules.system.gaming.enable = hostVariables.modules.systemSettings.gaming;

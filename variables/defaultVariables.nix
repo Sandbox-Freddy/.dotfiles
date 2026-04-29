@@ -37,7 +37,7 @@ in
         docker = true;
         flatpak = false;
         git = true;
-        noisetorch = true;
+        easyeffects = true;
         wine = false;
       };
       systemSettings = {
