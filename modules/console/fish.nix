@@ -20,11 +20,18 @@
           interactiveShellInit = ''
             # Disable greeting
             set fish_greeting
-            function launch_ranger
-              ranger
-              commandline -f repaint
+            bind shift-right 'ranger-cd; commandline -f repaint'
+          '';
+          functions.ranger-cd = ''
+            set tempfile (mktemp -t ranger-cdXXXXXX)
+            ${pkgs.ranger}/bin/ranger --choosedir=$tempfile $argv
+            if test -f "$tempfile"
+              set rangerdir (cat $tempfile)
+              if test -n "$rangerdir" -a "$rangerdir" != (pwd)
+                cd -- $rangerdir
+              end
+              rm -f -- $tempfile
             end
-            bind shift-right launch_ranger
           '';
         };
 
