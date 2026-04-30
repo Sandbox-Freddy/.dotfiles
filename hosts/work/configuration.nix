@@ -72,6 +72,8 @@
       drawio
       unstable.jetbrains.idea
       keepassxc
+      kind
+      kubectl
       unstable.lmstudio
       nodejs_24
       yubioath-flutter
