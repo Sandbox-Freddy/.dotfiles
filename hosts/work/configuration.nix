@@ -65,17 +65,21 @@
 
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
-      unstable.bruno
+      awscli2
       claude-code
-      unstable.google-chrome
-      unstable.dbeaver-bin
       drawio
-      unstable.jetbrains.idea
+      granted
+      k9s
       keepassxc
-      kind
+      kubectx
       kubectl
-      unstable.lmstudio
       nodejs_24
+      terraform
+      unstable.bruno
+      unstable.dbeaver-bin
+      unstable.google-chrome
+      unstable.jetbrains.idea
+      unstable.lmstudio
       yubioath-flutter
     ];
   };
