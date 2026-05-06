@@ -69,12 +69,8 @@
       claude-code
       drawio
       granted
-      k9s
       keepassxc
-      kubectx
-      kubectl
       nodejs_24
-      terraform
       unstable.bruno
       unstable.dbeaver-bin
       unstable.google-chrome
