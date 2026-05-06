@@ -73,7 +73,14 @@
       nodejs_24
       unstable.bruno
       unstable.dbeaver-bin
-      unstable.google-chrome
+      (unstable.google-chrome.override {
+                      commandLineArgs =
+                        [
+                          "--ozone-platform=wayland"
+                          "--disable-gtk-ime"
+                          "--disable-features=PdfOopif"
+                        ];
+                    })
       unstable.jetbrains.idea
       unstable.lmstudio
       yubioath-flutter
