@@ -66,6 +66,7 @@
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       awscli2
+      aisleriot
       claude-code
       drawio
       granted
