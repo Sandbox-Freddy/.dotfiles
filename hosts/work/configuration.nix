@@ -70,6 +70,7 @@
       claude-code
       drawio
       granted
+      jq
       keepassxc
       nodejs_24
       unstable.bruno
