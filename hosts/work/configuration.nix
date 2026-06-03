@@ -59,7 +59,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    neofetch
     pinta
   ];
 
@@ -76,13 +75,12 @@
       unstable.bruno
       unstable.dbeaver-bin
       (unstable.google-chrome.override {
-                      commandLineArgs =
-                        [
-                          "--ozone-platform=wayland"
-                          "--disable-gtk-ime"
-                          "--disable-features=PdfOopif"
-                        ];
-                    })
+        commandLineArgs = [
+          "--ozone-platform=wayland"
+          "--disable-gtk-ime"
+          "--disable-features=PdfOopif"
+        ];
+      })
       unstable.jetbrains.idea
       unstable.lmstudio
       yubioath-flutter

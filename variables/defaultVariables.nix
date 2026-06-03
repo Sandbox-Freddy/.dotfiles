@@ -11,7 +11,7 @@ in
     host = "default";
     system = "x86_64-linux";
     location = "de_DE.UTF-8";
-    stateVersion = "25.11";
+    stateVersion = "26.05";
     printerIp = "";
     modules = {
       console = {

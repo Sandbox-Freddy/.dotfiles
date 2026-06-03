@@ -28,7 +28,6 @@ in {
   config = lib.mkIf cfg.enable {
     services.displayManager.gdm = {
       enable = true;
-      wayland = true;
     };
     services.desktopManager.gnome.enable = true;
 

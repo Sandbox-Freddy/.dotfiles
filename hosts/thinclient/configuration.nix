@@ -43,8 +43,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    cifs-utils
-    neofetch
+    cifs-util
   ];
 
   home-manager.users.${hostVariables.username} = {
