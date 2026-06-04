@@ -28,6 +28,20 @@
 
     home-manager.users.${hostVariables.username} = {
       services.easyeffects.enable = true;
+
+      home.file.".config/easyeffects/input/jabra-noise-cancellation.json".source =
+        ./easyeffects-jabra-noise-cancellation.json;
+
+      home.file.".config/easyeffects/db/easyeffectsrc" = {
+        source = ./easyeffects-settings.ini;
+        force = true;
+      };
+
+      dconf.settings = {
+        "com/github/wwmm/easyeffects" = {
+          last-used-input-preset = "jabra-noise-cancellation";
+        };
+      };
     };
   };
 }
