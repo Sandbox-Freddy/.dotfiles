@@ -17,11 +17,6 @@ in
           // {
             printer = true;
           };
-        software =
-          default.modules.software
-          // {
-            wine = true;
-          };
         systemSettings =
           default.modules.systemSettings
           // {

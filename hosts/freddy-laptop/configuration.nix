@@ -62,8 +62,6 @@
       thunderbird
       jetbrains.webstorm
       keepassxc
-      unstable.lmstudio
-      unstable.mistral-vibe
       losslesscut-bin
       yubioath-flutter
     ];
