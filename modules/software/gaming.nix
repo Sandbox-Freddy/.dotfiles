@@ -4,11 +4,11 @@
   lib,
   ...
 }: {
-  options.modules.system.gaming = {
+  options.modules.software.gaming = {
     enable = lib.mkEnableOption "gaming";
   };
 
-  config = lib.mkIf config.modules.system.gaming.enable {
+  config = lib.mkIf config.modules.software.gaming.enable {
     nixpkgs.config.allowUnfreePredicate = pkg:
       builtins.elem (lib.getName pkg) [
         "steam"

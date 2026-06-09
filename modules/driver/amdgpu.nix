@@ -10,9 +10,6 @@
 
   config = lib.mkIf config.modules.driver.amdgpu.enable {
     boot.initrd.kernelModules = ["amdgpu"];
-    boot.kernelParams = ["radeon.cik_support=0" "amdgpu.cik_support=1"];
-
-    hardware.amdgpu.legacySupport.enable = true;
 
     services.xserver = {
       enable = true;
@@ -35,8 +32,11 @@
         rocmPackages.clr.icd
         rocmPackages.rocm-runtime
         rocmPackages.rocm-device-libs
+        libva-utils
       ];
     };
+
+    environment.sessionVariables.LIBVA_DRIVER_NAME = "radeonsi";
 
     systemd.tmpfiles.rules = [
       "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}"

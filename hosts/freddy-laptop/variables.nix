@@ -17,8 +17,8 @@ in
           // {
             printer = true;
           };
-        systemSettings =
-          default.modules.systemSettings
+        software =
+          default.modules.software
           // {
             gaming = true;
           };

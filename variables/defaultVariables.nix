@@ -35,14 +35,13 @@ in
       software = {
         display-link = false;
         docker = true;
+        gaming = false;
         flatpak = false;
         git = true;
         easyeffects = true;
-        wine = false;
       };
       systemSettings = {
         bootanimation = true;
-        gaming = false;
       };
     };
   }

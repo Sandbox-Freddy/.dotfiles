@@ -12,10 +12,5 @@ in
           // {
             amdgpu = true;
           };
-        software =
-          default.modules.software
-          // {
-            display-link = true;
-          };
       };
   }
