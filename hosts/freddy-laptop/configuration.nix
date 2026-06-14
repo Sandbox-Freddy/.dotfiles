@@ -49,9 +49,11 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    asunder
     brave
     cifs-utils
     ffmpeg
+    lame
     pinta
     sbctl
     unstable.space-cadet-pinball
