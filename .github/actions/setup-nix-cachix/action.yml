@@ -48,4 +48,4 @@ runs:
 
     - name: Prefetch required files
       shell: bash
-      run: sh nix/nix-prefetch.sh
+      run: sh nix-prefetch.sh
