@@ -38,7 +38,7 @@ in
         gaming = false;
         flatpak = false;
         git = true;
-        easyeffects = true;
+        easyeffects = false;
       };
       systemSettings = {
         bootanimation = true;
