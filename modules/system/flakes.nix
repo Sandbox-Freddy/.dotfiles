@@ -3,18 +3,20 @@
   config,
   ...
 }: {
-  nix = {
+  nix = let
+    nixSettings = builtins.fromJSON (builtins.readFile ../../nix-settings.json);
+  in {
     gc = {
       automatic = true;
       options = "--delete-older-than 3d";
     };
-    settings = {
+    settings = rec {
       auto-optimise-store = true;
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
+      experimental-features = nixSettings."experimental-features";
       trusted-users = [hostVariables.username];
+      substituters = nixSettings.substituters;
+      trusted-public-keys = nixSettings."trusted-public-keys";
+      trusted-substituters = substituters;
     };
     extraOptions = ''
       !include ${config.users.users.${hostVariables.username}.home}/.nix.conf

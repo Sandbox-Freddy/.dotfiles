@@ -1,0 +1,51 @@
+name: Setup Nix and Cachix
+description: Install Nix with flakes and configure the sandbox-freddy-dotfiles Cachix binary cache
+
+inputs:
+  cachix_auth_token:
+    description: Cachix auth token for pushing/pulling
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Free disk space
+      uses: jlumbroso/free-disk-space@main
+      with:
+        tool-cache: true
+        android: true
+        dotnet: true
+        haskell: true
+        large-packages: true
+        docker-images: true
+        swap-storage: true
+
+    - name: Read nix settings
+      id: nix-settings
+      shell: bash
+      run: |
+        config="./nix-settings.json"
+        echo "experimental-features=$(jq -r '."experimental-features" | join(" ")' "$config")" >> "$GITHUB_OUTPUT"
+        echo "substituters=$(jq -r '.substituters | join(" ")' "$config")" >> "$GITHUB_OUTPUT"
+        echo "public-keys=$(jq -r '."trusted-public-keys" | join(" ")' "$config")" >> "$GITHUB_OUTPUT"
+
+    - uses: cachix/install-nix-action@v31
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+        extra_nix_config: |
+          min-free = 5368709120  #  5 GiB
+          max-free = 26843545600 # 25 GiB
+          keep-outputs = false
+          keep-derivations = false
+          experimental-features = ${{ steps.nix-settings.outputs.experimental-features }}
+          extra-substituters = ${{ steps.nix-settings.outputs.substituters }}
+          extra-trusted-public-keys = ${{ steps.nix-settings.outputs.public-keys }}
+
+    - uses: cachix/cachix-action@v17
+      with:
+        name: sandbox-freddy-dotfiles
+        authToken: ${{ inputs.cachix_auth_token }}
+
+    - name: Prefetch required files
+      shell: bash
+      run: sh nix/nix-prefetch.sh

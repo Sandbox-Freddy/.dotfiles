@@ -1,0 +1,15 @@
+{
+  "experimental-features": [
+    "nix-command",
+    "flakes",
+    "pipe-operators"
+  ],
+  "substituters": [
+    "https://nix-community.cachix.org",
+    "https://sandbox-freddy-dotfiles.cachix.org"
+  ],
+  "trusted-public-keys": [
+    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs=",
+    "sandbox-freddy-dotfiles.cachix.org-1:sh9vY60F8I84FZ5ym8C/D0rMQvq4KN46KMDIEjtPQu4="
+  ]
+}
