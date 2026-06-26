@@ -1,0 +1,32 @@
+name: Build NixOS hosts
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-x86_64:
+    name: Build x86_64 hosts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: "Setup Nix & Cachix"
+        uses: ./.github/actions/setup-nix-cachix
+        with:
+          cachix_auth_token: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: "Build freddy-laptop Configuration"
+        uses: ./.github/actions/build-nix-host
+        with:
+          host: freddy-laptop
+
+      - name: "Build thinclient Configuration"
+        uses: ./.github/actions/build-nix-host
+        with:
+          host: thinclient
+
+      - name: "Build work Configurations"
+        uses: ./.github/actions/build-nix-host
+        with:
+          host: work

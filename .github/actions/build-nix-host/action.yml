@@ -1,0 +1,19 @@
+name: Build NixOS host
+description: "Build a NixOS host (prerequisites: Nix installed, Cachix set up)"
+
+inputs:
+  host:
+    description: NixOS host name to build
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Build ${{ inputs.host }}
+      shell: bash
+      run: |
+        nix run nixpkgs#nix-fast-build -- \
+        --flake '.#nixosConfigurations."${{ inputs.host }}".config.system.build.toplevel' \
+        --skip-cached \
+        --no-nom \
+        --cachix-cache sandbox-freddy-dotfiles
