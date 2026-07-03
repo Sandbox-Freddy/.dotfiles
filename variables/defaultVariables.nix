@@ -7,7 +7,7 @@ let
 in
   {
     username = "freddy";
-    description = "Frederik Nies";
+    description = "Frederik";
     host = "default";
     system = "x86_64-linux";
     location = "de_DE.UTF-8";
