@@ -18,7 +18,7 @@
     favoriteApps = [
       "org.gnome.Console.desktop"
       "bruno.desktop"
-      "idea.desktop"
+      "dev.zed.Zed.desktop"
       "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
       "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
       "google-chrome.desktop"
