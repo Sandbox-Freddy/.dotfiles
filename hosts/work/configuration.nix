@@ -85,6 +85,7 @@
       unstable.lmstudio
       yubioath-flutter
       xournalpp
+      zed-editor
     ];
   };
 
