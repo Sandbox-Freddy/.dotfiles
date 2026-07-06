@@ -10,7 +10,13 @@
     home-manager.users.${hostVariables.username} = {
       programs.zed-editor = {
         enable = true;
-        extensions = [ "nix" "material-icon-theme" ];
+        extensions = [ 
+          "nix" 
+          "material-icon-theme" 
+          "git-firefly" 
+          "dockerfile" 
+          "xml"
+        ];
         userSettings = {
           load_direnv = "shell_hook";
         };
