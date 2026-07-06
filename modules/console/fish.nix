@@ -47,6 +47,10 @@
           enable = true;
           enableFishIntegration = true;
         };
+        programs.direnv = {
+          enable = true;
+          nix-direnv.enable = true;
+        };
         home.file.".config/atuin/config.toml".text = ''
           enter_accept = true
           filter_mode = "workspace"
