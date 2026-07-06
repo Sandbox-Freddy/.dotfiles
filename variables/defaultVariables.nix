@@ -39,6 +39,7 @@ in
         flatpak = false;
         git = true;
         easyeffects = true;
+        zed-editor = false;
       };
       systemSettings = {
         bootanimation = true;

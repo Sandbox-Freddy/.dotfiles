@@ -5,6 +5,7 @@
     ./flatpak.nix
     ./gaming.nix
     ./git.nix
+    ./zed.nix
     ./easyeffects
   ];
 }
