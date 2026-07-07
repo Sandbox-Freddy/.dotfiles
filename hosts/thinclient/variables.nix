@@ -12,6 +12,7 @@ in
           // {
             flatpak = true;
             easyeffects = false;
+            zed-editor = true;
           };
         printer =
           default.modules.printer

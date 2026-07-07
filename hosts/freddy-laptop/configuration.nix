@@ -18,8 +18,9 @@
     favoriteApps = [
       "org.gnome.Console.desktop"
       "firefox.desktop"
+      "google-chrome.desktop"
       "brave-browser.desktop"
-      "webstorm.desktop"
+      "dev.zed.Zed.desktop"
       "steam.desktop"
       "discord-ptb.desktop"
       "org.gnome.Nautilus.desktop"
@@ -50,7 +51,14 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     asunder
-    brave
+
+    (unstable.google-chrome.override {
+      commandLineArgs = [
+        "--ozone-platform=wayland"
+        "--disable-gtk-ime"
+        "--disable-features=PdfOopif"
+      ];
+    })
     cifs-utils
     ffmpeg
     lame
@@ -62,7 +70,6 @@
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       thunderbird
-      jetbrains.webstorm
       keepassxc
       losslesscut-bin
       yubioath-flutter

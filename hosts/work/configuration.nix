@@ -69,7 +69,6 @@
       claude-code
       drawio
       granted
-      gh
       jq
       keepassxc
       nodejs_24

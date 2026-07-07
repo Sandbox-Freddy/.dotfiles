@@ -18,8 +18,7 @@
     favoriteApps = [
       "org.gnome.Console.desktop"
       "firefox.desktop"
-      "webstorm.desktop"
-      "com.valvesoftware.SteamLink.desktop"
+      "dev.zed.Zed.desktop"
       "vlc.desktop"
       "org.gnome.Nautilus.desktop"
     ];
@@ -48,7 +47,6 @@
 
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
-      jetbrains.webstorm
       vlc
     ];
   };

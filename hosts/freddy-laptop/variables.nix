@@ -21,6 +21,7 @@ in
           default.modules.software
           // {
             gaming = true;
+            zed-editor = true;
           };
       };
   }

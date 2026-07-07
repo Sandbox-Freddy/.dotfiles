@@ -30,10 +30,11 @@ in {
       description = "Git includes";
     };
   };
-
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [
-      pkgs.gitFull
+    environment.systemPackages = with pkgs; [
+      gitFull
+      git-credential-manager
+      gh
     ];
 
     home-manager.users.${hostVariables.username} = {
