@@ -33,8 +33,6 @@ in {
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       gitFull
-      git-credential-manager
-      gh
     ];
 
     home-manager.users.${hostVariables.username} = {

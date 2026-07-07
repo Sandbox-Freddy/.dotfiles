@@ -19,6 +19,7 @@
       "org.gnome.Console.desktop"
       "firefox.desktop"
       "dev.zed.Zed.desktop"
+      "org.gnome.gitg.desktop"
       "vlc.desktop"
       "org.gnome.Nautilus.desktop"
     ];
