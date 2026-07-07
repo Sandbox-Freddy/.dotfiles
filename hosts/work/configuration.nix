@@ -82,7 +82,6 @@
           "--disable-features=PdfOopif"
         ];
       })
-      unstable.jetbrains.idea
       unstable.lmstudio
       yubioath-flutter
       xournalpp

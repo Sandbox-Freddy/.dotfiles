@@ -41,6 +41,7 @@ in {
       gnomeExtensions.user-themes
       gnomeExtensions.system-monitor
       gnomeExtensions.color-picker
+      gitg
       gucharmap
       loupe
       papirus-icon-theme
