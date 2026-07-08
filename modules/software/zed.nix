@@ -2,11 +2,17 @@
   config,
   lib,
   hostVariables,
+  pkgs,
   ...
 }: {
   options.modules.software.zed.enable = lib.mkEnableOption "zed-editor";
 
   config = lib.mkIf config.modules.software.zed.enable {
+    environment.systemPackages = with pkgs; [
+      nil
+      nixd
+    ];
+
     home-manager.users.${hostVariables.username} = {
       programs.zed-editor = {
         enable = true;
