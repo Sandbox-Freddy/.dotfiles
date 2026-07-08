@@ -26,6 +26,13 @@
           "xml"
         ];
         userSettings = {
+          disable_ai = true;
+          proxy = "";
+          agent_servers = {
+            "claude-acp" = {
+              type = "registry";
+            };
+          };
           autosave = {
             after_delay = {
               milliseconds = 1000;
@@ -44,6 +51,8 @@
           };
           agent = {
             dock = "right";
+            favorite_models = [];
+            model_parameters = [];
           };
           git_panel = {
             dock = "left";
