@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  hostVariables,
   ...
 }: {
   options.modules.system.bootanimation = {

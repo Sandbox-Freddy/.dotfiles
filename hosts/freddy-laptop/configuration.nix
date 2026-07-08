@@ -62,6 +62,7 @@
     cifs-utils
     ffmpeg
     lame
+    keepassxc
     pinta
     sbctl
     unstable.space-cadet-pinball

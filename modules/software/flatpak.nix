@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  nix-vscode-extensions,
   ...
 }: {
   options.modules.software.flatpak = {
