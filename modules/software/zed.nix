@@ -8,6 +8,8 @@
   options.modules.software.zed.enable = lib.mkEnableOption "zed-editor";
 
   config = lib.mkIf config.modules.software.zed.enable {
+    programs.nix-ld.enable = true;
+
     environment.systemPackages = with pkgs; [
       nil
       nixd
