@@ -66,6 +66,32 @@
             nix = true;
           };
           load_direnv = "shell_hook";
+          languages = {
+            TypeScript = {
+              format_on_save = "on";
+              formatter = [
+                {code_action = "source.fixAll.eslint";}
+              ];
+            };
+            JavaScript = {
+              format_on_save = "on";
+              formatter = [
+                {code_action = "source.fixAll.eslint";}
+              ];
+            };
+            TSX = {
+              format_on_save = "on";
+              formatter = [
+                {code_action = "source.fixAll.eslint";}
+              ];
+            };
+            JSX = {
+              format_on_save = "on";
+              formatter = [
+                {code_action = "source.fixAll.eslint";}
+              ];
+            };
+          };
         };
       };
     };
