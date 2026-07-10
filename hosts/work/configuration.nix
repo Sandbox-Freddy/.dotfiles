@@ -19,7 +19,6 @@
       "org.gnome.Console.desktop"
       "bruno.desktop"
       "dev.zed.Zed.desktop"
-      "org.gnome.gitg.desktop"
       "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
       "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
       "google-chrome.desktop"

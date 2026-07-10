@@ -41,12 +41,6 @@ in {
       gnomeExtensions.user-themes
       gnomeExtensions.system-monitor
       gnomeExtensions.color-picker
-      (gitg.overrideAttrs (old: {
-        postInstall = ''
-          wrapProgram "$out/bin/gitg" \
-            --set LANG "en_US.UTF-8"
-        '';
-      }))
       gucharmap
       loupe
       papirus-icon-theme

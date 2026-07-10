@@ -20,7 +20,6 @@
       "firefox.desktop"
       "google-chrome.desktop"
       "dev.zed.Zed.desktop"
-      "org.gnome.gitg.desktop"
       "steam.desktop"
       "discord-ptb.desktop"
       "org.gnome.Nautilus.desktop"
