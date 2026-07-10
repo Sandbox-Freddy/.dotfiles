@@ -4,7 +4,8 @@
   hostVariables,
   pkgs,
   ...
-}: {
+}:
+{
   options.modules.software.zed.enable = lib.mkEnableOption "zed-editor";
 
   config = lib.mkIf config.modules.software.zed.enable {
@@ -28,11 +29,6 @@
         userSettings = {
           disable_ai = false;
           proxy = "";
-          agent_servers = {
-            "claude-acp" = {
-              type = "registry";
-            };
-          };
           autosave = {
             after_delay = {
               milliseconds = 1000;
@@ -51,8 +47,8 @@
           };
           agent = {
             dock = "right";
-            favorite_models = [];
-            model_parameters = [];
+            favorite_models = [ ];
+            model_parameters = [ ];
           };
           git_panel = {
             dock = "left";
@@ -79,25 +75,19 @@
             TypeScript = {
               format_on_save = "on";
               formatter = [
-                {code_action = "source.fixAll.eslint";}
+                { code_action = "source.fixAll.eslint"; }
               ];
             };
             JavaScript = {
               format_on_save = "on";
               formatter = [
-                {code_action = "source.fixAll.eslint";}
+                { code_action = "source.fixAll.eslint"; }
               ];
             };
             TSX = {
               format_on_save = "on";
               formatter = [
-                {code_action = "source.fixAll.eslint";}
-              ];
-            };
-            JSX = {
-              format_on_save = "on";
-              formatter = [
-                {code_action = "source.fixAll.eslint";}
+                { code_action = "source.fixAll.eslint"; }
               ];
             };
           };

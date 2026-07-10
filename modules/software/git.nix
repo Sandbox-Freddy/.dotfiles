@@ -48,6 +48,7 @@ in {
           credential.helper = "libsecret";
         };
         includes = cfg.includes;
+        package = pkgs.gitFull;
       };
     };
   };
