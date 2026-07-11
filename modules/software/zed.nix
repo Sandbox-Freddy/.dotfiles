@@ -26,7 +26,7 @@
           "xml"
         ];
         userSettings = {
-          disable_ai = true;
+          disable_ai = false;
           proxy = "";
           agent_servers = {
             "claude-acp" = {

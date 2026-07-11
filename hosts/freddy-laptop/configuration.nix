@@ -61,6 +61,7 @@
     cifs-utils
     ffmpeg
     lame
+    unstable.lmstudio
     keepassxc
     pinta
     sbctl
