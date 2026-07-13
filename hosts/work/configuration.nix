@@ -5,7 +5,8 @@
   hostVariables,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -94,4 +95,8 @@
   system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
 
   zramSwap.enable = true;
+
+  environment.shellAliases = {
+    awsssologin = "aws sso login --no-browser --sso-session";
+  };
 }
