@@ -25,6 +25,7 @@
           "git-firefly"
           "dockerfile"
           "xml"
+          "sql"
         ];
         userSettings = {
           disable_ai = false;
