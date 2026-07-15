@@ -26,6 +26,7 @@
           "dockerfile"
           "xml"
           "sql"
+          "terraform"
         ];
         userSettings = {
           disable_ai = false;
