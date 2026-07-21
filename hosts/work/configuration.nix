@@ -67,14 +67,11 @@
     home.packages = with pkgs; [
       awscli2
       aisleriot
+      unstable.bruno
       claude-code
+      unstable.dbeaver-bin
       drawio
       granted
-      jq
-      keepassxc
-      nodejs_24
-      unstable.bruno
-      unstable.dbeaver-bin
       (unstable.google-chrome.override {
         commandLineArgs = [
           "--ozone-platform=wayland"
@@ -82,6 +79,10 @@
           "--disable-features=PdfOopif"
         ];
       })
+      jq
+      keepassxc
+      nodejs_24
+      obsidian
       unstable.lmstudio
       yubioath-flutter
       xournalpp
@@ -92,7 +93,7 @@
   #Yubikey
   services.pcscd.enable = true;
 
-  system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
+  system.stateVersion = hostVariables.stateVersion;
 
   zramSwap.enable = true;
 
