@@ -40,10 +40,11 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [networkmanager-openvpn];
+  };
   time.timeZone = "Europe/Berlin";
-
-  i18n.defaultLocale = hostVariables.location;
 
   services.xserver.enable = true;
   services.xserver.xkb = {
@@ -77,6 +78,11 @@
     nerd-fonts.fira-code
     nerd-fonts.jetbrains-mono
   ];
+
+  # Common programs / settings across all hosts
+  programs.direnv.enable = true;
+  programs.firefox.enable = true;
+  zramSwap.enable = true;
 
   programs.nh = {
     enable = true;

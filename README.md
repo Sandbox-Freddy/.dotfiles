@@ -1,93 +1,48 @@
-# ⚙️ NixOS Multi-Host Configuration
+# NixOS Configuration
 
-This repository contains my modular NixOS system configuration, powered by [Nix Flakes](https://nixos.wiki/wiki/Flakes) and [Home Manager](https://nix-community.github.io/home-manager/).
+Modular NixOS setup for multiple hosts, built with [Flakes](https://nixos.wiki/wiki/Flakes) and [Home Manager](https://nix-community.github.io/home-manager/).
 
-## 🚀 Features
+- **Hosts:** `work`, `freddy-laptop`, `thinclient`
+- **Channel:** NixOS 26.05 (stable) + `nixos-unstable` overlay (`pkgs.unstable.*`)
+- **Desktop:** GNOME · **Shell:** Fish
 
-- **Flake-based**: Reproducible system configurations using NixOS 25.11.
-- **Multi-host**: Support for different machines (`work`, `freddy-laptop`, `thinclient`).
-- **Modular**: Clean separation of drivers, software, and system settings.
-- **Home Manager**: Integrated user-level configuration.
-- **Centralized Variables**: Easily toggle features and set system-wide flags via `variables.nix`.
-- **Pre-configured Software**: Includes modules for Docker, Git, GNOME, and more.
-
-## 🛠️ Stack
-
-- **OS**: NixOS (Stable 25.11 & Unstable)
-- **Configuration**: Nix (Flakes)
-- **User Management**: Home Manager
-- **Shell**: Fish (via `modules/console/fish.nix`)
-- **Desktop Environment**: GNOME (via `modules/gui/gnome.nix`)
-- **Package Manager**: Nix
-
-## 🏗️ Getting Started
-
-### Requirements
-
-- NixOS installed on your machine
-
-### Installation
-
-1. Clone the repository into `~/.dotfiles`:
+## Usage
 
 ```bash
 git clone https://github.com/Sandbox-Freddy/.dotfiles ~/.dotfiles
-cd ~/.dotfiles
+sudo nixos-rebuild switch --flake ~/.dotfiles#work   # pick your host
 ```
 
-2. Apply configuration for a specific host (e.g., `work`):
+Handy aliases (`modules/console/aliases.nix`):
 
-```bash
-sudo nixos-rebuild switch --flake ~/.dotfiles#work
+| Alias | Action |
+|-------|--------|
+| `rebuild` | `nixos-rebuild switch` for the current host |
+| `switchnix` | Same, via `nh` |
+| `update` | Update `flake.lock` |
+| `cleanup` | GC generations older than 3 days |
+| `nixfmt` | Format with `alejandra` |
+
+## Layout
+
+```
+flake.nix              Inputs + host definitions (mkNixosConfiguration)
+configuration.nix      Common settings shared by all hosts
+home.nix               Home Manager integration
+hosts/<host>/          Per-host config, hardware scan & variables.nix
+modules/               Toggleable modules (console, driver, gui,
+                       printer, software, system)
+variables/             Default variables + module toggles
 ```
 
-## ⌨️ Scripts & Aliases
+## Configuration
 
-The configuration provides several useful shell aliases defined in `modules/console/aliases.nix`:
+Features are toggled per host in `hosts/<host>/variables.nix`, which overrides
+`variables/defaultVariables.nix`. Key variables: `username`, `host`, `system`,
+`stateVersion`, and the nested `modules` set (enable/disable each module).
 
-| Alias | Description |
-|-------|-------------|
-| `rebuild` | Rebuilds the current host configuration using `nixos-rebuild`. |
-| `update` | Updates the `flake.lock` file. |
-| `switchnix` | Switches configuration using `nh` (Nix Helper). |
-| `nixfmt` | Formats nix files using `alejandra`. |
-| `securebootsign` | Signs boot files for Secure Boot using `sbctl`. |
+Machine-local, untracked overrides go in `variables/local.nix`.
 
-## 🧪 Tests
+## License
 
-- [ ] TODO: Implement automated NixOS tests for configurations.
-- Currently, verification is done manually by running `nixos-rebuild dry-activate`.
-
-## 📁 Project Structure
-
-- `hosts/`: Host-specific configurations.
-    - `freddy-laptop/`, `thinclient/`, `work/`: Specific machine setups.
-- `modules/`: Reusable configuration modules.
-    - `console/`: Shell (Fish), aliases, and terminal themes (Oh-My-Posh).
-    - `driver/`: Hardware drivers (Nvidia, AMD).
-    - `gui/`: Desktop environments (GNOME).
-    - `software/`: Application-specific configurations (Docker, Git, etc.).
-    - `system/`: Core system settings (Boot, i18n, Gaming, Keybindings).
-- `variables/`: Default configuration values.
-- `flake.nix`: Main entry point for the flake, defining inputs and host configurations.
-- `home.nix`: Global Home Manager configuration.
-- `configuration.nix`: Common NixOS settings shared by all hosts.
-- `overlays.nix`: Custom Nixpkgs overlays.
-
-## ⚙️ Nix Variables
-
-This project primarily uses Nix variables defined in `variables.nix` rather than traditional environment variables for system configuration. Key variables in `variables/defaultVariables.nix` include:
-
-- `username`: The primary system user (default: `freddy`).
-- `host`: The hostname.
-- `system`: The architecture (e.g., `x86_64-linux`).
-- `stateVersion`: The NixOS state version (currently `25.11`).
-- `modules`: A nested attribute set to enable/disable specific modules.
-
-## 📄 License
-
-This project is licensed under the [MIT License](./LICENSE).
-
----
-
-> 💬 Feedback, PRs, and questions are always welcome.
+[MIT](./LICENSE)

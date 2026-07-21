@@ -11,10 +11,7 @@
   config = lib.mkIf config.modules.driver.amdgpu.enable {
     boot.initrd.kernelModules = ["amdgpu"];
 
-    services.xserver = {
-      enable = true;
-      videoDrivers = ["amdgpu"];
-    };
+    services.xserver.videoDrivers = ["amdgpu"];
 
     environment.systemPackages = with pkgs; [
       clinfo

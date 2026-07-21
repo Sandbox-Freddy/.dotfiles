@@ -10,15 +10,9 @@
   };
 
   config = lib.mkIf config.modules.software.easyeffects.enable {
-    services.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-    };
+    # PipeWire base (enable/alsa/pulse) + rtkit live in configuration.nix;
+    # easyeffects only needs the JACK layer on top.
+    services.pipewire.jack.enable = true;
 
     environment.systemPackages = with pkgs; [
       pavucontrol

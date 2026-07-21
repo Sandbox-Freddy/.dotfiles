@@ -9,14 +9,8 @@
   };
 
   config = lib.mkIf config.modules.software.gaming.enable {
-    nixpkgs.config.allowUnfreePredicate = pkg:
-      builtins.elem (lib.getName pkg) [
-        "steam"
-        "steam-original"
-        "steam-unwrapped"
-        "steam-run"
-      ];
-
+    # allowUnfree is set globally in configuration.nix, so no Steam-specific
+    # allowUnfreePredicate is needed here.
     programs.gamemode.enable = true;
     programs.steam = {
       enable = true;

@@ -5,8 +5,7 @@
   hostVariables,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -42,23 +41,6 @@
     ];
   };
 
-  # Enable networking
-  networking.networkmanager = {
-    plugins = with pkgs; [
-      networkmanager-openvpn
-    ];
-  };
-
-  # Install direnv
-  programs.direnv.enable = true;
-
-  # Install firefox.
-  programs.firefox = {
-    enable = true;
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     pinta
   ];
@@ -94,8 +76,6 @@
   services.pcscd.enable = true;
 
   system.stateVersion = hostVariables.stateVersion;
-
-  zramSwap.enable = true;
 
   environment.shellAliases = {
     awsssologin = "aws sso login --no-browser --sso-session";

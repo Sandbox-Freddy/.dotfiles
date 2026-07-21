@@ -26,28 +26,10 @@
     ];
   };
 
-  # Enable networking
-  networking.networkmanager = {
-    plugins = with pkgs; [
-      networkmanager-openvpn
-    ];
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.${hostVariables.username} = {
     extraGroups = ["vboxusers"];
   };
 
-  # Install direnv
-  programs.direnv.enable = true;
-
-  # Install firefox.
-  programs.firefox = {
-    enable = true;
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     asunder
 
@@ -62,7 +44,6 @@
     ffmpeg
     lame
     unstable.lmstudio
-    keepassxc
     pinta
     sbctl
     unstable.space-cadet-pinball
@@ -83,9 +64,7 @@
   services.udev.extraRules = ''
     ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0660", GROUP="plugdev"
   '';
-  system.stateVersion = hostVariables.stateVersion; # Did you read the comment?
-
-  zramSwap.enable = true;
+  system.stateVersion = hostVariables.stateVersion;
 
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;

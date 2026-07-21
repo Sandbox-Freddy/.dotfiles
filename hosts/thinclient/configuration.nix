@@ -24,23 +24,6 @@
     ];
   };
 
-  # Enable networking
-  networking.networkmanager = {
-    plugins = with pkgs; [
-      networkmanager-openvpn
-    ];
-  };
-
-  # Install direnv
-  programs.direnv.enable = true;
-
-  # Install firefox.
-  programs.firefox = {
-    enable = true;
-  };
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     cifs-utils
   ];
@@ -62,6 +45,4 @@
       libva-vdpau-driver
     ];
   };
-
-  zramSwap.enable = true;
 }
