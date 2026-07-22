@@ -5,7 +5,8 @@
   hostVariables,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,6 +19,7 @@
     favoriteApps = [
       "org.gnome.Console.desktop"
       "bruno.desktop"
+      "obsidian.desktop"
       "dev.zed.Zed.desktop"
       "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
       "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
