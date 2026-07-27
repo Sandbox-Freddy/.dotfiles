@@ -38,6 +38,7 @@ in
         gaming = false;
         flatpak = false;
         git = true;
+        python = false;
         easyeffects = true;
         zed-editor = false;
       };

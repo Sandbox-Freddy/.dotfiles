@@ -31,6 +31,7 @@
   modules.software.docker.enable = hostVariables.modules.software.docker;
   modules.software.flatpak.enable = hostVariables.modules.software.flatpak;
   modules.software.git.enable = hostVariables.modules.software.git;
+  modules.software.python.enable = hostVariables.modules.software.python;
   modules.software.easyeffects.enable = hostVariables.modules.software.easyeffects;
   modules.software.zed.enable = hostVariables.modules.software.zed-editor;
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
