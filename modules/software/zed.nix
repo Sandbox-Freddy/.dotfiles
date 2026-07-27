@@ -27,8 +27,14 @@
           "xml"
           "sql"
           "terraform"
+          "vue"
         ];
         userSettings = {
+          language_models = {
+            lmstudio = {
+              api_url = "http://localhost:1234/api/v0";
+            };
+          };
           disable_ai = false;
           proxy = "";
           autosave = {
@@ -48,11 +54,17 @@
             dock = "left";
           };
           agent = {
+            default_model= {
+              provider= "lmstudio";
+              model="google/gemma-4-12b-qat";
+              enable_thinking= false;
+            };
             dock = "right";
             favorite_models = [ ];
             model_parameters = [ ];
           };
           git_panel = {
+            tree_view= true;
             dock = "left";
           };
           base_keymap = "JetBrains";
@@ -71,6 +83,12 @@
           auto_install_extensions = {
             material-icon-theme = true;
             nix = true;
+            dockerfile = true;
+            git-firefly = true;
+            xml = true;
+            sql = true;
+            terraform = true;
+            vue = true;
           };
           load_direnv = "shell_hook";
           languages = {
