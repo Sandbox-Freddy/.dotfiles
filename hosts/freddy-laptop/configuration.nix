@@ -5,7 +5,8 @@
   hostVariables,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -20,6 +21,7 @@
       "firefox.desktop"
       "google-chrome.desktop"
       "dev.zed.Zed.desktop"
+      "SourceGit.desktop"
       "steam.desktop"
       "discord-ptb.desktop"
       "org.gnome.Nautilus.desktop"
@@ -27,7 +29,7 @@
   };
 
   users.users.${hostVariables.username} = {
-    extraGroups = ["vboxusers"];
+    extraGroups = [ "vboxusers" ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -46,6 +48,7 @@
     unstable.lmstudio
     pinta
     sbctl
+    sourcegit
     unstable.space-cadet-pinball
   ];
 

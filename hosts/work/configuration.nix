@@ -21,6 +21,7 @@
       "bruno.desktop"
       "obsidian.desktop"
       "dev.zed.Zed.desktop"
+      "SourceGit.desktop"
       "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
       "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
       "google-chrome.desktop"
