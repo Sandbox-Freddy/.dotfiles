@@ -67,6 +67,7 @@
       keepassxc
       nodejs_24
       obsidian
+      sourcegit
       unstable.lmstudio
       yubioath-flutter
       xournalpp
