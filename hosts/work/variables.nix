@@ -1,23 +1,13 @@
 let
-  default = import ./../../variables/defaultVariables.nix;
+  inherit (import ./../../variables/defaultVariables.nix) mkHostVariables;
 in
-  default
-  // {
-    host = "work";
-    modules =
-      default.modules
-      // {
-        driver =
-          default.modules.driver
-          // {
-            amdgpu = true;
-          };
-        software =
-          default.modules.software
-          // {
-            display-link = true;
-            python = true;
-            zed-editor = true;
-          };
-      };
+  mkHostVariables "work" {
+    driver = {
+      amdgpu = true;
+    };
+    software = {
+      display-link = true;
+      python = true;
+      zed = true;
+    };
   }

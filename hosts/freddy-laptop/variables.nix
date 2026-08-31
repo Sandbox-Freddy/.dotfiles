@@ -1,27 +1,15 @@
 let
-  default = import ./../../variables/defaultVariables.nix;
+  inherit (import ./../../variables/defaultVariables.nix) mkHostVariables;
 in
-  default
-  // {
-    host = "freddy-laptop";
-    modules =
-      default.modules
-      // {
-        driver =
-          default.modules.driver
-          // {
-            nvidia = true;
-          };
-        printer =
-          default.modules.printer
-          // {
-            printer = true;
-          };
-        software =
-          default.modules.software
-          // {
-            gaming = true;
-            zed-editor = true;
-          };
-      };
+  mkHostVariables "freddy-laptop" {
+    driver = {
+      nvidia = true;
+    };
+    printer = {
+      printer = true;
+    };
+    software = {
+      gaming = true;
+      zed = true;
+    };
   }

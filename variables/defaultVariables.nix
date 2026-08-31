@@ -4,8 +4,19 @@ let
     if builtins.pathExists localPath
     then import localPath
     else {};
-in
-  {
+
+  # Deep-merge two attribute sets (right side wins, recursing into nested sets).
+  deepMerge = lhs: rhs:
+    lhs
+    // builtins.mapAttrs (
+      name: value:
+        if builtins.isAttrs value && builtins.isAttrs (lhs.${name} or {})
+        then deepMerge lhs.${name} value
+        else value
+    )
+    rhs;
+
+  defaults = {
     username = "freddy";
     description = "Frederik";
     host = "default";
@@ -40,11 +51,19 @@ in
         git = true;
         python = false;
         easyeffects = true;
-        zed-editor = false;
+        zed = false;
       };
       systemSettings = {
         bootanimation = true;
       };
     };
-  }
-  // local
+  };
+in {
+  # Build per-host variables from a set of module overrides.
+  mkHostVariables = host: moduleOverrides:
+    deepMerge defaults {
+      inherit host;
+      modules = moduleOverrides;
+    }
+    // local;
+}

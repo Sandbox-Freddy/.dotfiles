@@ -4,8 +4,7 @@
   hostVariables,
   pkgs,
   ...
-}:
-{
+}: {
   options.modules.software.zed.enable = lib.mkEnableOption "zed-editor";
 
   config = lib.mkIf config.modules.software.zed.enable {
@@ -54,17 +53,17 @@
             dock = "left";
           };
           agent = {
-            default_model= {
-              provider= "lmstudio";
-              model="google/gemma-4-12b-qat";
-              enable_thinking= false;
+            default_model = {
+              provider = "lmstudio";
+              model = "google/gemma-4-12b-qat";
+              enable_thinking = false;
             };
             dock = "right";
-            favorite_models = [ ];
-            model_parameters = [ ];
+            favorite_models = [];
+            model_parameters = [];
           };
           git_panel = {
-            tree_view= true;
+            tree_view = true;
             dock = "left";
           };
           base_keymap = "JetBrains";
@@ -95,19 +94,19 @@
             TypeScript = {
               format_on_save = "on";
               formatter = [
-                { code_action = "source.fixAll.eslint"; }
+                {code_action = "source.fixAll.eslint";}
               ];
             };
             JavaScript = {
               format_on_save = "on";
               formatter = [
-                { code_action = "source.fixAll.eslint"; }
+                {code_action = "source.fixAll.eslint";}
               ];
             };
             TSX = {
               format_on_save = "on";
               formatter = [
-                { code_action = "source.fixAll.eslint"; }
+                {code_action = "source.fixAll.eslint";}
               ];
             };
           };

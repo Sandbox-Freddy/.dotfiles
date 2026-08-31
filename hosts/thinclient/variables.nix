@@ -1,27 +1,17 @@
 let
-  default = import ./../../variables/defaultVariables.nix;
+  inherit (import ./../../variables/defaultVariables.nix) mkHostVariables;
 in
-  default
-  // {
-    host = "thinclient";
-    modules =
-      default.modules
-      // {
-        software =
-          default.modules.software
-          // {
-            flatpak = true;
-            easyeffects = false;
-            zed-editor = true;
-          };
-        printer =
-          default.modules.printer
-          // {
-            sane = true;
-            scanbutton = true;
-            scanbuttonOutDir = "/mnt/paperless";
-            scanbuttonBlankPageThreshold = 0.985;
-            scanbuttonBlackBorderTrimFuzz = "32%";
-          };
-      };
+  mkHostVariables "thinclient" {
+    software = {
+      flatpak = true;
+      easyeffects = false;
+      zed = true;
+    };
+    printer = {
+      sane = true;
+      scanbutton = true;
+      scanbuttonOutDir = "/mnt/paperless";
+      scanbuttonBlankPageThreshold = 0.985;
+      scanbuttonBlackBorderTrimFuzz = "32%";
+    };
   }

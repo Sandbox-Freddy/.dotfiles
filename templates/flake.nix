@@ -17,7 +17,6 @@
     in {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [
-
         ];
         shellHook = ''
           echo "Dev-Flake-Example"

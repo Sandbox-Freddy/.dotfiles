@@ -38,6 +38,13 @@
               nixpkgs.overlays = [
                 (final: prev: {
                   unstable = pkgs-unstable;
+                  chrome-wayland = pkgs-unstable.google-chrome.override {
+                    commandLineArgs = [
+                      "--ozone-platform=wayland"
+                      "--disable-gtk-ime"
+                      "--disable-features=PdfOopif"
+                    ];
+                  };
                 })
               ];
             }
@@ -47,33 +54,35 @@
         };
       };
   in
-    flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = import nixpkgs {inherit system;};
-    in {
-      packages = {
-        inherit (pkgs) alejandra;
-      };
-      devShells = {
-        default = pkgs.mkShell {
-          packages = with pkgs; [
-            alejandra
-            nixpkgs-fmt
-          ];
+    flake-utils.lib.eachDefaultSystem (
+      system: let
+        pkgs = import nixpkgs {inherit system;};
+      in {
+        packages = {
+          inherit (pkgs) alejandra;
         };
-      };
-    })
+        devShells = {
+          default = pkgs.mkShell {
+            packages = with pkgs; [
+              alejandra
+              nixpkgs-fmt
+            ];
+          };
+        };
+      }
+    )
     // {
       nixosConfigurations = {
         work = mkNixosConfiguration {
-          modules = [./hosts/work];
+          modules = [./hosts/work/configuration.nix];
           hostVariables = import ./hosts/work/variables.nix;
         };
         freddy-laptop = mkNixosConfiguration {
-          modules = [./hosts/freddy-laptop];
+          modules = [./hosts/freddy-laptop/configuration.nix];
           hostVariables = import ./hosts/freddy-laptop/variables.nix;
         };
         thinclient = mkNixosConfiguration {
-          modules = [./hosts/thinclient];
+          modules = [./hosts/thinclient/configuration.nix];
           hostVariables = import ./hosts/thinclient/variables.nix;
         };
       };

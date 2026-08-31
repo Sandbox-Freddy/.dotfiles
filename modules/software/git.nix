@@ -31,10 +31,6 @@ in {
     };
   };
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      gitFull
-    ];
-
     home-manager.users.${hostVariables.username} = {
       programs.git = {
         enable = true;

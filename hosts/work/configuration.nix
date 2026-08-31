@@ -5,8 +5,7 @@
   hostVariables,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -57,13 +56,7 @@
       unstable.dbeaver-bin
       drawio
       granted
-      (unstable.google-chrome.override {
-        commandLineArgs = [
-          "--ozone-platform=wayland"
-          "--disable-gtk-ime"
-          "--disable-features=PdfOopif"
-        ];
-      })
+      chrome-wayland
       jq
       keepassxc
       nodejs_24

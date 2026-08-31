@@ -12,7 +12,10 @@
     (final: prev: {
       openblas =
         if prev.stdenv.hostPlatform.system == "i686-linux"
-        then prev.openblas.overrideAttrs (_: {doCheck = false;})
+        then
+          prev.openblas.overrideAttrs (_: {
+            doCheck = false;
+          })
         else prev.openblas;
     })
   ];
@@ -33,7 +36,7 @@
   modules.software.git.enable = hostVariables.modules.software.git;
   modules.software.python.enable = hostVariables.modules.software.python;
   modules.software.easyeffects.enable = hostVariables.modules.software.easyeffects;
-  modules.software.zed.enable = hostVariables.modules.software.zed-editor;
+  modules.software.zed.enable = hostVariables.modules.software.zed;
   modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
   modules.software.gaming.enable = hostVariables.modules.software.gaming;
 
@@ -64,8 +67,11 @@
 
   users.users.${hostVariables.username} = {
     isNormalUser = true;
-    description = "${hostVariables.description}";
-    extraGroups = ["networkmanager" "wheel"];
+    description = hostVariables.description;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
   };
 
   # Allow unfree packages

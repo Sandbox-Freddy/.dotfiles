@@ -5,8 +5,7 @@
   hostVariables,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -29,22 +28,16 @@
   };
 
   users.users.${hostVariables.username} = {
-    extraGroups = [ "vboxusers" ];
+    extraGroups = ["vboxusers"];
   };
 
   environment.systemPackages = with pkgs; [
     asunder
-
-    (unstable.google-chrome.override {
-      commandLineArgs = [
-        "--ozone-platform=wayland"
-        "--disable-gtk-ime"
-        "--disable-features=PdfOopif"
-      ];
-    })
+    chrome-wayland
     cifs-utils
     ffmpeg
     lame
+    librewolf
     unstable.lmstudio
     pinta
     sbctl

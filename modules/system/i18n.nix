@@ -1,15 +1,19 @@
-{hostVariables, ...}: {
+{
+  lib,
+  hostVariables,
+  ...
+}: {
   i18n.defaultLocale = hostVariables.location;
 
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = hostVariables.location;
-    LC_IDENTIFICATION = hostVariables.location;
-    LC_MEASUREMENT = hostVariables.location;
-    LC_MONETARY = hostVariables.location;
-    LC_NAME = hostVariables.location;
-    LC_NUMERIC = hostVariables.location;
-    LC_PAPER = hostVariables.location;
-    LC_TELEPHONE = hostVariables.location;
-    LC_TIME = hostVariables.location;
-  };
+  i18n.extraLocaleSettings = lib.genAttrs [
+    "LC_ADDRESS"
+    "LC_IDENTIFICATION"
+    "LC_MEASUREMENT"
+    "LC_MONETARY"
+    "LC_NAME"
+    "LC_NUMERIC"
+    "LC_PAPER"
+    "LC_TELEPHONE"
+    "LC_TIME"
+  ] (_: hostVariables.location);
 }

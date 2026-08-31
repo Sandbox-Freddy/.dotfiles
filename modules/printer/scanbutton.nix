@@ -7,9 +7,9 @@
 }: let
   cfg = config.modules.printer.scanbutton;
   scannerUser = hostVariables.username;
-  hostOutputDir = lib.attrByPath ["modules" "printer" "scanbuttonOutDir"] null hostVariables;
-  hostBlankPageThreshold = lib.attrByPath ["modules" "printer" "scanbuttonBlankPageThreshold"] null hostVariables;
-  hostBlackBorderTrimFuzz = lib.attrByPath ["modules" "printer" "scanbuttonBlackBorderTrimFuzz"] null hostVariables;
+  hostOutputDir = hostVariables.modules.printer.scanbuttonOutDir or null;
+  hostBlankPageThreshold = hostVariables.modules.printer.scanbuttonBlankPageThreshold or null;
+  hostBlackBorderTrimFuzz = hostVariables.modules.printer.scanbuttonBlackBorderTrimFuzz or null;
   scanOutputDir = cfg.outputDir;
 
   saneBin = "${pkgs.sane-backends}/bin";
@@ -259,7 +259,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     users.users.${scannerUser} = {
-      extraGroups = ["scanner" "lp"];
+      extraGroups = [
+        "scanner"
+        "lp"
+      ];
     };
 
     environment.systemPackages = with pkgs; [
