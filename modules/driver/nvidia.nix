@@ -27,15 +27,11 @@
       };
     };
 
-    hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        nvidia-vaapi-driver
-        vulkan-validation-layers
-        vulkan-loader
-        vulkan-tools
-      ];
-    };
+    hardware.graphics.extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+      vulkan-validation-layers
+      vulkan-loader
+      vulkan-tools
+    ];
   };
 }

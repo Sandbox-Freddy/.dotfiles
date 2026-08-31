@@ -19,19 +19,15 @@
       rocmPackages.rocm-smi
     ];
 
-    hardware.graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        vulkan-loader
-        vulkan-validation-layers
-        vulkan-extension-layer
-        rocmPackages.clr.icd
-        rocmPackages.rocm-runtime
-        rocmPackages.rocm-device-libs
-        libva-utils
-      ];
-    };
+    hardware.graphics.extraPackages = with pkgs; [
+      vulkan-loader
+      vulkan-validation-layers
+      vulkan-extension-layer
+      rocmPackages.clr.icd
+      rocmPackages.rocm-runtime
+      rocmPackages.rocm-device-libs
+      libva-utils
+    ];
 
     environment.sessionVariables.LIBVA_DRIVER_NAME = "radeonsi";
 

@@ -43,10 +43,6 @@
     ];
   };
 
-  environment.systemPackages = with pkgs; [
-    pinta
-  ];
-
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       awscli2
@@ -61,6 +57,7 @@
       keepassxc
       nodejs_24
       obsidian
+      pinta
       sourcegit
       unstable.lmstudio
       yubioath-flutter

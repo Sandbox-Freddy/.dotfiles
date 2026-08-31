@@ -32,21 +32,21 @@
   };
 
   environment.systemPackages = with pkgs; [
-    asunder
     chrome-wayland
     cifs-utils
-    ffmpeg
-    lame
-    librewolf
-    unstable.lmstudio
-    pinta
     sbctl
-    sourcegit
-    unstable.space-cadet-pinball
   ];
 
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
+      asunder
+      ffmpeg
+      lame
+      librewolf
+      unstable.lmstudio
+      pinta
+      sourcegit
+      unstable.space-cadet-pinball
       thunderbird
       keepassxc
       losslesscut-bin

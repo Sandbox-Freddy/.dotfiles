@@ -10,7 +10,7 @@
   };
 
   config = lib.mkIf config.modules.software.easyeffects.enable {
-    # PipeWire base (enable/alsa/pulse) + rtkit live in configuration.nix;
+    # PipeWire base (audio/alsa/pulse) + rtkit live in configuration.nix;
     # easyeffects only needs the JACK layer on top.
     services.pipewire.jack.enable = true;
 

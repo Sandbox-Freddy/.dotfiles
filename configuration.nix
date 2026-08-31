@@ -7,18 +7,6 @@
   config,
   ...
 }: {
-  # --- Overlay für OpenBLAS (i686) ---
-  nixpkgs.overlays = [
-    (final: prev: {
-      openblas =
-        if prev.stdenv.hostPlatform.system == "i686-linux"
-        then
-          prev.openblas.overrideAttrs (_: {
-            doCheck = false;
-          })
-        else prev.openblas;
-    })
-  ];
   imports = [
     ./home.nix
   ];
@@ -59,11 +47,15 @@
 
   services.pipewire = {
     enable = true;
-    alsa.enable = true;
+    audio.enable = true;
     alsa.support32Bit = true;
-    pulse.enable = true;
   };
   security.rtkit.enable = true;
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   users.users.${hostVariables.username} = {
     isNormalUser = true;
@@ -96,6 +88,10 @@
     flake = "${config.users.users.${hostVariables.username}.home}/.dotfiles";
   };
 
-  system.autoUpgrade.enable = true;
-  system.autoUpgrade.allowReboot = true;
+  system.autoUpgrade = {
+    enable = true;
+    allowReboot = true;
+    flake = "/home/${hostVariables.username}/.dotfiles";
+    operation = "switch";
+  };
 }
