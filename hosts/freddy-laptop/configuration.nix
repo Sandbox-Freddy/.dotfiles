@@ -46,7 +46,7 @@
       ffmpeg
       lame
       librewolf
-      unstable.lmstudio
+      opencode
       pinta
       sourcegit
       unstable.space-cadet-pinball
