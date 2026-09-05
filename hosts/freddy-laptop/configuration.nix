@@ -5,7 +5,8 @@
   hostVariables,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -25,10 +26,12 @@
       "discord-ptb.desktop"
       "org.gnome.Nautilus.desktop"
     ];
+    lockEnabled = false;
+    lockOnSuspend = false;
   };
 
   users.users.${hostVariables.username} = {
-    extraGroups = ["vboxusers"];
+    extraGroups = [ "vboxusers" ];
   };
 
   environment.systemPackages = with pkgs; [

@@ -4,20 +4,32 @@
   config,
   hostVariables,
   ...
-}: let
+}:
+let
   cfg = config.modules.gui.gnome;
-in {
+in
+{
   options.modules.gui.gnome = {
     enable = lib.mkEnableOption "gnome";
     favoriteApps = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [];
+      default = [ ];
       description = "Favorite apps in GNOME dash";
     };
     idleDelay = lib.mkOption {
       type = lib.types.int;
       default = 0;
       description = "Idle delay in seconds";
+    };
+    lockEnabled = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable automatic screen lock";
+    };
+    lockOnSuspend = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Lock the screen when suspending";
     };
     leftHanded = lib.mkOption {
       type = lib.types.bool;
@@ -74,7 +86,7 @@ in {
         };
         "org/gnome/shell" = {
           disable-user-extensions = false;
-          disabled-extensions = [];
+          disabled-extensions = [ ];
           enabled-extensions = [
             pkgs.gnomeExtensions.dash-to-dock.extensionUuid
             pkgs.gnomeExtensions.user-themes.extensionUuid
@@ -108,7 +120,8 @@ in {
           idle-delay = cfg.idleDelay;
         };
         "org/gnome/desktop/screensaver" = {
-          lock-enabled = true;
+          lock-enabled = cfg.lockEnabled;
+          lock-on-suspend = cfg.lockOnSuspend;
           lock-delay = 0;
         };
         "org/gnome/desktop/notifications" = {
