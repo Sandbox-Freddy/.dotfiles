@@ -59,7 +59,6 @@
       obsidian
       pinta
       sourcegit
-      unstable.lmstudio
       yubioath-flutter
       xournalpp
       zed-editor
