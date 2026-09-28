@@ -5,7 +5,8 @@
   hostVariables,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -32,6 +33,7 @@
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       vlc
+      opencode
       sourcegit
     ];
   };
