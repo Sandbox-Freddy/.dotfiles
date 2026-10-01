@@ -60,6 +60,10 @@ in
     ];
 
     home-manager.users.${hostVariables.username} = {
+      home.file."Vorlagen/textdatei.txt".text = "";
+      home.file."Vorlagen/markdown.md".text = "";
+      home.file."Vorlagen/typescript.ts".text = "";
+
       dconf.settings = {
         "org/gnome/desktop/interface" = {
           clock-show-seconds = true;
