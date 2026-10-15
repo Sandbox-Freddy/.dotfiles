@@ -44,6 +44,7 @@
     home.packages = with pkgs; [
       asunder
       ffmpeg
+      github-cli
       lame
       librewolf
       opencode

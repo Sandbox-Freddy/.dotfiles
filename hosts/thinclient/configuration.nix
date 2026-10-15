@@ -21,7 +21,6 @@
       "firefox.desktop"
       "dev.zed.Zed.desktop"
       "SourceGit.desktop"
-      "vlc.desktop"
       "org.gnome.Nautilus.desktop"
     ];
   };
@@ -32,7 +31,7 @@
 
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
-      vlc
+      github-cli
       opencode
       sourcegit
     ];
