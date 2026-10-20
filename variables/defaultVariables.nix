@@ -53,6 +53,7 @@ let
         easyeffects = true;
         ssh = false;
         zed = false;
+        zeiterfassung = false;
       };
       systemSettings = {
         bootanimation = true;

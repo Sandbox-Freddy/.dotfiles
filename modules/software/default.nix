@@ -8,6 +8,7 @@
     ./python.nix
     ./ssh.nix
     ./zed.nix
+    ./zeiterfassung.nix
     ./easyeffects
   ];
 }

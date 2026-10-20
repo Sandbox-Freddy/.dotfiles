@@ -10,5 +10,6 @@ in
       python = true;
       ssh = true;
       zed = true;
+      zeiterfassung = true;
     };
   }
