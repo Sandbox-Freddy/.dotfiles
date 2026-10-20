@@ -43,6 +43,21 @@
     ];
   };
 
+  modules.software.ssh = {
+    matchBlocks = {
+      "github-personal" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      "github-work" = {
+        hostname = "github.com";
+        user = "git";
+        identityFile = "~/.ssh/work_github";
+      };
+    };
+  };
+
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       awscli2

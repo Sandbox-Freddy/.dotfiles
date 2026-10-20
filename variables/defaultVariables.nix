@@ -51,6 +51,7 @@ let
         git = true;
         python = false;
         easyeffects = true;
+        ssh = false;
         zed = false;
       };
       systemSettings = {

@@ -8,6 +8,7 @@ in
     software = {
       display-link = true;
       python = true;
+      ssh = true;
       zed = true;
     };
   }

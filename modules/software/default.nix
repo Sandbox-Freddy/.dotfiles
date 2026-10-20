@@ -6,6 +6,7 @@
     ./gaming.nix
     ./git.nix
     ./python.nix
+    ./ssh.nix
     ./zed.nix
     ./easyeffects
   ];
