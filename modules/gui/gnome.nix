@@ -4,16 +4,14 @@
   config,
   hostVariables,
   ...
-}:
-let
+}: let
   cfg = config.modules.gui.gnome;
-in
-{
+in {
   options.modules.gui.gnome = {
     enable = lib.mkEnableOption "gnome";
     favoriteApps = lib.mkOption {
       type = lib.types.listOf lib.types.str;
-      default = [ ];
+      default = [];
       description = "Favorite apps in GNOME dash";
     };
     idleDelay = lib.mkOption {
@@ -48,6 +46,7 @@ in
       ffmpegthumbnailer
       gnome-chess
       gnome-tweaks
+      gnomeExtensions.appindicator
       gnomeExtensions.clipboard-history
       gnomeExtensions.dash-to-dock
       gnomeExtensions.user-themes
@@ -90,8 +89,9 @@ in
         };
         "org/gnome/shell" = {
           disable-user-extensions = false;
-          disabled-extensions = [ ];
+          disabled-extensions = [];
           enabled-extensions = [
+            pkgs.gnomeExtensions.appindicator.extensionUuid
             pkgs.gnomeExtensions.dash-to-dock.extensionUuid
             pkgs.gnomeExtensions.user-themes.extensionUuid
             pkgs.gnomeExtensions.system-monitor.extensionUuid
