@@ -8,9 +8,11 @@ in
     software = {
       displaylink = true;
       python = true;
-      ssh = true;
       yubikey = true;
       zed = true;
       zeiterfassung = true;
+    };
+    system = {
+      ssh = true;
     };
   }

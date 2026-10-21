@@ -38,7 +38,7 @@
     ];
   };
 
-  modules.software.ssh = {
+  modules.system.ssh = {
     settings = {
       "github-personal" = {
         HostName = "github.com";

@@ -51,13 +51,13 @@ let
         gaming = false;
         git = true;
         python = false;
-        ssh = false;
         yubikey = false;
         zed = false;
         zeiterfassung = false;
       };
       system = {
         bootanimation = true;
+        ssh = false;
       };
     };
   };

@@ -4,9 +4,9 @@
   hostVariables,
   ...
 }: let
-  cfg = config.modules.software.ssh;
+  cfg = config.modules.system.ssh;
 in {
-  options.modules.software.ssh = {
+  options.modules.system.ssh = {
     enable = lib.mkEnableOption "ssh";
     settings = lib.mkOption {
       type = lib.types.attrs;
