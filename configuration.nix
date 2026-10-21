@@ -5,9 +5,79 @@
   lib,
   hostVariables,
   ...
-}: {
+}: let
+  # Modules that are deliberately ungated common settings rather than features,
+  # and therefore have no toggle. Everything else must have one.
+  ungatedModules = [
+    "console/aliases.nix"
+    "system/flakes.nix"
+    "system/i18n.nix"
+    "system/keybindings.nix"
+  ];
+
+  # The gated modules actually on disk, as {category = ["name" ...];}. A module
+  # is either `<category>/<name>.nix` or `<category>/<name>/<name>.nix` when it
+  # ships data files alongside. A subdirectory without that inner `.nix` is a
+  # plain data directory owned by some other module (console/oh-my-posh), not a
+  # module itself.
+  gatedModules = let
+    categories = lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./modules);
+
+    namesIn = category: let
+      entries = builtins.readDir (./modules + "/${category}");
+      isNixFile = name: type: type == "regular" && lib.hasSuffix ".nix" name;
+      fromFiles =
+        lib.mapAttrsToList
+        (name: _: {
+          toggle = lib.removeSuffix ".nix" name;
+          path = "${category}/${name}";
+        })
+        (lib.filterAttrs isNixFile entries);
+      fromDirs =
+        lib.mapAttrsToList
+        (name: _: {
+          toggle = name;
+          path = "${category}/${name}/${name}.nix";
+        })
+        (lib.filterAttrs
+          (name: type:
+            type
+            == "directory"
+            && builtins.pathExists (./modules + "/${category}/${name}/${name}.nix"))
+          entries);
+    in
+      map (m: m.toggle)
+      (builtins.filter (m: !(builtins.elem m.path ungatedModules)) (fromFiles ++ fromDirs));
+  in
+    lib.mapAttrs (category: _: namesIn category) categories;
+
+  togglesIn = category: lib.attrNames (hostVariables.modules.${category} or {});
+
+  # A module without a toggle can never be switched on; a toggle without a
+  # module is dead. Both are silent today, so turn them into build failures.
+  modulesWithoutToggle = lib.concatLists (lib.mapAttrsToList
+    (category: names: map (n: "${category}.${n}") (lib.subtractLists (togglesIn category) names))
+    gatedModules);
+
+  togglesWithoutModule = lib.concatLists (lib.mapAttrsToList
+    (category: _: map (n: "${category}.${n}") (lib.subtractLists (gatedModules.${category} or []) (togglesIn category)))
+    hostVariables.modules);
+in {
   imports = [
     ./home.nix
+  ];
+
+  assertions = [
+    {
+      assertion = modulesWithoutToggle == [] && togglesWithoutModule == [];
+      message =
+        "variables/defaultVariables.nix is out of sync with the modules/ tree."
+        + lib.optionalString (modulesWithoutToggle != [])
+        "\n  module but no toggle: ${lib.concatStringsSep ", " modulesWithoutToggle}"
+        + lib.optionalString (togglesWithoutModule != [])
+        "\n  toggle but no module: ${lib.concatStringsSep ", " togglesWithoutModule}"
+        + "\n  (modules that are intentionally ungated belong in `ungatedModules` in configuration.nix)";
+    }
   ];
 
   # Feature modules: every `hostVariables.modules.<category>.<name>` boolean maps
