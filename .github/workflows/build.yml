@@ -11,8 +11,10 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: cachix/install-nix-action@v31
+      # The flake's own alejandra, so CI formats with the same version the
+      # hosts ship. `nixpkgs#` would be whatever the registry resolves to.
       - name: alejandra --check
-        run: nix run nixpkgs#alejandra -- --check .
+        run: nix run .#alejandra -- --check .
 
   build-x86_64:
     name: Build ${{ matrix.host }}
