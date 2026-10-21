@@ -139,7 +139,6 @@ in {
           left-handed = cfg.leftHanded;
         };
 
-        # keybindings
         "org/gnome/settings-daemon/plugins/media-keys" = {
           custom-keybindings = [
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/my-open-terminal/"

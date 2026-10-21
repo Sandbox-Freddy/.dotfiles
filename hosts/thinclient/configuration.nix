@@ -4,11 +4,9 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  # Modules
   modules.gui.gnome = {
     favoriteApps = [
       "org.gnome.Console.desktop"
@@ -37,7 +35,6 @@
   };
 
   hardware.graphics.extraPackages = with pkgs; [
-    # your Open GL, Vulkan and VAAPI drivers
     libva-vdpau-driver
   ];
 }

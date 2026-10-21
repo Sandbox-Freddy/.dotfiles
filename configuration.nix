@@ -83,7 +83,6 @@ in {
   # onto `modules.<category>.<name>.enable`, so names must match the module paths.
   modules = lib.mapAttrs (_: lib.mapAttrs (_: enable: {inherit enable;})) hostVariables.modules;
 
-  # Common Desktop / System Settings
   networking.hostName = hostVariables.host;
   system.stateVersion = hostVariables.stateVersion;
 
@@ -124,7 +123,6 @@ in {
     ];
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -136,7 +134,6 @@ in {
     nerd-fonts.jetbrains-mono
   ];
 
-  # Common programs / settings across all hosts
   programs.firefox.enable = true;
   zramSwap.enable = true;
 

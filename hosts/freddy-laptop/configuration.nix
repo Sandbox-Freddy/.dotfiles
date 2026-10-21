@@ -4,11 +4,9 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
-  # Modules
   modules.gui.gnome = {
     favoriteApps = [
       "org.gnome.Console.desktop"
