@@ -2,7 +2,6 @@
   imports = [
     ./displaylink.nix
     ./docker.nix
-    ./easyeffects/easyeffects.nix
     ./flatpak.nix
     ./gaming.nix
     ./git.nix

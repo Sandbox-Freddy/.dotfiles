@@ -7,7 +7,6 @@
 }: let
   cfg = config.modules.gui.gnome;
 
-  # Single source of truth: installed as packages *and* enabled in GNOME shell.
   shellExtensions = with pkgs.gnomeExtensions; [
     appindicator
     clipboard-history

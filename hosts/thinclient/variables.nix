@@ -7,7 +7,6 @@ in
       scanbutton = true;
     };
     software = {
-      easyeffects = false;
       flatpak = true;
       zed = true;
     };
