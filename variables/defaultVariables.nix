@@ -33,25 +33,23 @@ let
       console = {
         fish = true;
       };
-      driver = {
-        nvidia = false;
-        amdgpu = false;
-      };
       gui = {
         gnome = true;
       };
-      printer = {
-        printer = false;
-        sane = false;
+      hardware = {
+        amdgpu = false;
+        displaylink = false;
+        nvidia = false;
+        printing = false;
         scanbutton = false;
+        scanner = false;
+        yubikey = false;
       };
       software = {
-        displaylink = false;
         docker = true;
         gaming = false;
         git = true;
         python = false;
-        yubikey = false;
         zed = false;
         zeiterfassung = false;
       };

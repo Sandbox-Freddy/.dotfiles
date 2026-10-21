@@ -4,11 +4,11 @@
   hostVariables,
   ...
 }: {
-  options.modules.software.displaylink = {
+  options.modules.hardware.displaylink = {
     enable = lib.mkEnableOption "displaylink";
   };
 
-  config = lib.mkIf config.modules.software.displaylink.enable {
+  config = lib.mkIf config.modules.hardware.displaylink.enable {
     services.xserver.videoDrivers = ["displaylink" "modesetting" "amdgpu"];
     systemd.services.dlm.wantedBy = ["multi-user.target"];
 

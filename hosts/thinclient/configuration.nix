@@ -19,7 +19,7 @@
     ];
   };
 
-  modules.printer.scanbutton = {
+  modules.hardware.scanbutton = {
     outputDir = "/mnt/paperless";
     blankPageThreshold = 0.985;
     blackBorderTrimFuzz = "32%";

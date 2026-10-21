@@ -5,7 +5,7 @@
   hostVariables,
   ...
 }: let
-  cfg = config.modules.printer.scanbutton;
+  cfg = config.modules.hardware.scanbutton;
 
   saneBin = "${pkgs.sane-backends}/bin";
   libtiffBin = "${pkgs.libtiff}/bin";
@@ -209,7 +209,7 @@
     }
   '';
 in {
-  options.modules.printer.scanbutton = {
+  options.modules.hardware.scanbutton = {
     enable = lib.mkEnableOption "scan button trigger for Fujitsu fi-6130";
 
     outputDir = lib.mkOption {

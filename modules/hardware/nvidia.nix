@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-  options.modules.driver.nvidia = {
+  options.modules.hardware.nvidia = {
     enable = lib.mkEnableOption "nvidia";
   };
 
-  config = lib.mkIf config.modules.driver.nvidia.enable {
+  config = lib.mkIf config.modules.hardware.nvidia.enable {
     services.xserver.videoDrivers = [
       "nvidia"
     ];

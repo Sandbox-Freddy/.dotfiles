@@ -2,13 +2,13 @@ let
   inherit (import ./../../variables/defaultVariables.nix) mkHostVariables;
 in
   mkHostVariables "work" {
-    driver = {
+    hardware = {
       amdgpu = true;
+      displaylink = true;
+      yubikey = true;
     };
     software = {
-      displaylink = true;
       python = true;
-      yubikey = true;
       zed = true;
       zeiterfassung = true;
     };

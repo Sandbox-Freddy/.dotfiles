@@ -2,15 +2,13 @@ let
   inherit (import ./../../variables/defaultVariables.nix) mkHostVariables;
 in
   mkHostVariables "freddy-laptop" {
-    driver = {
+    hardware = {
       nvidia = true;
-    };
-    printer = {
-      printer = true;
+      printing = true;
+      yubikey = true;
     };
     software = {
       gaming = true;
-      yubikey = true;
       zed = true;
     };
   }

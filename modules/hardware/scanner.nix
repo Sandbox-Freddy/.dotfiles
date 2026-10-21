@@ -5,10 +5,10 @@
   hostVariables,
   ...
 }: let
-  cfg = config.modules.printer.sane;
+  cfg = config.modules.hardware.scanner;
 in {
-  options.modules.printer.sane = {
-    enable = lib.mkEnableOption "sane";
+  options.modules.hardware.scanner = {
+    enable = lib.mkEnableOption "scanner (SANE)";
   };
 
   config = lib.mkIf cfg.enable {

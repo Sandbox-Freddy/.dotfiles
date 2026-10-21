@@ -4,11 +4,11 @@
   pkgs,
   ...
 }: {
-  options.modules.driver.amdgpu = {
+  options.modules.hardware.amdgpu = {
     enable = lib.mkEnableOption "amdgpu";
   };
 
-  config = lib.mkIf config.modules.driver.amdgpu.enable {
+  config = lib.mkIf config.modules.hardware.amdgpu.enable {
     boot.initrd.kernelModules = ["amdgpu"];
 
     services.xserver.videoDrivers = ["amdgpu"];

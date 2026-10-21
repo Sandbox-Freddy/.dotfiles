@@ -2,9 +2,9 @@ let
   inherit (import ./../../variables/defaultVariables.nix) mkHostVariables;
 in
   mkHostVariables "thinclient" {
-    printer = {
-      sane = true;
+    hardware = {
       scanbutton = true;
+      scanner = true;
     };
     software = {
       zed = true;

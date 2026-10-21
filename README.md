@@ -23,8 +23,8 @@ flake.nix              Inputs + host definitions (mkNixosConfiguration)
 configuration.nix      Common settings shared by all hosts
 home.nix               Home Manager integration
 hosts/<host>/          Per-host config, hardware scan & variables.nix
-modules/               Toggleable modules (console, driver, gui,
-                       printer, software, system)
+modules/               Toggleable modules (console, gui, hardware,
+                       software, system)
 variables/             Default variables + module toggles
 ```
 
@@ -40,7 +40,7 @@ Settings that are not a simple on/off switch are set directly on the module opti
 
 ```nix
 modules.gui.gnome.favoriteApps = ["firefox.desktop"];
-modules.printer.scanbutton.outputDir = "/mnt/paperless";
+modules.hardware.scanbutton.outputDir = "/mnt/paperless";
 ```
 
 Machine-local, untracked overrides go in `variables/local.nix` — these require

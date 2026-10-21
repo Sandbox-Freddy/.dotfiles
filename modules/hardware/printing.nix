@@ -5,11 +5,11 @@
   hostVariables,
   ...
 }: {
-  options.modules.printer.printer = {
-    enable = lib.mkEnableOption "printer";
+  options.modules.hardware.printing = {
+    enable = lib.mkEnableOption "printing (CUPS)";
   };
 
-  config = lib.mkIf config.modules.printer.printer.enable {
+  config = lib.mkIf config.modules.hardware.printing.enable {
     services.avahi = {
       enable = true;
       nssmdns4 = true;
