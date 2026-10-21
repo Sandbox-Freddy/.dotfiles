@@ -64,9 +64,15 @@ in {
       ++ shellExtensions;
 
     home-manager.users.${hostVariables.username} = {
+      # Nautilus' "New Document" menu. The dev-shell pair comes straight from
+      # templates/, so there is one copy of it. `.envrc` is hidden and only
+      # shows up in that menu because the file chooser's `show-hidden` is on
+      # below — Nautilus reads its own hidden-file state from that key.
       home.file."Vorlagen/textdatei.txt".text = "";
       home.file."Vorlagen/markdown.md".text = "";
       home.file."Vorlagen/typescript.ts".text = "";
+      home.file."Vorlagen/flake.nix".source = ../../templates/flake.nix;
+      home.file."Vorlagen/.envrc".source = ../../templates/.envrc;
 
       dconf.settings = {
         "org/gnome/desktop/interface" = {
