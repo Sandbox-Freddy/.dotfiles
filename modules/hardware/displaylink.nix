@@ -9,7 +9,9 @@
   };
 
   config = lib.mkIf config.modules.hardware.displaylink.enable {
-    services.xserver.videoDrivers = ["displaylink" "modesetting" "amdgpu"];
+    # Must precede the GPU driver, which contributes its own entry — listing
+    # it here too would just duplicate it (amdgpu.nix, nvidia.nix).
+    services.xserver.videoDrivers = lib.mkBefore ["displaylink" "modesetting"];
     systemd.services.dlm.wantedBy = ["multi-user.target"];
 
     # Zed (GPUI) has broken pointer coordinates on DisplayLink/Wayland — force XWayland
