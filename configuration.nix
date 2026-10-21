@@ -53,15 +53,13 @@
 
   togglesIn = category: lib.attrNames (hostVariables.modules.${category} or {});
 
-  # A module without a toggle can never be switched on; a toggle without a
-  # module is dead. Both are silent today, so turn them into build failures.
+  # A module without a toggle can never be switched on, and nothing complains —
+  # so turn it into a build failure. The reverse case (a toggle with no module)
+  # needs no check here: the module system already throws on an undeclared
+  # `modules.<category>.<name>` option, and even suggests the right name.
   modulesWithoutToggle = lib.concatLists (lib.mapAttrsToList
     (category: names: map (n: "${category}.${n}") (lib.subtractLists (togglesIn category) names))
     gatedModules);
-
-  togglesWithoutModule = lib.concatLists (lib.mapAttrsToList
-    (category: _: map (n: "${category}.${n}") (lib.subtractLists (gatedModules.${category} or []) (togglesIn category)))
-    hostVariables.modules);
 in {
   imports = [
     ./home.nix
@@ -69,14 +67,15 @@ in {
 
   assertions = [
     {
-      assertion = modulesWithoutToggle == [] && togglesWithoutModule == [];
-      message =
-        "variables/defaultVariables.nix is out of sync with the modules/ tree."
-        + lib.optionalString (modulesWithoutToggle != [])
-        "\n  module but no toggle: ${lib.concatStringsSep ", " modulesWithoutToggle}"
-        + lib.optionalString (togglesWithoutModule != [])
-        "\n  toggle but no module: ${lib.concatStringsSep ", " togglesWithoutModule}"
-        + "\n  (modules that are intentionally ungated belong in `ungatedModules` in configuration.nix)";
+      assertion = modulesWithoutToggle == [];
+      message = ''
+        These modules have no toggle in variables/defaultVariables.nix and can
+        therefore never be enabled: ${lib.concatStringsSep ", " modulesWithoutToggle}
+
+        Add a boolean of the same name under `modules.<category>`, or list the
+        module in `ungatedModules` in configuration.nix if it is meant to be a
+        common setting rather than a feature.
+      '';
     }
   ];
 
