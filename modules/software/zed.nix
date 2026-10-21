@@ -34,6 +34,9 @@
               api_url = "http://localhost:1234/api/v0";
             };
           };
+          edit_predictions = {
+            provider = "zed";
+          };
           disable_ai = false;
           proxy = "";
           autosave = {
@@ -66,6 +69,7 @@
             tree_view = true;
             dock = "left";
           };
+          diff_view_style = "split";
           base_keymap = "JetBrains";
           icon_theme = {
             mode = "dark";
