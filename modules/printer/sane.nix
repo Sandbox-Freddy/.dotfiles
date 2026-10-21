@@ -9,10 +9,6 @@
 in {
   options.modules.printer.sane = {
     enable = lib.mkEnableOption "sane";
-    description = lib.mkOption {
-      type = lib.types.str;
-      default = "Sane-Backends";
-    };
   };
 
   config = lib.mkIf cfg.enable {

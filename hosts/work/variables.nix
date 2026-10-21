@@ -6,9 +6,10 @@ in
       amdgpu = true;
     };
     software = {
-      display-link = true;
+      displaylink = true;
       python = true;
       ssh = true;
+      yubikey = true;
       zed = true;
       zeiterfassung = true;
     };

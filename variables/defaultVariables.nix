@@ -16,14 +16,19 @@ let
     )
     rhs;
 
+  username = "freddy";
+
   defaults = {
-    username = "freddy";
+    inherit username;
     description = "Frederik";
-    host = "default";
     system = "x86_64-linux";
     location = "de_DE.UTF-8";
     stateVersion = "26.05";
+    dotfilesDir = "/home/${username}/.dotfiles";
     printerIp = "";
+    # Every entry maps 1:1 onto `modules.<category>.<name>.enable`
+    # (see the generated mapping in configuration.nix), so names must match
+    # the module paths and values must stay booleans.
     modules = {
       console = {
         fish = true;
@@ -39,23 +44,21 @@ let
         printer = false;
         sane = false;
         scanbutton = false;
-        scanbuttonOutDir = null;
-        scanbuttonBlankPageThreshold = null;
-        scanbuttonBlackBorderTrimFuzz = null;
       };
       software = {
-        display-link = false;
+        displaylink = false;
         docker = true;
-        gaming = false;
+        easyeffects = true;
         flatpak = false;
+        gaming = false;
         git = true;
         python = false;
-        easyeffects = true;
         ssh = false;
+        yubikey = false;
         zed = false;
         zeiterfassung = false;
       };
-      systemSettings = {
+      system = {
         bootanimation = true;
       };
     };
@@ -63,9 +66,9 @@ let
 in {
   # Build per-host variables from a set of module overrides.
   mkHostVariables = host: moduleOverrides:
-    deepMerge defaults {
+    deepMerge (deepMerge defaults {
       inherit host;
       modules = moduleOverrides;
-    }
-    // local;
+    })
+    local;
 }

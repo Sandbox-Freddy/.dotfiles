@@ -8,17 +8,17 @@
 in {
   options.modules.software.ssh = {
     enable = lib.mkEnableOption "ssh";
-    matchBlocks = lib.mkOption {
+    settings = lib.mkOption {
       type = lib.types.attrs;
       default = {};
-      description = "SSH config match blocks (programs.ssh.matchBlocks)";
+      description = "SSH client config blocks (programs.ssh.settings), keyed by host pattern";
     };
   };
   config = lib.mkIf cfg.enable {
     home-manager.users.${hostVariables.username} = {
       programs.ssh = {
         enable = true;
-        matchBlocks = cfg.matchBlocks;
+        settings = cfg.settings;
       };
     };
   };

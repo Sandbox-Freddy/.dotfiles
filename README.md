@@ -13,15 +13,8 @@ git clone https://github.com/Sandbox-Freddy/.dotfiles ~/.dotfiles
 sudo nixos-rebuild switch --flake ~/.dotfiles#work   # pick your host
 ```
 
-Handy aliases (`modules/console/aliases.nix`):
-
-| Alias | Action |
-|-------|--------|
-| `rebuild` | `nixos-rebuild switch` for the current host |
-| `switchnix` | Same, via `nh` |
-| `update` | Update `flake.lock` |
-| `cleanup` | GC generations older than 3 days |
-| `nixfmt` | Format with `alejandra` |
+Handy aliases (`rebuild`, `switchnix`, `update`, `cleanup`, `nixfmt`) are defined in
+[`modules/console/aliases.nix`](modules/console/aliases.nix).
 
 ## Layout
 
@@ -37,11 +30,21 @@ variables/             Default variables + module toggles
 
 ## Configuration
 
-Features are toggled per host in `hosts/<host>/variables.nix`, which overrides
+Features are toggled per host in `hosts/<host>/variables.nix`, which deep-merges over
 `variables/defaultVariables.nix`. Key variables: `username`, `host`, `system`,
-`stateVersion`, and the nested `modules` set (enable/disable each module).
+`stateVersion`, `dotfilesDir`, and the nested `modules` set of booleans — each one maps
+automatically onto `modules.<category>.<name>.enable`.
 
-Machine-local, untracked overrides go in `variables/local.nix`.
+Settings that are not a simple on/off switch are set directly on the module option in
+`hosts/<host>/configuration.nix`, e.g.:
+
+```nix
+modules.gui.gnome.favoriteApps = ["firefox.desktop"];
+modules.printer.scanbutton.outputDir = "/mnt/paperless";
+```
+
+Machine-local, untracked overrides go in `variables/local.nix` — these require
+`--impure`, otherwise they are silently ignored.
 
 ## License
 

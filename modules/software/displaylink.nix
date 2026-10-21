@@ -13,6 +13,8 @@
     systemd.services.dlm.wantedBy = ["multi-user.target"];
 
     # Zed (GPUI) has broken pointer coordinates on DisplayLink/Wayland — force XWayland
+    environment.shellAliases.zeditor = "env WAYLAND_DISPLAY= zeditor";
+
     home-manager.users.${hostVariables.username} = {
       xdg.desktopEntries."dev.zed.Zed" = {
         name = "Zed";
@@ -24,10 +26,6 @@
           "text/plain"
           "inode/directory"
         ];
-      };
-
-      programs.fish.shellAliases = {
-        zeditor = "env WAYLAND_DISPLAY= zeditor";
       };
     };
   };

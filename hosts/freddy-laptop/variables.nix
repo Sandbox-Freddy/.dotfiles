@@ -10,6 +10,7 @@ in
     };
     software = {
       gaming = true;
+      yubikey = true;
       zed = true;
     };
   }

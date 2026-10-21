@@ -72,19 +72,17 @@
       }
     )
     // {
-      nixosConfigurations = {
-        work = mkNixosConfiguration {
-          modules = [./hosts/work/configuration.nix];
-          hostVariables = import ./hosts/work/variables.nix;
-        };
-        freddy-laptop = mkNixosConfiguration {
-          modules = [./hosts/freddy-laptop/configuration.nix];
-          hostVariables = import ./hosts/freddy-laptop/variables.nix;
-        };
-        thinclient = mkNixosConfiguration {
-          modules = [./hosts/thinclient/configuration.nix];
-          hostVariables = import ./hosts/thinclient/variables.nix;
-        };
-      };
+      nixosConfigurations =
+        nixpkgs.lib.genAttrs [
+          "work"
+          "freddy-laptop"
+          "thinclient"
+        ] (
+          host:
+            mkNixosConfiguration {
+              modules = [./hosts/${host}/configuration.nix];
+              hostVariables = import ./hosts/${host}/variables.nix;
+            }
+        );
     };
 }

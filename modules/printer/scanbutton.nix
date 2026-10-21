@@ -6,11 +6,6 @@
   ...
 }: let
   cfg = config.modules.printer.scanbutton;
-  scannerUser = hostVariables.username;
-  hostOutputDir = hostVariables.modules.printer.scanbuttonOutDir or null;
-  hostBlankPageThreshold = hostVariables.modules.printer.scanbuttonBlankPageThreshold or null;
-  hostBlackBorderTrimFuzz = hostVariables.modules.printer.scanbuttonBlackBorderTrimFuzz or null;
-  scanOutputDir = cfg.outputDir;
 
   saneBin = "${pkgs.sane-backends}/bin";
   libtiffBin = "${pkgs.libtiff}/bin";
@@ -38,7 +33,7 @@
     MV_BIN="${coreutilsBin}/mv"
     RM_BIN="${coreutilsBin}/rm"
 
-    OUT_DIR="${scanOutputDir}"
+    OUT_DIR="${cfg.outputDir}"
     TIMESTAMP="$("$DATE_BIN" +%Y%m%d-%H%M%S)"
     UUID="$("${utilLinuxBin}/uuidgen")"
 
@@ -219,28 +214,19 @@ in {
 
     outputDir = lib.mkOption {
       type = lib.types.str;
-      default =
-        if hostOutputDir != null
-        then hostOutputDir
-        else "/home/${hostVariables.username}/Scans";
+      default = "/home/${hostVariables.username}/Scans";
       description = "Directory where scanned files are written.";
     };
 
     blankPageThreshold = lib.mkOption {
       type = lib.types.float;
-      default =
-        if hostBlankPageThreshold != null
-        then hostBlankPageThreshold
-        else 0.998;
+      default = 0.998;
       description = "Grayscale mean threshold (0-1) above which a scanned page is considered empty and removed.";
     };
 
     blackBorderTrimFuzz = lib.mkOption {
       type = lib.types.str;
-      default =
-        if hostBlackBorderTrimFuzz != null
-        then hostBlackBorderTrimFuzz
-        else "12%";
+      default = "12%";
       description = "ImageMagick fuzz value used when trimming black page borders.";
     };
 
@@ -258,7 +244,7 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
-    users.users.${scannerUser} = {
+    users.users.${hostVariables.username} = {
       extraGroups = [
         "scanner"
         "lp"
@@ -270,7 +256,7 @@ in {
     ];
 
     systemd.tmpfiles.rules = [
-      "d ${scanOutputDir} 0770 ${scannerUser} users -"
+      "d ${cfg.outputDir} 0770 ${hostVariables.username} users -"
     ];
 
     environment.etc."scanbd/scanbd.conf".source = scanbdConf;

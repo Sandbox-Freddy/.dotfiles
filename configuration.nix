@@ -1,36 +1,23 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# Common settings shared by every host. Host-specific bits live in
+# hosts/<host>/configuration.nix, feature toggles in hosts/<host>/variables.nix.
 {
   pkgs,
+  lib,
   hostVariables,
-  config,
   ...
 }: {
   imports = [
     ./home.nix
   ];
-  # Modules
-  modules.console.fish.enable = hostVariables.modules.console.fish;
-  modules.driver.amdgpu.enable = hostVariables.modules.driver.amdgpu;
-  modules.driver.nvidia.enable = hostVariables.modules.driver.nvidia;
-  modules.gui.gnome.enable = hostVariables.modules.gui.gnome;
-  modules.printer.printer.enable = hostVariables.modules.printer.printer;
-  modules.printer.sane.enable = hostVariables.modules.printer.sane;
-  modules.printer.scanbutton.enable = hostVariables.modules.printer.scanbutton;
-  modules.software.displaylink.enable = hostVariables.modules.software.display-link;
-  modules.software.docker.enable = hostVariables.modules.software.docker;
-  modules.software.flatpak.enable = hostVariables.modules.software.flatpak;
-  modules.software.git.enable = hostVariables.modules.software.git;
-  modules.software.python.enable = hostVariables.modules.software.python;
-  modules.software.ssh.enable = hostVariables.modules.software.ssh;
-  modules.software.easyeffects.enable = hostVariables.modules.software.easyeffects;
-  modules.software.zed.enable = hostVariables.modules.software.zed;
-  modules.software.zeiterfassung.enable = hostVariables.modules.software.zeiterfassung;
-  modules.system.bootanimation.enable = hostVariables.modules.systemSettings.bootanimation;
-  modules.software.gaming.enable = hostVariables.modules.software.gaming;
+
+  # Feature modules: every `hostVariables.modules.<category>.<name>` boolean maps
+  # onto `modules.<category>.<name>.enable`, so names must match the module paths.
+  modules = lib.mapAttrs (_: lib.mapAttrs (_: enable: {inherit enable;})) hostVariables.modules;
 
   # Common Desktop / System Settings
+  networking.hostName = hostVariables.host;
+  system.stateVersion = hostVariables.stateVersion;
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
@@ -81,19 +68,18 @@
   ];
 
   # Common programs / settings across all hosts
-  programs.direnv.enable = true;
   programs.firefox.enable = true;
   zramSwap.enable = true;
 
   programs.nh = {
     enable = true;
-    flake = "${config.users.users.${hostVariables.username}.home}/.dotfiles";
+    flake = hostVariables.dotfilesDir;
   };
 
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
-    flake = "/home/${hostVariables.username}/.dotfiles";
+    flake = hostVariables.dotfilesDir;
     operation = "switch";
   };
 }

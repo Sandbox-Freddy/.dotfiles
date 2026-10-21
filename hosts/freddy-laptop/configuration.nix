@@ -1,18 +1,12 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   hostVariables,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
-  networking.hostName = hostVariables.host; # Define your hostname.
 
   # Modules
   modules.gui.gnome = {
@@ -31,11 +25,10 @@
   };
 
   users.users.${hostVariables.username} = {
-    extraGroups = [ "vboxusers" ];
+    extraGroups = ["vboxusers"];
   };
 
   environment.systemPackages = with pkgs; [
-    chrome-wayland
     cifs-utils
     sbctl
   ];
@@ -43,29 +36,25 @@
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
       asunder
+      chrome-wayland
       ffmpeg
       github-cli
+      keepassxc
       lame
       librewolf
+      losslesscut-bin
       opencode
       pinta
-      sourcegit
-      unstable.space-cadet-pinball
       thunderbird
-      keepassxc
-      losslesscut-bin
-      yubioath-flutter
+      unstable.space-cadet-pinball
     ];
   };
-
-  #Yubikey
-  services.pcscd.enable = true;
 
   services.udev.extraRules = ''
     ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0660", GROUP="plugdev"
   '';
-  system.stateVersion = hostVariables.stateVersion;
 
+  # Kept disabled on purpose; the vboxusers group above exists for re-enabling.
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
   # virtualisation.libvirtd.enable = false;

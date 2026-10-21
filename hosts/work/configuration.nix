@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
   hostVariables,
   pkgs,
@@ -10,8 +7,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
-  networking.hostName = hostVariables.host; # Define your hostname.
 
   # Modules
   modules.gui.gnome = {
@@ -44,46 +39,38 @@
   };
 
   modules.software.ssh = {
-    matchBlocks = {
+    settings = {
       "github-personal" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_ed25519";
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_ed25519";
       };
       "github-work" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/work_github";
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/work_github";
       };
     };
   };
 
   home-manager.users.${hostVariables.username} = {
     home.packages = with pkgs; [
-      awscli2
       aisleriot
-      unstable.bruno
+      awscli2
+      chrome-wayland
       claude-code
-      unstable.dbeaver-bin
       drawio
       granted
-      chrome-wayland
       jq
       keepassxc
       nodejs_24
       obsidian
       pinta
-      sourcegit
-      yubioath-flutter
+      unstable.bruno
+      unstable.dbeaver-bin
       xournalpp
-      zed-editor
     ];
   };
-
-  #Yubikey
-  services.pcscd.enable = true;
-
-  system.stateVersion = hostVariables.stateVersion;
 
   environment.shellAliases = {
     awsssologin = "aws sso login --no-browser --sso-session";

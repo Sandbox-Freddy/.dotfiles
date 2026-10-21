@@ -6,6 +6,16 @@
   ...
 }: let
   cfg = config.modules.gui.gnome;
+
+  # Single source of truth: installed as packages *and* enabled in GNOME shell.
+  shellExtensions = with pkgs.gnomeExtensions; [
+    appindicator
+    clipboard-history
+    color-picker
+    dash-to-dock
+    system-monitor
+    user-themes
+  ];
 in {
   options.modules.gui.gnome = {
     enable = lib.mkEnableOption "gnome";
@@ -41,22 +51,18 @@ in {
     };
     services.desktopManager.gnome.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      dconf-editor
-      ffmpegthumbnailer
-      gnome-chess
-      gnome-tweaks
-      gnomeExtensions.appindicator
-      gnomeExtensions.clipboard-history
-      gnomeExtensions.dash-to-dock
-      gnomeExtensions.user-themes
-      gnomeExtensions.system-monitor
-      gnomeExtensions.color-picker
-      gucharmap
-      loupe
-      papirus-icon-theme
-      yaru-theme
-    ];
+    environment.systemPackages =
+      (with pkgs; [
+        dconf-editor
+        ffmpegthumbnailer
+        gnome-chess
+        gnome-tweaks
+        gucharmap
+        loupe
+        papirus-icon-theme
+        yaru-theme
+      ])
+      ++ shellExtensions;
 
     home-manager.users.${hostVariables.username} = {
       home.file."Vorlagen/textdatei.txt".text = "";
@@ -90,14 +96,7 @@ in {
         "org/gnome/shell" = {
           disable-user-extensions = false;
           disabled-extensions = [];
-          enabled-extensions = [
-            pkgs.gnomeExtensions.appindicator.extensionUuid
-            pkgs.gnomeExtensions.dash-to-dock.extensionUuid
-            pkgs.gnomeExtensions.user-themes.extensionUuid
-            pkgs.gnomeExtensions.system-monitor.extensionUuid
-            pkgs.gnomeExtensions.clipboard-history.extensionUuid
-            pkgs.gnomeExtensions.color-picker.extensionUuid
-          ];
+          enabled-extensions = map (e: e.extensionUuid) shellExtensions;
           app-picker-layout = "[]";
           favorite-apps = cfg.favoriteApps;
         };
