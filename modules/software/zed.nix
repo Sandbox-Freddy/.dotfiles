@@ -88,22 +88,25 @@
           load_direnv = "shell_hook";
           languages = {
             TypeScript = {
+              code_actions_on_format = {
+                "source.fixAll.eslint" = true;
+              };
               format_on_save = "on";
-              formatter = [
-                {code_action = "source.fixAll.eslint";}
-              ];
+              formatter = [];
             };
             JavaScript = {
+              code_actions_on_format = {
+                "source.fixAll.eslint" = true;
+              };
               format_on_save = "on";
-              formatter = [
-                {code_action = "source.fixAll.eslint";}
-              ];
+              formatter = [];
             };
             TSX = {
+              code_actions_on_format = {
+                "source.fixAll.eslint" = true;
+              };
               format_on_save = "on";
-              formatter = [
-                {code_action = "source.fixAll.eslint";}
-              ];
+              formatter = [];
             };
           };
         };
