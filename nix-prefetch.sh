@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 # Puts the DisplayLink driver archive into the Nix store so that
-# modules/software/displaylink.nix can build (the package is `requireFile`-based).
+# modules/hardware/displaylink.nix can build (the package is `requireFile`-based).
 set -eu
 
 nix-prefetch-url --name displaylink-620.zip \
