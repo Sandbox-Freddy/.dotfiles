@@ -53,7 +53,16 @@
     };
   };
 
+  # AWS tooling. `assume` has to be a fish alias because it sources a .fish
+  # file; the rest of the AWS setup is the shellAliases block at the bottom.
   home-manager.users.${hostVariables.username} = {
+    programs.fish.shellAliases = {
+      assume = "source ${pkgs.granted}/share/assume.fish";
+    };
+    home.file.".config/fish/completions/aws.fish".text = ''
+      complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
+    '';
+
     home.packages = with pkgs; [
       aisleriot
       awscli2
