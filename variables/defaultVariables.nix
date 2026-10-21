@@ -48,7 +48,6 @@ let
       software = {
         displaylink = false;
         docker = true;
-        flatpak = false;
         gaming = false;
         git = true;
         python = false;
