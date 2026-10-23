@@ -24,7 +24,7 @@ in {
       description = "Favorite apps in GNOME dash";
     };
     idleDelay = lib.mkOption {
-      type = lib.types.int;
+      type = lib.types.ints.unsigned;
       default = 0;
       description = "Idle delay in seconds";
     };
@@ -63,7 +63,7 @@ in {
       ])
       ++ shellExtensions;
 
-    home-manager.users.${hostVariables.username} = {
+    home-manager.users.${hostVariables.username} = {lib, ...}: {
       home.file."Vorlagen/textdatei.txt".text = "";
       home.file."Vorlagen/markdown.md".text = "";
       home.file."Vorlagen/typescript.ts".text = "";
@@ -121,12 +121,12 @@ in {
           power-button-action = "interactive";
         };
         "org/gnome/desktop/session" = {
-          idle-delay = cfg.idleDelay;
+          idle-delay = lib.hm.gvariant.mkUint32 cfg.idleDelay;
         };
         "org/gnome/desktop/screensaver" = {
           lock-enabled = cfg.lockEnabled;
           lock-on-suspend = cfg.lockOnSuspend;
-          lock-delay = 0;
+          lock-delay = lib.hm.gvariant.mkUint32 0;
         };
         "org/gnome/desktop/notifications" = {
           show-in-lock-screen = false;
