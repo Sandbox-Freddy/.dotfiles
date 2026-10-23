@@ -50,6 +50,7 @@
             }
           ];
         specialArgs = {
+          inherit (inputs) self;
           inherit hostVariables;
         };
       };

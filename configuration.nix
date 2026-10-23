@@ -13,6 +13,7 @@
     "system/flakes.nix"
     "system/i18n.nix"
     "system/keybindings.nix"
+    "system/symlink.nix"
   ];
 
   # The gated modules actually on disk, as {category = ["name" ...];}. A module

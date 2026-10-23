@@ -3,6 +3,7 @@
   pkgs,
   lib,
   hostVariables,
+  mkOutOfStorePath,
   ...
 }: {
   options.modules.console.fish = {
@@ -10,6 +11,13 @@
   };
 
   config = lib.mkIf config.modules.console.fish.enable {
+    assertions = [
+      {
+        assertion = builtins.isAttrs (builtins.fromJSON (builtins.readFile ./oh-my-posh/theme/atomic.omp.json));
+        message = "oh-my-posh theme atomic.omp.json is not a JSON object";
+      }
+    ];
+
     programs.fish.enable = true;
     users.users.${hostVariables.username}.shell = pkgs.fish;
 
@@ -40,7 +48,7 @@
       programs.oh-my-posh = {
         enable = true;
         enableFishIntegration = true;
-        settings = builtins.fromJSON (builtins.unsafeDiscardStringContext (builtins.readFile ./oh-my-posh/theme/atomic.omp.json));
+        configFile = mkOutOfStorePath ./oh-my-posh/theme/atomic.omp.json;
       };
       programs.atuin = {
         enable = true;
