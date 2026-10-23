@@ -66,7 +66,6 @@
           default = pkgs.mkShell {
             packages = with pkgs; [
               alejandra
-              nixpkgs-fmt
             ];
           };
         };
