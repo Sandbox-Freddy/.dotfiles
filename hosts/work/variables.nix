@@ -9,7 +9,6 @@ in
     };
     software = {
       python = true;
-      zed = true;
       zeiterfassung = true;
     };
     system = {

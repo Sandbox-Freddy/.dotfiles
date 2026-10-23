@@ -9,6 +9,5 @@ in
     };
     software = {
       gaming = true;
-      zed = true;
     };
   }

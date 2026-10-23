@@ -244,6 +244,13 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = config.modules.hardware.scanner.enable;
+        message = "modules.hardware.scanbutton needs modules.hardware.scanner for hardware.sane";
+      }
+    ];
+
     users.users.${hostVariables.username} = {
       extraGroups = [
         "scanner"

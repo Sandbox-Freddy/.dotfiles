@@ -50,7 +50,7 @@ let
         gaming = false;
         git = true;
         python = false;
-        zed = false;
+        zed = true;
         zeiterfassung = false;
       };
       system = {
