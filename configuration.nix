@@ -128,10 +128,16 @@ in {
     flake = hostVariables.dotfilesDir;
   };
 
+  # git+file pins the nightly run to the last commit; the bare path would
+  # activate whatever happens to be in the working tree. --impure keeps
+  # variables/local.nix in play, and --upgrade is a channel flag that does
+  # nothing for a flake. flags merges with the module's own --refresh --flake.
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
-    flake = hostVariables.dotfilesDir;
+    flake = "git+file://${hostVariables.dotfilesDir}";
     operation = "switch";
+    upgrade = false;
+    flags = ["--impure"];
   };
 }
