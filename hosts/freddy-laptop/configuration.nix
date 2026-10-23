@@ -22,10 +22,6 @@
     lockOnSuspend = false;
   };
 
-  users.users.${hostVariables.username} = {
-    extraGroups = ["vboxusers"];
-  };
-
   environment.systemPackages = with pkgs; [
     cifs-utils
     sbctl
@@ -48,13 +44,23 @@
     ];
   };
 
-  services.udev.extraRules = ''
-    ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0660", GROUP="plugdev"
-  '';
+  # uaccess has to be tagged before systemd's 73-seat-late.rules consumes it,
+  # and services.udev.extraRules writes 99-local.rules — hence the own package.
+  services.udev.packages = [
+    (pkgs.writeTextFile {
+      name = "thrustmaster-udev-rules";
+      destination = "/etc/udev/rules.d/60-thrustmaster.rules";
+      text = ''
+        ATTRS{idVendor}=="044f", ATTRS{idProduct}=="b668", MODE="0660", TAG+="uaccess"
+      '';
+    })
+  ];
 
-  # Kept disabled on purpose; the vboxusers group above exists for re-enabling.
+  # Kept disabled on purpose. Re-enabling needs the group line too: the
+  # virtualbox module creates vboxusers but does not put anyone in it.
   # virtualisation.virtualbox.host.enable = true;
   # virtualisation.virtualbox.host.enableExtensionPack = true;
   # virtualisation.libvirtd.enable = false;
   # boot.blacklistedKernelModules = ["kvm-intel" "kvm-amd" "xpad"];
+  # users.users.${hostVariables.username}.extraGroups = ["vboxusers"];
 }
