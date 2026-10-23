@@ -51,8 +51,6 @@
     };
   };
 
-  # AWS tooling. `assume` has to be a fish alias because it sources a .fish
-  # file; the rest of the AWS setup is the shellAliases block at the bottom.
   home-manager.users.${hostVariables.username} = {
     programs.fish.shellAliases = {
       assume = "source ${pkgs.granted}/share/assume.fish";

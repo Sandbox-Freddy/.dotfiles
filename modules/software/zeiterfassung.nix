@@ -9,9 +9,6 @@
 in {
   options.modules.software.zeiterfassung.enable = lib.mkEnableOption "zeiterfassung (SAP-Zeiterfassung Electron app, private repo)";
 
-  # Installed imperatively via `nix profile` instead of as a flake input/overlay,
-  # since the repo is private: a flake input would force CI (which has no SSH
-  # access to it) to fetch it on every build, even for hosts that don't need it.
   config = lib.mkIf cfg.enable {
     home-manager.users.${hostVariables.username} = {
       lib,

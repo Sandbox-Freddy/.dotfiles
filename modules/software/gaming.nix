@@ -9,8 +9,6 @@
   };
 
   config = lib.mkIf config.modules.software.gaming.enable {
-    # allowUnfree is set globally in configuration.nix, so no Steam-specific
-    # allowUnfreePredicate is needed here.
     programs.gamemode.enable = true;
     programs.steam = {
       enable = true;

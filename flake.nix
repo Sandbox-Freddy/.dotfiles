@@ -73,8 +73,6 @@
       }
     )
     // {
-      # `nix flake init -t ~/.dotfiles` scaffolds a per-project direnv shell.
-      # Same files GNOME offers under "New Document" (see modules/gui/gnome.nix).
       templates.default = {
         path = ./templates;
         description = "Development environment flake with a direnv .envrc";

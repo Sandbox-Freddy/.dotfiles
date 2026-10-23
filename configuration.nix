@@ -1,13 +1,9 @@
-# Common settings shared by every host. Host-specific bits live in
-# hosts/<host>/configuration.nix, feature toggles in hosts/<host>/variables.nix.
 {
   pkgs,
   lib,
   hostVariables,
   ...
 }: let
-  # Modules that are deliberately ungated common settings rather than features,
-  # and therefore have no toggle. Everything else must have one.
   ungatedModules = [
     "console/aliases.nix"
     "system/flakes.nix"
@@ -16,11 +12,6 @@
     "system/symlink.nix"
   ];
 
-  # The gated modules actually on disk, as {category = ["name" ...];}. A module
-  # is either `<category>/<name>.nix` or `<category>/<name>/<name>.nix` when it
-  # ships data files alongside. A subdirectory without that inner `.nix` is a
-  # plain data directory owned by some other module (console/oh-my-posh), not a
-  # module itself.
   gatedModules = let
     categories = lib.filterAttrs (_: type: type == "directory") (builtins.readDir ./modules);
 
@@ -54,10 +45,6 @@
 
   togglesIn = category: lib.attrNames (hostVariables.modules.${category} or {});
 
-  # A module without a toggle can never be switched on, and nothing complains —
-  # so turn it into a build failure. The reverse case (a toggle with no module)
-  # needs no check here: the module system already throws on an undeclared
-  # `modules.<category>.<name>` option, and even suggests the right name.
   modulesWithoutToggle = lib.concatLists (lib.mapAttrsToList
     (category: names: map (n: "${category}.${n}") (lib.subtractLists (togglesIn category) names))
     gatedModules);
@@ -80,8 +67,6 @@ in {
     }
   ];
 
-  # Feature modules: every `hostVariables.modules.<category>.<name>` boolean maps
-  # onto `modules.<category>.<name>.enable`, so names must match the module paths.
   modules = lib.mapAttrs (_: lib.mapAttrs (_: enable: {inherit enable;})) hostVariables.modules;
 
   networking.hostName = hostVariables.host;
