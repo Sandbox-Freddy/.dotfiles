@@ -18,7 +18,25 @@ in {
     home-manager.users.${hostVariables.username} = {
       programs.ssh = {
         enable = true;
-        settings = cfg.settings;
+        # home-manager is removing these defaults; carrying them explicitly
+        # keeps the generated config identical once they are gone.
+        enableDefaultConfig = false;
+        settings =
+          lib.recursiveUpdate {
+            "*" = {
+              AddKeysToAgent = "no";
+              Compression = false;
+              ControlMaster = "no";
+              ControlPath = "~/.ssh/master-%r@%n:%p";
+              ControlPersist = "no";
+              ForwardAgent = false;
+              HashKnownHosts = false;
+              ServerAliveCountMax = 3;
+              ServerAliveInterval = 0;
+              UserKnownHostsFile = "~/.ssh/known_hosts";
+            };
+          }
+          cfg.settings;
       };
     };
   };
