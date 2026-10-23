@@ -9,5 +9,6 @@ in
     };
     software = {
       gaming = true;
+      opencode = true;
     };
   }

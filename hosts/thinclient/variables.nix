@@ -6,4 +6,7 @@ in
       scanbutton = true;
       scanner = true;
     };
+    software = {
+      opencode = true;
+    };
   }

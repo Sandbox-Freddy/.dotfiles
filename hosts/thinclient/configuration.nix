@@ -48,7 +48,6 @@
   home-manager.users.${hostVariables.username} = {lib, ...}: {
     home.packages = with pkgs; [
       github-cli
-      opencode
     ];
 
     dconf.settings."org/gnome/nautilus/preferences" = {

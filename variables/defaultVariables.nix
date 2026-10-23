@@ -49,6 +49,7 @@ let
         docker = true;
         gaming = false;
         git = true;
+        opencode = false;
         python = false;
         zed = true;
         zeiterfassung = false;

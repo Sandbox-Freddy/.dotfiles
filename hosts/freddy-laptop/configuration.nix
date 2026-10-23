@@ -37,7 +37,6 @@
       lame
       librewolf
       losslesscut-bin
-      opencode
       pinta
       thunderbird
       unstable.space-cadet-pinball
