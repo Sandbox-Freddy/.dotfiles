@@ -43,6 +43,11 @@ in {
       default = true;
       description = "Enable left-handed mouse mode";
     };
+    disabledExtensions = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [];
+      description = "GNOME Shell extension UUIDs to disable";
+    };
   };
   config = lib.mkIf cfg.enable {
     services.displayManager.gdm = {
@@ -96,7 +101,7 @@ in {
         };
         "org/gnome/shell" = {
           disable-user-extensions = false;
-          disabled-extensions = [];
+          disabled-extensions = cfg.disabledExtensions;
           enabled-extensions = map (e: e.extensionUuid) shellExtensions;
           app-picker-layout = "[]";
           favorite-apps = cfg.favoriteApps;
