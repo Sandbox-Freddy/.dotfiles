@@ -47,6 +47,7 @@ let
       };
       software = {
         docker = true;
+        firefox = true;
         gaming = false;
         git = true;
         opencode = false;

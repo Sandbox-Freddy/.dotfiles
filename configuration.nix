@@ -120,7 +120,6 @@ in {
     nerd-fonts.jetbrains-mono
   ];
 
-  programs.firefox.enable = true;
   zramSwap.enable = true;
 
   programs.nh = {
