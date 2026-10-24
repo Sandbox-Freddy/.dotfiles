@@ -27,13 +27,10 @@
           "sql"
           "terraform"
           "vue"
+          "fish"
         ];
         userSettings = {
-          language_models = {
-            lmstudio = {
-              api_url = "http://localhost:1234/api/v0";
-            };
-          };
+          language_models = {};
           edit_predictions = {
             provider = "zed";
           };
@@ -56,14 +53,6 @@
             dock = "left";
           };
           agent = {
-            default_model = {
-              provider = "lmstudio";
-              model = "google/gemma-4-12b-qat";
-              enable_thinking = false;
-            };
-            dock = "right";
-            favorite_models = [];
-            model_parameters = [];
           };
           git_panel = {
             tree_view = true;
