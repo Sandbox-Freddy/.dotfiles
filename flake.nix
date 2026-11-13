@@ -81,6 +81,7 @@
         nixpkgs.lib.genAttrs [
           "work"
           "freddy-laptop"
+          "freddy-pc"
           "thinclient"
         ] (
           host:

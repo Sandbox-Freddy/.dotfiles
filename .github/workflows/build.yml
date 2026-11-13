@@ -23,7 +23,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        host: [work, freddy-laptop, thinclient]
+        host: [work, freddy-laptop, freddy-pc, thinclient]
     steps:
       - uses: actions/checkout@v6
 
