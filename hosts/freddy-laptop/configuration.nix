@@ -1,11 +1,21 @@
 {
+  config,
   hostVariables,
+  lib,
   pkgs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  # Firmware key enrollment remains a separate, manual step.
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+    configurationLimit = 5;
+  };
+  boot.loader.systemd-boot.enable = lib.mkIf config.boot.lanzaboote.enable (lib.mkForce false);
 
   modules.gui.gnome = {
     favoriteApps = [
