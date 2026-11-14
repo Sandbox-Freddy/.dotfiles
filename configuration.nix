@@ -72,6 +72,7 @@ in {
   networking.hostName = hostVariables.host;
   system.stateVersion = hostVariables.stateVersion;
 
+  boot.loader.timeout = 15;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
