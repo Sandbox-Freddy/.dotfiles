@@ -1,11 +1,21 @@
 {
+  config,
   hostVariables,
+  lib,
   pkgs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
   ];
+
+  # Enable only after creating signing keys and preparing the firmware.
+  boot.lanzaboote = {
+    enable = false;
+    pkiBundle = "/var/lib/sbctl";
+    configurationLimit = 5;
+  };
+  boot.loader.systemd-boot.enable = lib.mkIf config.boot.lanzaboote.enable (lib.mkForce false);
 
   modules.gui.gnome = {
     favoriteApps = [

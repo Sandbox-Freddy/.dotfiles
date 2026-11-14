@@ -72,6 +72,63 @@ User-scoped config goes through Home Manager inside a module's `config` block as
 - **Ungated common setting:** same, but skip the toggle and add the path (`<category>/<name>.nix`) to `ungatedModules` in `configuration.nix`.
 - **New host:** add `hosts/<host>/` (with `configuration.nix`, `hardware-configuration.nix`, `variables.nix`) and add the name to the `genAttrs` list in `flake.nix` and to `matrix.host` in `.github/workflows/build.yml`. `networking.hostName` and `system.stateVersion` come from the shared `configuration.nix`.
 
+## Windows dual boot and Secure Boot on `freddy-laptop`
+
+Lanzaboote is imported for this host but **disabled** in
+[`hosts/freddy-laptop/configuration.nix`](hosts/freddy-laptop/configuration.nix).
+This preserves the existing systemd-boot setup until signing keys and the firmware
+are ready. Other hosts are unaffected. `system.autoUpgrade` applies the last
+committed configuration and can reboot; an older commit could reinstall the
+unsigned bootloader after Secure Boot has been enabled.
+
+1. Back up the laptop, including its EFI system partition (ESP), and prepare
+   bootable NixOS and Windows recovery media. Before changing partitions or
+   rebuilding, compare `findmnt /boot`, `findmnt /` and `lsblk -f` on the actual
+   laptop with `hosts/freddy-laptop/hardware-configuration.nix`. Resolve any
+   mismatch first; do not format or overwrite the NixOS partitions. Pause
+   `system.autoUpgrade` declaratively for the entire migration, including
+   reboots (for example, set `system.autoUpgrade.enable = lib.mkForce false;`
+   in the host configuration and rebuild after resolving any mismatch).
+2. Install Windows 11 in UEFI mode onto the dedicated **Samsung SSD 860 EVO
+   500GB** (currently `/dev/sda`, 465.8 GiB). Its existing LUKS partition and
+   all data on it will be destroyed. Back up anything needed first and verify
+   the disk model and size again: disk numbering can change. Do **not** delete
+   or format the NixOS disk (currently the Samsung SSD 990 EVO Plus 2TB NVMe)
+   or its ESP. The Windows installer may use an existing ESP or change the UEFI
+   boot order even when Windows itself is installed on the other disk. Check
+   that both operating systems still start via the firmware boot menu. Keep the
+   Windows BitLocker/device-encryption recovery key outside the laptop, even if
+   encryption was enabled automatically.
+3. Inspect `sudo sbctl status` before creating keys. If no keys exist, run
+   `sudo sbctl create-keys`. Store a protected backup of `/var/lib/sbctl`
+   outside the Nix store and repository: it contains private signing keys.
+4. With Secure Boot temporarily disabled but the firmware keys intact, set
+   `boot.lanzaboote.enable = true` in the host configuration and run
+   `sudo nixos-rebuild switch --flake ~/.dotfiles#freddy-laptop --impure`.
+   Check `sudo sbctl verify` and test that NixOS still boots before changing
+   firmware keys. Lanzaboote's documentation explains which unsigned files in
+   the verification output are expected.
+5. Before modifying firmware trust, check the laptop's UEFI documentation and
+   inventory its existing keys. Preserve the Microsoft and required OEM trust
+   entries and the `dbx` revocation database. If supported, adding the new public
+   db certificate while retaining the existing entries avoids replacing the
+   whole key hierarchy. Otherwise the exact enrollment procedure depends on
+   the firmware: **do not blindly clear all keys or enroll only your own**.
+   If Windows uses BitLocker, suspend its protection for the firmware changes
+   and keep the recovery key available; resume protection after both systems
+   boot correctly. Never clear the TPM as a troubleshooting shortcut.
+6. Enable Secure Boot and verify with `bootctl status` and `sudo sbctl status`.
+   Test both operating systems via the firmware boot menu. Depending on the ESP
+   layout, Windows may not automatically appear in systemd-boot. Restore
+   automatic upgrades only after the working Lanzaboote configuration is
+   committed and available to the auto-upgrader.
+
+See the upstream [Lanzaboote setup guide](https://github.com/nix-community/lanzaboote/blob/v1.2.0/docs/getting-started/prepare-your-system.md)
+for signing and [firmware guide](https://github.com/nix-community/lanzaboote/blob/v1.2.0/docs/getting-started/enable-secure-boot.md)
+for firmware-specific details. Merely turning Secure Boot off is not the same as
+entering UEFI Setup Mode; do not enter Setup Mode until the key-preservation plan
+for this particular machine is understood.
+
 ## Notes
 
 - **Out-of-store config.** `modules/system/symlink.nix` (ungated) provides two `_module.args` every module can take: `mkOutOfStorePath ./x` returns the path of `./x` inside `~/.dotfiles` as a plain string, and `mkSymlink ./x` wraps that in a `home.file` / `xdg.configFile` entry. Both make a file read from the working tree instead of a store snapshot, so edits apply without a rebuild — used by `modules/console/fish.nix` for the oh-my-posh theme. Only worth it for config you iterate on: the link dangles at runtime if the checkout moves, rather than failing the build. Adapted from [modulix](https://github.com/anders130/modulix) (MIT).

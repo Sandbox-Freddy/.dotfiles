@@ -3,6 +3,10 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.2.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager?ref=release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -86,7 +90,11 @@
         ] (
           host:
             mkNixosConfiguration {
-              modules = [./hosts/${host}/configuration.nix];
+              modules =
+                [./hosts/${host}/configuration.nix]
+                ++ nixpkgs.lib.optionals (host == "freddy-laptop") [
+                  inputs.lanzaboote.nixosModules.lanzaboote
+                ];
               hostVariables = import ./hosts/${host}/variables.nix;
             }
         );
