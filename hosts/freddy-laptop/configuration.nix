@@ -9,9 +9,6 @@
     ./hardware-configuration.nix
   ];
 
-  # Keep upgrades paused throughout the Secure Boot migration, including reboots.
-  system.autoUpgrade.enable = lib.mkForce false;
-
   # Firmware key enrollment remains a separate, manual step.
   boot.lanzaboote = {
     enable = true;
