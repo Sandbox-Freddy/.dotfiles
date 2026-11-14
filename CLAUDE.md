@@ -127,6 +127,25 @@ for firmware-specific details. Merely turning Secure Boot off is not the same as
 entering UEFI Setup Mode; do not enter Setup Mode until the key-preservation plan
 for this particular machine is understood.
 
+## Secure Boot on `freddy-pc`
+
+Lanzaboote is also enabled for `freddy-pc` in its host configuration, with
+`system.autoUpgrade` paused for the migration. Before the first rebuild on the PC,
+keep Secure Boot disabled, verify the actual disk layout against its hardware
+configuration, back up the ESP, and inspect `sudo sbctl status`. Create keys with
+`sudo sbctl create-keys` only if none exist; use keys generated on the PC, not the
+laptop's private keys. Keep a protected external backup of `/var/lib/sbctl`.
+
+Apply with `sudo nixos-rebuild switch --flake ~/.dotfiles#freddy-pc --impure`,
+check `sudo sbctl verify`, and test booting with Secure Boot still disabled.
+Firmware enrollment is a separate manual step: prefer appending the public db
+certificate while retaining existing Microsoft/OEM entries and `dbx`. Do not
+assume the laptop's MSI firmware menus apply to the PC. Before firmware changes,
+save any Windows recovery key and suspend BitLocker if applicable. Enable Secure
+Boot only after enrollment, then verify `sudo sbctl status` and test all installed
+operating systems. Restore automatic upgrades only once the working configuration
+is committed and available to the auto-upgrader.
+
 ## Notes
 
 - **Out-of-store config.** `modules/system/symlink.nix` (ungated) provides two `_module.args` every module can take: `mkOutOfStorePath ./x` returns the path of `./x` inside `~/.dotfiles` as a plain string, and `mkSymlink ./x` wraps that in a `home.file` / `xdg.configFile` entry. Both make a file read from the working tree instead of a store snapshot, so edits apply without a rebuild — used by `modules/console/fish.nix` for the oh-my-posh theme. Only worth it for config you iterate on: the link dangles at runtime if the checkout moves, rather than failing the build. Adapted from [modulix](https://github.com/anders130/modulix) (MIT).

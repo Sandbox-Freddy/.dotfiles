@@ -92,7 +92,7 @@
             mkNixosConfiguration {
               modules =
                 [./hosts/${host}/configuration.nix]
-                ++ nixpkgs.lib.optionals (host == "freddy-laptop") [
+                ++ nixpkgs.lib.optionals (builtins.elem host ["freddy-laptop" "freddy-pc"]) [
                   inputs.lanzaboote.nixosModules.lanzaboote
                 ];
               hostVariables = import ./hosts/${host}/variables.nix;
