@@ -9,9 +9,12 @@
     ./hardware-configuration.nix
   ];
 
-  # Enable only after creating signing keys and preparing the firmware.
+  # Keep upgrades paused throughout the Secure Boot migration, including reboots.
+  system.autoUpgrade.enable = lib.mkForce false;
+
+  # Firmware key enrollment remains a separate, manual step.
   boot.lanzaboote = {
-    enable = false;
+    enable = true;
     pkiBundle = "/var/lib/sbctl";
     configurationLimit = 5;
   };

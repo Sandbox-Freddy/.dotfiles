@@ -74,36 +74,34 @@ User-scoped config goes through Home Manager inside a module's `config` block as
 
 ## Windows dual boot and Secure Boot on `freddy-laptop`
 
-Lanzaboote is imported for this host but **disabled** in
+Lanzaboote is enabled in the configuration for this host in
 [`hosts/freddy-laptop/configuration.nix`](hosts/freddy-laptop/configuration.nix).
-This preserves the existing systemd-boot setup until signing keys and the firmware
-are ready. Other hosts are unaffected. `system.autoUpgrade` applies the last
-committed configuration and can reboot; an older commit could reinstall the
-unsigned bootloader after Secure Boot has been enabled.
+A rebuild is required to install its signed boot artifacts; it does not enroll
+firmware keys or enable Secure Boot. Other hosts are unaffected. The host
+configuration temporarily disables `system.autoUpgrade`. The auto-upgrader uses
+the last committed configuration and can reboot; an older commit could reinstall
+the unsigned bootloader after Secure Boot has been enabled.
 
 1. Back up the laptop, including its EFI system partition (ESP), and prepare
    bootable NixOS and Windows recovery media. Before changing partitions or
    rebuilding, compare `findmnt /boot`, `findmnt /` and `lsblk -f` on the actual
    laptop with `hosts/freddy-laptop/hardware-configuration.nix`. Resolve any
-   mismatch first; do not format or overwrite the NixOS partitions. Pause
-   `system.autoUpgrade` declaratively for the entire migration, including
-   reboots (for example, set `system.autoUpgrade.enable = lib.mkForce false;`
-   in the host configuration and rebuild after resolving any mismatch).
-2. Install Windows 11 in UEFI mode onto the dedicated **Samsung SSD 860 EVO
-   500GB** (currently `/dev/sda`, 465.8 GiB). Its existing LUKS partition and
-   all data on it will be destroyed. Back up anything needed first and verify
-   the disk model and size again: disk numbering can change. Do **not** delete
-   or format the NixOS disk (currently the Samsung SSD 990 EVO Plus 2TB NVMe)
-   or its ESP. The Windows installer may use an existing ESP or change the UEFI
-   boot order even when Windows itself is installed on the other disk. Check
-   that both operating systems still start via the firmware boot menu. Keep the
+   mismatch first; do not format or overwrite the NixOS partitions. Rebuild to
+   apply the host's declarative `system.autoUpgrade.enable = lib.mkForce false;`
+   and keep automatic upgrades paused throughout the migration, including reboots.
+2. Windows 11 is installed on the dedicated **Samsung SSD 860 EVO 500GB**
+   (currently `/dev/sda`, 465.8 GiB). Its Windows Boot Manager uses the NixOS
+   disk's ESP on the Samsung SSD 990 EVO Plus 2TB NVMe, mounted at `/boot`.
+   Do **not** delete or format either disk or the shared ESP. Disk numbering can
+   change, so verify the layout before making any storage changes. Check that
+   both operating systems still start via the firmware boot menu. Keep the
    Windows BitLocker/device-encryption recovery key outside the laptop, even if
    encryption was enabled automatically.
 3. Inspect `sudo sbctl status` before creating keys. If no keys exist, run
    `sudo sbctl create-keys`. Store a protected backup of `/var/lib/sbctl`
    outside the Nix store and repository: it contains private signing keys.
-4. With Secure Boot temporarily disabled but the firmware keys intact, set
-   `boot.lanzaboote.enable = true` in the host configuration and run
+4. With Secure Boot temporarily disabled but the firmware keys intact, apply
+   the host's Lanzaboote configuration with
    `sudo nixos-rebuild switch --flake ~/.dotfiles#freddy-laptop --impure`.
    Check `sudo sbctl verify` and test that NixOS still boots before changing
    firmware keys. Lanzaboote's documentation explains which unsigned files in
