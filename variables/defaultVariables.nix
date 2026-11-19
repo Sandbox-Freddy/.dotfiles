@@ -52,6 +52,7 @@ let
         git = true;
         opencode = false;
         python = false;
+        vscode = false;
         zed = true;
         zeiterfassung = false;
       };

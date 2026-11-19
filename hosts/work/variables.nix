@@ -9,6 +9,7 @@ in
     };
     software = {
       python = true;
+      vscode = true;
       zeiterfassung = true;
     };
     system = {

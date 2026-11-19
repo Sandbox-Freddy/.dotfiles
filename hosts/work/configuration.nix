@@ -13,6 +13,7 @@
       "bruno.desktop"
       "obsidian.desktop"
       "dev.zed.Zed.desktop"
+      "code.desktop"
       "SourceGit.desktop"
       "chrome-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop"
       "chrome-faolnafnngnfdaknnbpnkhgohbobgegn-Default.desktop"
