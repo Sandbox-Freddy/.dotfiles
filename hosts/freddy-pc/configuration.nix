@@ -45,7 +45,6 @@
       github-cli
       keepassxc
       lame
-      librewolf
       losslesscut-bin
       pinta
       thunderbird
