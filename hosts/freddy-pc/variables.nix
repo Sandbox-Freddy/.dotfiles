@@ -7,6 +7,7 @@ in
     };
     software = {
       gaming = true;
+      lmstudio = true;
       opencode = true;
     };
   }

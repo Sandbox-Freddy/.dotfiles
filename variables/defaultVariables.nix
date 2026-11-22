@@ -50,6 +50,7 @@ let
         firefox = true;
         gaming = false;
         git = true;
+        lmstudio = false;
         opencode = false;
         python = false;
         vscode = false;
